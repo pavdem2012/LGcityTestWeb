@@ -4,6 +4,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class NewsMainLgCity extends Settings{
+    /*
+    Проверка "Новостные баннеры"
+     */
     @Test
     public void setNews(){
         open("https://lgcity.ru");
