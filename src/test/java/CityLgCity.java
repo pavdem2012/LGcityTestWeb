@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /*
 Проверка "УКАЖИТЕ СВОЙ ГОРОД"
@@ -36,8 +37,11 @@ public class CityLgCity extends Settings {
         open("https://lgcity.ru");
         driver.findElement(By.id("header-title-user-location")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Укажите свой город')]/../..")));
-        driver.findElement(By.xpath("//div[@class='locate__popular-list']/a")).click();
-        String popularCity = driver.findElement(By.xpath("//div[@class='locate__popular-list']/a")).getText();
+        int popularCityAmount =driver.findElements(By.xpath("//div[@class='locate__popular-list']/a")).size();
+        Random random =new Random();
+        int randomNumber = random.nextInt(popularCityAmount)+1;
+        driver.findElement(By.xpath("(//div[@class='locate__popular-list']/a)["+randomNumber+"]")).click();
+        String popularCity = driver.findElement(By.xpath("(//div[@class='locate__popular-list']/a)["+randomNumber+"]")).getText();
         String attr = driver.findElement(By.id("input-user-locate")).getAttribute("value");
         Assert.assertEquals(popularCity, attr);
         driver.findElement(By.id("btn-save-user-locate")).click();
