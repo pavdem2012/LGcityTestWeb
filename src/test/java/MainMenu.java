@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class MainMenu extends Settings {
     /*
-    Проверка элементов главного меню
+    Проверка элементов главного меню.
      */
     @Test
     public void testMenu() {
