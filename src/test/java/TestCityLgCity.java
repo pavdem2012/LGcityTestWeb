@@ -10,7 +10,7 @@ import java.util.Random;
 /*
 Проверка "УКАЖИТЕ СВОЙ ГОРОД"
  */
-public class CityLgCity extends Settings {
+public class TestCityLgCity extends Settings {
 
     /*
     Проверка ввода названия города.
