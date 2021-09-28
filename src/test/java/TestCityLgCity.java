@@ -36,7 +36,7 @@ public class TestCityLgCity extends Settings {
     public void setPopularCity() {
         open("https://lgcity.ru");
         driver.findElement(By.id("header-title-user-location")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),\"Укажите свой город\")]/../..")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Укажите свой город')]/../..")));
         int popularCityAmount =driver.findElements(By.xpath("//div[@class='locate__popular-list']/a")).size();
         Random random =new Random();
         int randomNumber = random.nextInt(popularCityAmount)+1;
@@ -45,8 +45,7 @@ public class TestCityLgCity extends Settings {
         String attr = driver.findElement(By.id("input-user-locate")).getAttribute("value");
         Assert.assertEquals(popularCity, attr);
         driver.findElement(By.id("btn-save-user-locate")).click();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(),\"Укажите свой " +
-                "город\"]/../..")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(),'Укажите свой город']/../..")));
         String cityInHeader = driver.findElement(By.id("header-title-user-location")).getText();
         Assert.assertEquals(popularCity, cityInHeader);
     }
