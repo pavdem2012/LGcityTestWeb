@@ -33,7 +33,7 @@ public class TestCityLgCity extends Settings {
     Проверка выбора города из выпадающего списка
      */
     @Test
-    public void setPopularCity() {
+    public void setPopularCity() throws InterruptedException{
         open("https://lgcity.ru");
         driver.findElement(By.id("header-title-user-location")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Укажите свой город')]/../..")));
@@ -46,6 +46,7 @@ public class TestCityLgCity extends Settings {
         Assert.assertEquals(popularCity, attr);
         driver.findElement(By.id("btn-save-user-locate")).click();
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(),'Укажите свой город']/../..")));
+        Thread.sleep(1000);
         String cityInHeader = driver.findElement(By.id("header-title-user-location")).getText();
         Assert.assertEquals(popularCity, cityInHeader);
     }
