@@ -5,7 +5,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.Random;
 
-public class MainMenu extends Settings {
+public class TestMainMenu extends Settings {
     /*
     Проверка элементов главного меню.
      */
