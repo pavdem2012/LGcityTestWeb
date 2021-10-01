@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class TestSearch extends Settings{
     @Test
-    public void SearchByName() throws InterruptedException {
+    public void SearchByName(){
         open("https://lgcity.ru");
         driver.findElement(By.xpath("//div[@class='header__right-side-icons']/a[@data-popup='popup--search']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"header__search popup " +
