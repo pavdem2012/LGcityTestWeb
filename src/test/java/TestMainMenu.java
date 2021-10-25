@@ -210,7 +210,7 @@ public class TestMainMenu extends Settings {
         String nameOfItemInCatalogue = driver.findElement(By.xpath("(//div[@class='catalog__item-title'])[" + randomCatalogIconsToFavorites + "]")).getText().toLowerCase().replaceAll(" ","");
         driver.findElement(By.xpath("(//div[@class='favorite__button btn-add-to-favorite owox-add-to-favorite-listing checked'])[" + randomCatalogIconsToFavorites + "]")).click();
 
-        //System.out.println("имя в каталоге: " +nameOfItemInCatalogue);
+        System.out.println("имя в каталоге: " +nameOfItemInCatalogue);
         //driver.findElement(By.xpath("//body")).sendKeys(Keys.PAGE_UP);
 
         driver.findElement(By.xpath("//input[@class='favorite__input input-add-to-favorite']")).isEnabled();
@@ -222,7 +222,7 @@ public class TestMainMenu extends Settings {
         //Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='lk__favorites']")));
         String nameOfProductInFavorites = driver.findElement(By.xpath("//div[@class='catalog__item-title']")).getText().toLowerCase().replaceAll("[^\\da-zA-Z]", "");
-        //System.out.println("имя в избранном: " + nameOfProductInFavorites);
+        System.out.println("имя в избранном: " + nameOfProductInFavorites);
         Assert.assertTrue(nameOfItemInCatalogue.contains(nameOfProductInFavorites));
         driver.findElement(By.xpath("//div[@class='favorite__button']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='empty-content__title' and contains (text(),'Список понравившихся товаров пуст')]")));
