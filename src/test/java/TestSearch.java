@@ -12,8 +12,7 @@ public class TestSearch extends Settings{
     public void SearchByName(){
         open("https://lgcity.ru");
         driver.findElement(By.xpath("//div[@class='header__right-side-icons']/a[@data-popup='popup--search']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"header__search popup " +
-                "popup--search js-popup-open\"]")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='header__search popup popup--search js-popup-open']")));
         driver.findElement(By.name("q")).sendKeys("Футболка");
         WebElement element = driver.findElement(By.name("q"));
         element.sendKeys(Keys.ENTER);
@@ -23,10 +22,8 @@ public class TestSearch extends Settings{
         int randomSearchProduct=random.nextInt(searchProducts)+1;
         String randomProduct = driver.findElement(By.xpath("(//div[@class='catalog__item-desc'])["+randomSearchProduct+"]")).getText().toLowerCase();
         driver.findElement(By.xpath("//div[@class='header__right-side-icons']/a[@data-popup='popup--search']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"header__search popup " +
-                "popup--search js-popup-open\"]")));
-        String inputProduct = driver.findElement(By.xpath("//div[@class='input input--default header__search-input " +
-                "autocomplete is-focused']/input")).getAttribute("value").toLowerCase();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='header__search popup popup--search js-popup-open']")));
+        String inputProduct = driver.findElement(By.xpath("//div[@class='input input--default header__search-input autocomplete is-focused']/input")).getAttribute("value").toLowerCase();
         Assert.assertTrue(randomProduct.contains(inputProduct));
     }
 }
