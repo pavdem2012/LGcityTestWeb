@@ -1,16 +1,22 @@
 import org.junit.After;
 import org.junit.Before;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.Pages;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Settings {
-    public WebDriver driver;
+    public static WebDriver driver;
     public WebDriverWait wait;
-
+    public static FunctionsForTests functions = new FunctionsForTests();
 
     @Before
     public void before() {
@@ -25,7 +31,25 @@ public class Settings {
     public void open(String baseUrl) {
         driver.get(baseUrl);
     }
-
+    public WebElement getElementByXpath(String string){
+        return driver.findElement(By.xpath(string));
+    }
+    public WebElement getElementByClassName(String string){
+        return driver.findElement(By.className(string));
+    }
+    public WebElement getElementById(String string){
+        return driver.findElement(By.id(string));
+    }
+    public void waitVisibilityElement(String string){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(string)));
+    }
+    public void waitTextToBe(String string,String text){
+        wait.until(ExpectedConditions.textToBe(By.xpath(string),text));
+    }
+/*    public WebElement getElementsByXpath(String string) {
+        ArrayList<WebElement> list = driver.findElements(By.xpath(string));
+        return driver.findElements(By.xpath(string));
+    }*/
     @After
     public void quit() {
         driver.quit();

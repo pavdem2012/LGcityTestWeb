@@ -1,29 +1,22 @@
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.Pages;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
+
 
 public class NewsMainLgCity extends Settings{
     /*
     Проверка "Новостные баннеры"
      */
+
     @Test
     public void setNews(){
         open("https://lgcity.ru");
-        Actions scroll = new Actions(driver);
-        scroll.moveToElement(driver.findElement(By.className("news"))).perform();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("news__item")));
-        int newsBlock =driver.findElements(By.xpath("//div[@class = 'news__item']")).size();
-        System.out.println(newsBlock);
-        Random random =new Random();
-        int randomNumber = random.nextInt(newsBlock)+1;
-        driver.findElement(By.xpath("(//div[@class = 'news__item']//a[not(contains(text(), 'Бестселлеры коллекций'))])["+randomNumber+"]")).click();
-        //driver.findElement(By.id("bx_651765591_783616")).click();
-        wait.until(ExpectedConditions.textToBe(By.className("news-page__back-title"),"Акции и новости"));
+        functions.scrollToNews();
+        waitVisibilityElement(Pages.newsItemBlock);
+        functions.randomNews();
+        waitTextToBe(Pages.newsPageBlockTitle,"Акции и новости");
     }
 /*    *//*
     Проверка "Шапка сайта"
@@ -34,7 +27,7 @@ public class NewsMainLgCity extends Settings{
     @Test
     public void SiteHeader() throws InterruptedException {
         open("https://lgcity.ru");
-        driver.findElement(By.xpath("//a[@class='header__r-icons-link header__r-icons-link--search js-popup']")).click();
+            driver.findElement(By.xpath("//a[@class='header__r-icons-link header__r-icons-link--search js-popup']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'Что вы хотите найти?')]")));
         driver.findElement(By.className("header__r-icon--close")).click();
         Thread.sleep(3000);
