@@ -1,27 +1,24 @@
+import common.Settings;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import pages.Pages;
 
-import java.util.Random;
-
-
-public class NewsMainLgCity extends Settings{
+public class NewsMainLgCity extends Settings {
     /*
     Проверка "Новостные баннеры"
      */
 
     @Test
-    public void setNews(){
+    public void setNews() {
         open("https://lgcity.ru");
-        functions.scrollToNews();
+        mainPage.scrollToNews();
         waitVisibilityElement(Pages.newsItemBlock);
-        functions.randomNews();
-        waitTextToBe(Pages.newsPageBlockTitle,"Акции и новости");
+        mainPage.randomNews();
+        waitTextToBe(Pages.newsPageBlockTitle, "Акции и новости");
     }
-/*    *//*
+    /*    *//*
     Проверка "Шапка сайта"
      *//*
-    *//*+
+     *//*+
     Проверка иконки поиска
      *//*
     @Test
