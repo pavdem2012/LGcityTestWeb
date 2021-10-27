@@ -1,3 +1,5 @@
+package tests;
+
 import common.Settings;
 import org.junit.Test;
 import pages.Pages;
