@@ -8,14 +8,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.CityPage;
 import pages.MainPage;
 
 import java.util.concurrent.TimeUnit;
 
 public class Settings {
     public static WebDriver driver;
-    public WebDriverWait wait;
+    public static WebDriverWait wait;
     public static MainPage mainPage = new MainPage();
+    public CityPage cityPage;
 
     @Before
     public void before() {
@@ -24,7 +26,7 @@ public class Settings {
         wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-
+        cityPage = new CityPage(driver, wait);
     }
 
     public void open(String baseUrl) {
@@ -47,8 +49,20 @@ public class Settings {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(string)));
     }
 
+    public static void waitVisibilityElement(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void waitInvisibilityElement(WebElement element) {
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
     public void waitTextToBe(String string, String text) {
         wait.until(ExpectedConditions.textToBe(By.xpath(string), text));
+    }
+
+    public void waitValueInElement(WebElement element, String string){
+        wait.until(ExpectedConditions.textToBePresentInElementValue(element, string));
     }
 
     /*    public WebElement getElementsByXpath(String string) {
