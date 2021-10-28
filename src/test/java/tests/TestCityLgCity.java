@@ -71,7 +71,6 @@ public class TestCityLgCity extends Settings {
         cityPage.selectCity(city);
         Assert.assertEquals("Город в шапке и выбранный город в попапе не совпали", city, cityPage.getHeaderCity());
         cityPage.setAutoCity(autoCity);
-        cityPage.btnSaveUserLocate.click();
         waitInvisibilityElement(cityPage.popupSetSity);
         Assert.assertNotEquals(cityPage.getHeaderCity(), city);
     }
@@ -82,15 +81,10 @@ public class TestCityLgCity extends Settings {
     @Test
     public void popularCityList() throws InterruptedException {
         open("https://lgcity.ru");
-        driver.findElement(By.id("header-title-user-location")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Укажите свой город')]/../..")));
-        int count = driver.findElements(By.xpath("//a[@class='locate__popular-list-item']")).size();
-        Assert.assertTrue(count > 0);
-        List<String> cityList = new ArrayList<>();
-        for (int i = 1; i <= count; i++) {
-            cityList.add(driver.findElement(By.xpath("(//a[@class='locate__popular-list-item'])[" + i + "]")).getText());
-        }
-        boolean city = cityList.contains("Москва");
-        System.out.println("Выпадающий список городов: " + city);
+        cityPage.iconSetSity.click();
+        waitVisibilityElement(cityPage.popupSetSity);
+        int popularCityAmount = getElementsByXpath(cityPage.popularCityList).size();
+        Assert.assertTrue("Список популярных городов пуст" ,popularCityAmount > 0);
+        Assert.assertTrue("В списке отстутствует город 'Москва'",cityPage.checkPopularCityList(popularCityAmount));
     }
 }

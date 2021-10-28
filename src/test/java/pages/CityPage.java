@@ -37,11 +37,11 @@ public class CityPage extends Settings {
     //Кнопка "Закрыть"  в попапе "УКАЖИТЕ СВОЙ ГОРОД"
     @FindBy(xpath = "//div[@class='locate__title-icon-box js-popup-close']")
     public WebElement iconBoxPopupClose;
-
+    //Кнопка "Определить автоматически" в попап "УКАЖИТЕ СВОЙ ГОРОД"
     @FindBy(xpath = "//a[@class='locate__input-auto']")
     public WebElement locateInputAuto;
-
-    public By popularCityList = By.xpath("//div[@class='locate__popular-list']/a");
+    //Поупулярные города
+    public By popularCityList = By.xpath("//a[@class='locate__popular-list-item']");
 
     public void selectCity(String city) {
         iconSetSity.click();
@@ -62,6 +62,7 @@ public class CityPage extends Settings {
         inputUserLocate.clear();
         locateInputAuto.click();
         waitValueInElement(inputUserLocate, city);
+        btnSaveUserLocate.click();
     }
 
     public ArrayList<String> getRandomCity(int cityAmount){
@@ -70,11 +71,19 @@ public class CityPage extends Settings {
         driver.findElement(By.xpath("(//div[@class='locate__popular-list']/a)[" + randomNumber + "]")).click();
         ArrayList<String> list = new ArrayList<>();
         String popularCity = driver.findElement(By.xpath("(//div[@class='locate__popular-list']/a)[" + randomNumber + "]")).getText();
-        String cityInField = driver.findElement(By.id("input-user-locate")).getAttribute("value");
+        String cityInField = inputUserLocate.getAttribute("value");
         list.add(popularCity);
         list.add(cityInField);
         return list;
     }
 
+    public boolean checkPopularCityList (int popularCityAmount){
+        List<String> cityList = new ArrayList<>();
+        for (int i = 1; i <= popularCityAmount; i++) {
+            //cityList.add((driver.popularCityList[+  i  +].getText());
+            cityList.add(driver.findElement(By.xpath("(//a[@class='locate__popular-list-item'])[" + i + "]")).getText());
+        }
+        return cityList.contains("Москва");
+    }
 
 }
