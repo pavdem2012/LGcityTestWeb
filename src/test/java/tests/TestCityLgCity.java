@@ -74,12 +74,12 @@ public class TestCityLgCity extends Settings {
     Проверка заполнения выпадающего списка популярных городов
      */
     @Test
-    public void popularCityList() throws InterruptedException {
+    public void popularCityList() {
         open("https://lgcity.ru");
         cityPage.iconSetCity.click();
         waitVisibilityElement(cityPage.popupSetCity);
         int popularCityAmount = getElementsByXpath(cityPage.popularCityList).size();
-        Assert.assertTrue("Список популярных городов пуст" ,popularCityAmount > 0);
-        Assert.assertTrue("В списке отстутствует город 'Москва'",cityPage.checkPopularCityList(popularCityAmount));
+        Assert.assertTrue("Список популярных городов пуст", popularCityAmount > 0);
+        Assert.assertTrue("В списке отстутствует город 'Москва'", cityPage.checkPopularCityList(popularCityAmount));
     }
 }

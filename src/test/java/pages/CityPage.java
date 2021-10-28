@@ -4,6 +4,7 @@ import common.Settings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -42,6 +43,9 @@ public class CityPage extends Settings {
     public WebElement locateInputAuto;
     //Поупулярные города
     public By popularCityList = By.xpath("//a[@class='locate__popular-list-item']");
+    //список элементов списка популярных городов
+    @FindBy(xpath = "//a[@class='locate__popular-list-item']")
+    List<WebElement> popularCityElements;
 
     public void selectCity(String city) {
         iconSetCity.click();
@@ -65,25 +69,23 @@ public class CityPage extends Settings {
         btnSaveUserLocate.click();
     }
 
-    public ArrayList<String> getRandomCity(int cityAmount){
+    public ArrayList<String> getRandomCity(int cityAmount) {
         Random random = new Random();
-        int randomNumber = random.nextInt(cityAmount) + 1;
-        driver.findElement(By.xpath("(//div[@class='locate__popular-list']/a)[" + randomNumber + "]")).click();
+        int randomNumber = random.nextInt(cityAmount);
+        popularCityElements.get(randomNumber).click();
         ArrayList<String> list = new ArrayList<>();
-        String popularCity = driver.findElement(By.xpath("(//div[@class='locate__popular-list']/a)[" + randomNumber + "]")).getText();
+        String popularCity = popularCityElements.get(randomNumber).getText();
         String cityInField = inputUserLocate.getAttribute("value");
         list.add(popularCity);
         list.add(cityInField);
         return list;
     }
 
-    public boolean checkPopularCityList (int popularCityAmount){
+    public boolean checkPopularCityList(int popularCityAmount) {
         List<String> cityList = new ArrayList<>();
-        for (int i = 1; i <= popularCityAmount; i++) {
-            //cityList.add((driver.popularCityList[+  i  +].getText());
-            cityList.add(driver.findElement(By.xpath("(//a[@class='locate__popular-list-item'])[" + i + "]")).getText());
+        for (int i = 0; i < popularCityAmount; i++) {
+            cityList.add(popularCityElements.get(i).getText());
         }
         return cityList.contains("Москва");
     }
-
 }
