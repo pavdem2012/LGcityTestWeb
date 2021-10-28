@@ -24,10 +24,10 @@ public class CityPage extends Settings {
 
     //Иконка открытия попапа "Укажите свой город"
     @FindBy(id = "header-title-user-location")
-    public WebElement iconSetSity;
+    public WebElement iconSetCity;
     //Попап "Укажите свой город"
     @FindBy(xpath = "//div[contains(text(),'Укажите свой город')]/../..")
-    public WebElement popupSetSity;
+    public WebElement popupSetCity;
     //Поле ввода населенного пункта
     @FindBy(id = "input-user-locate")
     public WebElement inputUserLocate;
@@ -44,21 +44,21 @@ public class CityPage extends Settings {
     public By popularCityList = By.xpath("//a[@class='locate__popular-list-item']");
 
     public void selectCity(String city) {
-        iconSetSity.click();
-        waitVisibilityElement(popupSetSity);
+        iconSetCity.click();
+        waitVisibilityElement(popupSetCity);
         inputUserLocate.clear();
         inputUserLocate.sendKeys(city);
         btnSaveUserLocate.click();
-        waitInvisibilityElement(popupSetSity);
+        waitInvisibilityElement(popupSetCity);
     }
 
     public String getHeaderCity() {
-        return iconSetSity.getText();
+        return iconSetCity.getText();
     }
 
     public void setAutoCity(String city) {
-        iconSetSity.click();
-        waitInvisibilityElement(popupSetSity);
+        iconSetCity.click();
+        waitInvisibilityElement(popupSetCity);
         inputUserLocate.clear();
         locateInputAuto.click();
         waitValueInElement(inputUserLocate, city);
