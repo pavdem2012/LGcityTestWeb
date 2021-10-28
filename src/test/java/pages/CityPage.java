@@ -42,7 +42,6 @@ public class CityPage extends Settings {
     public WebElement locateInputAuto;
     //Поупулярные города
     public By popularCityList = By.xpath("//a[@class='locate__popular-list-item']");
-
     public void selectCity(String city) {
         iconSetCity.click();
         waitVisibilityElement(popupSetCity);
@@ -79,11 +78,20 @@ public class CityPage extends Settings {
 
     public boolean checkPopularCityList (int popularCityAmount){
         List<String> cityList = new ArrayList<>();
-        for (int i = 1; i <= popularCityAmount; i++) {
-            //cityList.add((driver.popularCityList[+  i  +].getText());
-            cityList.add(driver.findElement(By.xpath("(//a[@class='locate__popular-list-item'])[" + i + "]")).getText());
+        List<WebElement> menuElements = getElementsByXpath(popularCityList);
+        for (WebElement menuElement: menuElements) {
+            cityList.add(menuElement.getText());
+            //cityList.add(driver.findElement(By.xpath("(//a[@class='locate__popular-list-item'])[" + i + "]")).getText());
         }
         return cityList.contains("Москва");
     }
 
+    public boolean hasCity (String cityName){
+        for (WebElement element : getElementsByXpath(popularCityList)){
+            if (element.getText().equals(cityName)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
