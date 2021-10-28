@@ -32,20 +32,15 @@ public class TestCityLgCity extends Settings {
     @Test
     public void setPopularCity() throws InterruptedException {
         open("https://lgcity.ru");
-        driver.findElement(By.id("header-title-user-location")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Укажите свой город')]/../..")));
-        int popularCityAmount = driver.findElements(By.xpath("//div[@class='locate__popular-list']/a")).size();
-        Random random = new Random();
-        int randomNumber = random.nextInt(popularCityAmount) + 1;
-        driver.findElement(By.xpath("(//div[@class='locate__popular-list']/a)[" + randomNumber + "]")).click();
-        String popularCity = driver.findElement(By.xpath("(//div[@class='locate__popular-list']/a)[" + randomNumber + "]")).getText();
-        String attr = driver.findElement(By.id("input-user-locate")).getAttribute("value");
-        Assert.assertEquals(popularCity, attr);
-        driver.findElement(By.id("btn-save-user-locate")).click();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(),'Укажите свой город']/../..")));
+        cityPage.iconSetSity.click();
+        waitVisibilityElement(cityPage.popupSetSity);
+        int popularCityAmount = getElementsByXpath(cityPage.popularCityList).size();
+        ArrayList<String> list = cityPage.getRandomCity(popularCityAmount);
+        Assert.assertEquals(list.get(0), list.get(1));
+        cityPage.btnSaveUserLocate.click();
+        waitInvisibilityElement(cityPage.popupSetSity);
         Thread.sleep(1000);
-        String cityInHeader = driver.findElement(By.id("header-title-user-location")).getText();
-        Assert.assertEquals(popularCity, cityInHeader);
+        Assert.assertEquals(list.get(0), cityPage.getHeaderCity());
     }
 
     /*
@@ -76,7 +71,7 @@ public class TestCityLgCity extends Settings {
         cityPage.selectCity(city);
         Assert.assertEquals("Город в шапке и выбранный город в попапе не совпали", city, cityPage.getHeaderCity());
         cityPage.setAutoCity(autoCity);
-        cityPage.btnSave.click();
+        cityPage.btnSaveUserLocate.click();
         waitInvisibilityElement(cityPage.popupSetSity);
         Assert.assertNotEquals(cityPage.getHeaderCity(), city);
     }

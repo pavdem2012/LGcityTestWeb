@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.CityPage;
 import pages.MainPage;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Settings {
@@ -31,10 +32,15 @@ public class Settings {
 
     public void open(String baseUrl) {
         driver.get(baseUrl);
+        driver.findElement(By.id("confirm-use-cookies")).click();
     }
 
     public WebElement getElementByXpath(String string) {
         return driver.findElement(By.xpath(string));
+    }
+
+    public List<WebElement> getElementsByXpath(By string) {
+        return driver.findElements(string);
     }
 
     public WebElement getElementByClassName(String string) {
@@ -61,7 +67,7 @@ public class Settings {
         wait.until(ExpectedConditions.textToBe(By.xpath(string), text));
     }
 
-    public void waitValueInElement(WebElement element, String string){
+    public void waitValueInElement(WebElement element, String string) {
         wait.until(ExpectedConditions.textToBePresentInElementValue(element, string));
     }
 
