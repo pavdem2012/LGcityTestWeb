@@ -80,16 +80,6 @@ public class CityPage extends Settings {
         return list;
     }
 
-    public boolean checkPopularCityList (){
-        List<String> cityList = new ArrayList<>();
-        List<WebElement> menuElements = getElementsByXpath(popularCityList);
-        for (WebElement menuElement: menuElements) {
-            cityList.add(menuElement.getText());
-            //cityList.add(driver.findElement(By.xpath("(//a[@class='locate__popular-list-item'])[" + i + "]")).getText());
-        }
-        return cityList.contains("Москва");
-    }
-
     public boolean checkPopularCityListV2(int popularCityAmount) {
         List<String> cityList = new ArrayList<>();
         for (int i = 0; i < popularCityAmount; i++) {
@@ -98,12 +88,4 @@ public class CityPage extends Settings {
         return cityList.contains("Москва");
     }
 
-    public boolean hasCity (String cityName){
-        for (WebElement element : getElementsByXpath(popularCityList)){
-            if (element.getText().equals(cityName)){
-                return true;
-            }
-        }
-        return false;
-    }
 }
