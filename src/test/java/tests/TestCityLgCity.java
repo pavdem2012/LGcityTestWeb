@@ -80,6 +80,6 @@ public class TestCityLgCity extends Settings {
         waitVisibilityElement(cityPage.popupSetCity);
         int popularCityAmount = getElementsByXpath(cityPage.popularCityList).size();
         Assert.assertTrue("Список популярных городов пуст" ,popularCityAmount > 0);
-        Assert.assertTrue("В списке отстутствует город 'Москва'",cityPage.checkPopularCityList(popularCityAmount));
+        Assert.assertTrue("В списке отстутствует город 'Москва'",cityPage.checkPopularCityList());
     }
 }
