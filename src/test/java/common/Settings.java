@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.BasketPage;
 import pages.CityPage;
 import pages.MainPage;
 
@@ -19,6 +20,8 @@ public class Settings {
     public static WebDriverWait wait;
     public static MainPage mainPage = new MainPage();
     public CityPage cityPage;
+    public BasketPage basketPage;
+    public Pages pages;
 
     @Before
     public void before() {
@@ -28,11 +31,13 @@ public class Settings {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         cityPage = new CityPage(driver, wait);
+        basketPage= new BasketPage(driver, wait);
+        pages = new Pages(driver, wait);
     }
 
     public void open(String baseUrl) {
         driver.get(baseUrl);
-        driver.findElement(By.id("confirm-use-cookies")).click();
+        pages.closeCookieBtn.click();//!!!Не забыть перетащить элемент в MainPage
     }
 
     public WebElement getElementByXpath(String string) {
