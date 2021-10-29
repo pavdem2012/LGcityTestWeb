@@ -15,12 +15,18 @@ public class MainPage extends Settings {
     String newsItemWithException = "//div[@class = 'news__item']//a[not(contains(text(), 'Бестселлеры коллекций'))]";
     //Заголовок страницы новостей
     String newsPageBlockTitle = "//div[@class='news-page__back-title']";
+    //
 
+    /*
+    Переход к блоку новостей
+     */
     public void scrollToNews() {
         Actions scroll = new Actions(driver);
         scroll.moveToElement(getElementByClassName(newsBlock)).perform();
     }
-
+    /*
+    Выбор рандомной новости
+     */
     public void randomNews() {
         int newsBlock = driver.findElements(By.xpath(newsItemBlock)).size();
         Random random = new Random();
