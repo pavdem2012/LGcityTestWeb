@@ -1,12 +1,13 @@
+package tests;
+
+import common.Settings;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import java.util.ArrayList;
-
 import java.util.Random;
 
 public class TestMainMenu extends Settings {
