@@ -8,13 +8,13 @@ import java.util.Random;
 
 public class MainPage extends Settings {
     //Блок новостей на главной странице
-    String newsBlock = "news";
+   public static String newsBlock = "news";
     //Элемент блока новостей на Главной странице
-    String newsItemBlock = "//div[@class = 'news__item']";
+    public static String newsItemBlock = "//div[@class = 'news__item']";
     //Элемент блока новостей на главной странице с исключением
-    String newsItemWithException = "//div[@class = 'news__item']//a[not(contains(text(), 'Бестселлеры коллекций'))]";
+    public static String newsItemWithException = "//div[@class = 'news__item']//a[not(contains(text(), 'Бестселлеры коллекций'))]";
     //Заголовок страницы новостей
-    String newsPageBlockTitle = "//div[@class='news-page__back-title']";
+    public static String newsPageBlockTitle = "//div[@class='news-page__back-title']";
     //
 
     /*

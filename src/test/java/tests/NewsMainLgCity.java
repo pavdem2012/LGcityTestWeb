@@ -2,7 +2,8 @@ package tests;
 
 import common.Settings;
 import org.junit.Test;
-import pages.Pages;
+import common.Pages;
+import pages.MainPage;
 
 public class NewsMainLgCity extends Settings {
     /*
@@ -13,9 +14,9 @@ public class NewsMainLgCity extends Settings {
     public void setNews() {
         open("https://lgcity.ru");
         mainPage.scrollToNews();
-        waitVisibilityElement(Pages.newsItemBlock);
+        waitVisibilityElement(MainPage.newsItemBlock);
         mainPage.randomNews();
-        waitTextToBe(Pages.newsPageBlockTitle, "Акции и новости");
+        waitTextToBe(mainPage.newsPageBlockTitle, "Акции и новости");
     }
     /*    *//*
     Проверка "Шапка сайта"
