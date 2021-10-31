@@ -10,10 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.BasketPage;
-import pages.CityPage;
-import pages.FavoritePage;
-import pages.MainPage;
+import pages.*;
 
 import java.util.List;
 import java.util.Random;
@@ -24,10 +21,11 @@ public class Settings {
     public static WebDriverWait wait;
     public static MainPage mainPage = new MainPage();
     public CityPage cityPage;
-    public BasketPage basketPage;
+    public CardProductPage cartProductPage;
     public Pages pages;
     public FavoritePage favoritePage;
     public FunctionsForTests functions;
+    public BasketPage basketPage;
 
     @Before
     public void before() {
@@ -37,15 +35,16 @@ public class Settings {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         cityPage = new CityPage(driver, wait);
-        basketPage = new BasketPage(driver, wait);
+        cartProductPage = new CardProductPage(driver, wait);
         pages = new Pages(driver, wait);
         favoritePage = new FavoritePage(driver, wait);
         functions = new FunctionsForTests();
+        basketPage = new BasketPage(driver,wait);
     }
 
     public void open(String baseUrl) {
         driver.get(baseUrl);
-        pages.closeCookieBtn.click();//!!!Не забыть перетащить элемент в MainPage
+        pages.setCloseCookieBtn();
         waitInvisibilityElement(pages.closeCookieBtn);
     }
 

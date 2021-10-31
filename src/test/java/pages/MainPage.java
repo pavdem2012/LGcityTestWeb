@@ -2,7 +2,9 @@ package pages;
 
 import common.Settings;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.Random;
 
@@ -15,7 +17,8 @@ public class MainPage extends Settings {
     public static String newsItemWithException = "//div[@class = 'news__item']//a[not(contains(text(), 'Бестселлеры коллекций'))]";
     //Заголовок страницы новостей
     public static String newsPageBlockTitle = "//div[@class='news-page__back-title']";
-    //
+
+
 
     /*
     Переход к блоку новостей
@@ -33,4 +36,5 @@ public class MainPage extends Settings {
         int randomNumber = random.nextInt(newsBlock) + 1;
         getElementByXpath("(" + newsItemWithException + ")[" + randomNumber + "]").click();
     }
+
 }

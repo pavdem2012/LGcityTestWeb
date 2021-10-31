@@ -110,7 +110,7 @@ public class TestMainMenu extends Settings {
             Assert.assertTrue(cartItemSize.contains(sizeOfProductInCart));
             driver.findElement(By.xpath("//div[@class='basket__item-remove js-basket-remove-item']")).click();
         }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"basket__empty\"]")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='basket__empty']")));
         int sumInCarts = 0;
 
         for (int i = 0; i<cartItemPrice.size(); i++){
@@ -121,9 +121,9 @@ public class TestMainMenu extends Settings {
         Assert.assertEquals(sumInCarts,totalPrice);
 
 
-        driver.findElement(By.xpath("//div[@class='basket__header-icon-box js-popup-close']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'basket__empty-title')]")));
 
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'basket__empty-title')]")));
+        driver.findElement(By.xpath("//div[@class='basket__header-icon-box js-popup-close']")).click();
     }
     @Test
     /*

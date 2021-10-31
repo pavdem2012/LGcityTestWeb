@@ -18,5 +18,32 @@ public class Pages extends Settings{
     //Куки
     @FindBy(id = "confirm-use-cookies")
     WebElement closeCookieBtn;
+    //Иконка "Корзина"
+    @FindBy(xpath = "//a[@class='header__r-icons-link js-popup js-header-basket']")
+    static
+    WebElement basketIcon;
+    //Логотип
+    @FindBy(xpath = "//a[@class='header__logo-link']")
+    WebElement logo;
 
+/*
+Закрыть куки
+ */
+public void setCloseCookieBtn(){
+    closeCookieBtn.click();
+}
+
+
+    /*
+Войти в Корзину
+ */
+    public static void goToBasket(){
+        basketIcon.click();
+    }
+    /*
+    Перейти на главную страницу по логотипу
+     */
+    public void goToMainPage(){
+        logo.click();
+    }
 }
