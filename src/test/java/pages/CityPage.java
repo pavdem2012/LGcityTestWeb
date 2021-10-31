@@ -68,24 +68,23 @@ public class CityPage extends Settings {
         btnSaveUserLocate.click();
     }
 
-    public ArrayList<String> getRandomCity(int cityAmount){
+    public ArrayList<String> getRandomCity(int cityAmount) {
         Random random = new Random();
-        int randomNumber = random.nextInt(cityAmount) + 1;
-        driver.findElement(By.xpath("(//div[@class='locate__popular-list']/a)[" + randomNumber + "]")).click();
+        int randomNumber = random.nextInt(cityAmount);
+        popularCityElements.get(randomNumber).click();
         ArrayList<String> list = new ArrayList<>();
-        String popularCity = driver.findElement(By.xpath("(//div[@class='locate__popular-list']/a)[" + randomNumber + "]")).getText();
+        String popularCity = popularCityElements.get(randomNumber).getText();
         String cityInField = inputUserLocate.getAttribute("value");
         list.add(popularCity);
         list.add(cityInField);
         return list;
     }
 
-    public boolean checkPopularCityListV2(int popularCityAmount) {
+    public boolean checkPopularCityList(int popularCityAmount) {
         List<String> cityList = new ArrayList<>();
         for (int i = 0; i < popularCityAmount; i++) {
             cityList.add(popularCityElements.get(i).getText());
         }
         return cityList.contains("Москва");
     }
-
 }
