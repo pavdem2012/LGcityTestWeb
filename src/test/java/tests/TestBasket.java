@@ -26,8 +26,9 @@ public class TestBasket extends Settings {
             waitVisibilityElement(favoritePage.menuItem);
             favoritePage.selectRandomMenu();
             String randomMenuItem = favoritePage.selectRandomMenuItem();
+            System.out.println("Итерация "+ (i+1)+": Заголовок страницы: " + favoritePage.getTitle() + "; Заголовок меню: " + randomMenuItem);
             Assert.assertTrue(favoritePage.getTitle().contains(randomMenuItem));
-            System.out.println("Заголовок страницы: " + favoritePage.getTitle() + " Заголовок меню: " + randomMenuItem);
+
             sendKeysToBody(Keys.PAGE_DOWN);
             waitVisibilityElement(favoritePage.catalogListBlock);
             favoritePage.selectRandomCard();
@@ -39,22 +40,19 @@ public class TestBasket extends Settings {
             CardProductPage.addProductToBasket();
             pages.goToMainPage();
         }
-        System.out.println(cartItemPrice);
-        System.out.println(cartItemName);
-        System.out.println(cartItemColor);
-        System.out.println(cartItemSize);
+
         Pages.goToBasket();
         waitVisibilityElement(BasketPage.basketNonEmptyPage);
         Thread.sleep(2000);
         int totalPrice = basketPage.totalPrice();
         for (int i = 0; i < BasketPage.countProductsForTest; i++) {
-            System.out.println("Цена в карточке: " + cartItemPrice + ", Цена в корзине: " + basketPage.getPriceOfProductInCart());
+            System.out.println("Итерация "+ (i+1)+": Цена в карточке: " + cartItemPrice + ", Цена в корзине: " + basketPage.getPriceOfProductInCart());
             Assert.assertTrue(cartItemPrice.contains(basketPage.getPriceOfProductInCart()));
-            System.out.println("Название в карточке: " + cartItemName + ", Название в корзине: " + basketPage.nameOfProductInCart());
+            System.out.println("Итерация "+ (i+1)+": Название в карточке: " + cartItemName + ", Название в корзине: " + basketPage.nameOfProductInCart());
             Assert.assertTrue(cartItemName.contains(basketPage.nameOfProductInCart()));
-            System.out.println("Цвет в карточке: " + cartItemColor + ", Цвет в корзине: " + basketPage.colorOfProductInCart());
+            System.out.println("Итерация "+ (i+1)+": Цвет в карточке: " + cartItemColor + ", Цвет в корзине: " + basketPage.colorOfProductInCart());
             Assert.assertTrue(cartItemColor.contains(basketPage.colorOfProductInCart()));
-            System.out.println("Размер в карточке: " + cartItemSize + ", Размер в корзине: " + basketPage.sizeOfProductInCart());
+            System.out.println("Итерация "+ (i+1)+": Размер в карточке: " + cartItemSize + ", Размер в корзине: " + basketPage.sizeOfProductInCart());
             Assert.assertTrue(cartItemSize.contains(basketPage.sizeOfProductInCart()));
 
             basketPage.setBasketItemRemove();
