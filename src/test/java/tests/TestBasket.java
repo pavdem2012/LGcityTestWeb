@@ -54,7 +54,7 @@ public class TestBasket extends Settings {
             //System.out.println("Итерация "+ (i+1)+": Цвет в карточке: " + cartItemColor + ", Цвет в корзине: " + basketPage.colorOfProductInCart());
             Assert.assertTrue("Итерация "+ (i+1)+": Цвет в карточке: " + cartItemColor + ", Цвет в корзине: " +  basketPage.colorOfProductInCart(), cartItemColor.contains(basketPage.colorOfProductInCart()));
             //System.out.println("Итерация "+ (i+1)+": Размер в карточке: " + cartItemSize + ", Размер в корзине: " + basketPage.sizeOfProductInCart());
-            Assert.assertTrue("Итерация "+ (i+1)+": Размер в карточке: " + cartItemSize + ", Размер в корзине: " + basketPage.sizeOfProductInCart(), cartItemSize.contains(basketPage.sizeOfProductInCart()));
+            Assert.assertTrue("Итерация "+ (i+1)+": Размеры в карточке: " + cartItemSize + ", Размер в корзине: " + basketPage.sizeOfProductInCart(), cartItemSize.contains(basketPage.sizeOfProductInCart()));
 
             basketPage.setBasketItemRemove();
         }
