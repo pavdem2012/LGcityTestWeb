@@ -34,18 +34,21 @@ public class CardProductPage extends Settings {
     WebElement priceItemCart;
     //Кнопка "В корзину"
     @FindBy(id = "btn-add-to-cart")
-    static
+    public static
     WebElement addToBasketBtn;
 
     //Цвет товара из карточки
     public String getColorCartItem() {
+        waitVisibilityElement(colorItemCart);
         return colorItemCart.getText().toLowerCase();
     }
 
     //Размер товара из карточки
     public String getSizeCartItem() {
+        waitVisibilityElement(sizeMenuClick);
         sizeMenuClick.click();
         waitVisibilityElement(sizesMenu);
+        waitVisibilityElement(sizeItemCart);
         String cartSize = sizeItemCart.getAttribute("data-size").toLowerCase();
         colorItemCart.click();
         waitInvisibilityElement(sizesMenu);
@@ -54,11 +57,13 @@ public class CardProductPage extends Settings {
 
     //Цена товара из карточки
     public String getPriceCartItem() {
+        waitVisibilityElement(priceItemCart);
         return priceItemCart.getText().replaceAll(" ", "").replaceAll("₽", "");
     }
 
     //Добавить товар в корзину
     public static void addProductToBasket() {
+        waitVisibilityElement(addToBasketBtn);
         addToBasketBtn.click();
     }
 
