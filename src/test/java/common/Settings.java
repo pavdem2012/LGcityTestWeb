@@ -98,6 +98,10 @@ public class Settings {
         actions.moveToElement(element).perform();
     }
 
+    public String getUrl(){
+        return driver.getCurrentUrl();
+    }
+
     @After
     public void quit() {
         driver.quit();

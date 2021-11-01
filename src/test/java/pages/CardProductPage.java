@@ -22,7 +22,7 @@ public class CardProductPage extends Settings {
     WebElement colorItemCart;
     //Строка выбора размера
     @FindBy(xpath = "//input[@class='js-select-input select__input']")
-    WebElement sizeMenuClick;
+    WebElement  sizeMenuClick;
     //Всплывющее меню с размерами
     @FindBy(xpath = "//div[@class='select__drop select__drop--sizes']")
     WebElement sizesMenu;
@@ -38,16 +38,16 @@ public class CardProductPage extends Settings {
 
     //Цвет товара из карточки
     public String getColorCartItem() {
-        waitVisibilityElement(colorItemCart);
+        //waitVisibilityElement(colorItemCart);
         return colorItemCart.getText().toLowerCase();
     }
 
     //Размер товара из карточки
     public String getSizeCartItem() {
-        waitVisibilityElement(sizeMenuClick);
+        //waitVisibilityElement(sizeMenuClick);
         sizeMenuClick.click();
         waitVisibilityElement(sizesMenu);
-        waitVisibilityElement(sizeItemCart);
+        //waitVisibilityElement(sizeItemCart);
         String cartSize = sizeItemCart.getAttribute("data-size").toLowerCase();
         colorItemCart.click();
         waitInvisibilityElement(sizesMenu);
@@ -56,13 +56,13 @@ public class CardProductPage extends Settings {
 
     //Цена товара из карточки
     public String getPriceCartItem() {
-        waitVisibilityElement(priceItemCart);
+        //waitValueInElement(priceItemCart,"₽");
         return priceItemCart.getText().replaceAll(" ", "").replaceAll("₽", "");
     }
 
     //Добавить товар в корзину
     public static void addProductToBasket() {
-        waitVisibilityElement(addToBasketBtn);
+        //waitVisibilityElement(addToBasketBtn);
         addToBasketBtn.click();
     }
 

@@ -62,43 +62,43 @@ public class BasketPage extends Settings {
     //Функции
     //Общая цена в корзине число
     public int totalPrice() {
-        waitVisibilityElement(basketTotalPrice);
+        //waitVisibilityElement(basketTotalPrice);
         return Integer.parseInt(basketTotalPrice.getText().replaceAll(" ", ""));
     }
 
     //Цена товара в корзине
     public  String getPriceOfProductInCart() {
-        waitVisibilityElement(priceOfProductInCart);
+
         return  priceOfProductInCart.getText().replaceAll(" ", "").replaceAll("₽", "");
     }
 
     //Название товара в корзине
     public  String nameOfProductInCart() {
-        waitVisibilityElement(nameOfProductInCart);
+        //waitVisibilityElement(nameOfProductInCart);
         return nameOfProductInCart.getText().toLowerCase().replaceAll("[^\\da-zA-Z]", "");
     }
 
     //Цвет товара в корзине
     public  String colorOfProductInCart() {
-        waitVisibilityElement(colorOfProductInCart);
+        //waitVisibilityElement(colorOfProductInCart);
         return colorOfProductInCart.getText().toLowerCase().replaceAll("цвет:", "").replaceAll(" ", "");
     }
 
     //Размер товара в корзине
     public  String sizeOfProductInCart() {
-        waitVisibilityElement(sizeOfProductInCart);
+        //waitVisibilityElement(sizeOfProductInCart);
         return sizeOfProductInCart.getText().replaceAll(" ", "").toLowerCase().replaceAll("размер:", "");
     }
 
     //Удалить товар из корзины
     public void setBasketItemRemove() {
-        waitVisibilityElement(basketItemRemove);
+        //waitVisibilityElement(basketItemRemove);
         basketItemRemove.click();
     }
 
     //Закрыть корзину
     public void setBasketClose() {
-        waitVisibilityElement(basketPopupClose);
+        //waitVisibilityElement(basketPopupClose);
         basketPopupClose.click();
     }
 }
