@@ -44,10 +44,10 @@ public class CardProductPage extends Settings {
 
     //Размер товара из карточки
     public String getSizeCartItem() {
-        //waitVisibilityElement(sizeMenuClick);
+        waitVisibilityElement(sizeMenuClick);
         sizeMenuClick.click();
         waitVisibilityElement(sizesMenu);
-        //waitVisibilityElement(sizeItemCart);
+        waitVisibilityElement(sizeItemCart);
         String cartSize = sizeItemCart.getAttribute("data-size").toLowerCase();
         colorItemCart.click();
         waitInvisibilityElement(sizesMenu);

@@ -75,7 +75,7 @@ public class BasketPage extends Settings {
     //Название товара в корзине
     public  String nameOfProductInCart() {
         //waitVisibilityElement(nameOfProductInCart);
-        return nameOfProductInCart.getText().toLowerCase().replaceAll("[^\\da-zA-Z]", "");
+        return nameOfProductInCart.getText().toLowerCase().replaceAll(" ", "");//!!
     }
 
     //Цвет товара в корзине
