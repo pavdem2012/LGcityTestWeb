@@ -34,8 +34,7 @@ public class CardProductPage extends Settings {
     WebElement priceItemCart;
     //Кнопка "В корзину"
     @FindBy(id = "btn-add-to-cart")
-    public static
-    WebElement addToBasketBtn;
+    static WebElement addToBasketBtn;
 
     //Цвет товара из карточки
     public String getColorCartItem() {
