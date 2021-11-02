@@ -68,7 +68,7 @@ public class CatalogListPage extends Settings {
         //System.out.println("Наименование: " +title);
         wait(1);
         moveTo(catalogQuickBuyList.get(num));
-        wait(1);
+        wait(2);
         int randomQuickBuSize =
                 getRandom(driver.findElements(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button")).size()) + 1;
         String randomSize =
