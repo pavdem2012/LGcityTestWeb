@@ -47,9 +47,8 @@ public class CardProductPage extends Settings {
         Thread.sleep(1000);
         //waitVisibilityElement(sizeMenuClick);
         sizeMenuClick.click();
-
         //waitVisibilityElement(sizesMenu);
-        //waitVisibilityElement(sizeItemCart);
+        waitVisibilityElement(sizeItemCart);
         String cartSize = sizeItemCart.getAttribute("data-size").toLowerCase();
         colorItemCart.click();
         waitInvisibilityElement(sizesMenu);
