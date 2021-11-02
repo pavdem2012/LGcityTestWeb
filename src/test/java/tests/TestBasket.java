@@ -85,9 +85,9 @@ public class TestBasket extends Settings {
             waitVisibilityElement(favoritePage.catalogListBlock);
             catalogListPage.selectQuickBuyList();
         }
-        System.out.println(catalogListPage.cartItemPrice);
-        System.out.println(catalogListPage.cartItemSize);
-        System.out.println(catalogListPage.cartItemName);
+        //System.out.println(catalogListPage.cartItemPrice);
+        //System.out.println(catalogListPage.cartItemSize);
+        //System.out.println(catalogListPage.cartItemName);
         Pages.goToBasket();
         waitVisibilityElement(BasketPage.basketNonEmptyPage);
         Thread.sleep(2000);
