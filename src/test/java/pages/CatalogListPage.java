@@ -72,7 +72,7 @@ public class CatalogListPage extends Settings {
         int randomQuickBuSize =
                 getRandom(driver.findElements(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button")).size()) + 1;
         String randomSize =
-                driver.findElement(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button[" + randomQuickBuSize + "]")).getText().replaceAll(" ", "");
+                driver.findElement(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button[" + randomQuickBuSize + "]")).getText().toLowerCase().replaceAll(" ", "");
         cartItemSize.add(randomSize);
         waitVisibilityElement(priceInList);
         String price = priceItemTitleList.get(num).getText().replaceAll(" ","").replaceAll("₽","");
