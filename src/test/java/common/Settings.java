@@ -104,6 +104,11 @@ public class Settings {
         return driver.getCurrentUrl();
     }
 
+    public void wait(int second) throws InterruptedException {
+        int time = second * 1000;
+        Thread.sleep(time);
+    }
+
     @After
     public void quit() {
         driver.quit();

@@ -43,6 +43,9 @@ public class CatalogListPage extends Settings {
     //название товара в листинге товара
     @FindBy(xpath = "//div[@class='catalog__item-title']")
     WebElement catalogItemTitle;
+    //список названий товаров в листинге товара
+    @FindBy(xpath = "//div[@class='catalog__item-title']")
+    List<WebElement> catalogItemTitleList;
     //int randomQuickBuyList;
     //int randomQuickBuSize;
     //Функции
@@ -56,9 +59,11 @@ public class CatalogListPage extends Settings {
         moveTo(randomCard);
 //        System.out.println("рандом 1: " + randomQuickBuyList);
 //        System.out.println( getUrl());
-        Thread.sleep(1000);
+        String title = catalogItemTitleList.get(num).getText();
+        System.out.println(title);
+        wait(1);
         moveTo(catalogQuickBuyList.get(num));
-        Thread.sleep(1000);
+        wait(1);
         int randomQuickBuSize =
                 getRandom(driver.findElements(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button")).size()) + 1;
         String randomSize =
