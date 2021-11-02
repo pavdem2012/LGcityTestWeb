@@ -28,6 +28,9 @@ public class CatalogListPage extends Settings {
     //Всплывающее меню быстрой покупки
     @FindBy(xpath = "//div[@class='catalog__quick-buy catalog__quick-buy--size']")
     public List<WebElement> quickBuyCatalog;
+    //карточки товаров на странице
+    @FindBy(xpath = "//div[@class='catalog__item-top']")
+    List<WebElement> cardsList;
     //Доступные размеры в всплывающее меню быстрой покупки
     @FindBy(xpath = "//div[@class='catalog__quick-buy-list']")
     public List<WebElement> catalogQuickBuyList;
@@ -47,17 +50,19 @@ public class CatalogListPage extends Settings {
 
     //Подвести к рандомной карточке
     public void selectQuickBuyList() throws InterruptedException {
-        int randomQuickBuyList = getRandom(catalogQuickBuyList.size()) + 1;
-        moveTo(catalogQuickBuyList.get(randomQuickBuyList));
-        System.out.println("рандом 1: " + randomQuickBuyList);
-        System.out.println( getUrl());
+//        int randomQuickBuyList = getRandom(catalogQuickBuyList.size());
+        int num = getRandom(cardsList.size());
+        WebElement randomCard = cardsList.get(num);
+        moveTo(randomCard);
+//        System.out.println("рандом 1: " + randomQuickBuyList);
+//        System.out.println( getUrl());
         Thread.sleep(1000);
-        moveTo(catalogQuickBuyList.get(randomQuickBuyList));
+        moveTo(catalogQuickBuyList.get(num));
+        Thread.sleep(1000);
         int randomQuickBuSize =
-                getRandom(driver.findElements(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + randomQuickBuyList + "]/button")).size()) + 1;
+                getRandom(driver.findElements(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button")).size()) + 1;
         String randomSize =
-                driver.findElement(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + randomQuickBuyList +
-                        "]/button[" + randomQuickBuSize + "]")).getText().replaceAll(" ", "");
+                driver.findElement(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button[" + randomQuickBuSize + "]")).getText().replaceAll(" ", "");
         System.out.println("рандом 2: " + randomQuickBuSize);
         System.out.println("размер " + randomSize);
     }

@@ -83,7 +83,7 @@ public class TestBasket extends Settings {
             String randomMenuItem = favoritePage.selectRandomMenuItem();
             //System.out.println("Итерация "+ (i+1)+": Заголовок страницы: " + favoritePage.getTitle() + "; Заголовок меню: " + randomMenuItem);
             //Assert.assertTrue("Итерация "+ (i+1)+": Заголовок страницы каталога: " + favoritePage.getTitle() + "; Заголовок меню: " + randomMenuItem,favoritePage.getTitle().contains(randomMenuItem));
-            sendKeysToBody(Keys.PAGE_DOWN);
+//            sendKeysToBody(Keys.PAGE_DOWN);
             waitVisibilityElement(favoritePage.catalogListBlock);
             catalogListPage.selectQuickBuyList();
         //System.out.println(catalogListPage.randomQuickBuSize());
