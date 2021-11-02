@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -40,6 +41,9 @@ public class CatalogListPage extends Settings {
     //Цена в листинге товара
     @FindBy(xpath = "//div[@itemprop='price']")
     WebElement priceInList;
+    //Список цен в листинге товара
+    @FindBy(xpath = "//div[@itemprop='price']")
+    List<WebElement> priceItemTitleList;
     //название товара в листинге товара
     @FindBy(xpath = "//div[@class='catalog__item-title']")
     WebElement catalogItemTitle;
@@ -51,16 +55,17 @@ public class CatalogListPage extends Settings {
     //Функции
 
 
-    //Подвести к рандомной карточке
+    //Выбрать рандомный товар
+    public ArrayList<String> cartItemPrice = new ArrayList<>();
+    public ArrayList<String> cartItemSize = new ArrayList<>();
+    public ArrayList<String> cartItemName = new ArrayList<>();
     public void selectQuickBuyList() throws InterruptedException {
-//        int randomQuickBuyList = getRandom(catalogQuickBuyList.size());
         int num = getRandom(cardsList.size());
         WebElement randomCard = cardsList.get(num);
         moveTo(randomCard);
-//        System.out.println("рандом 1: " + randomQuickBuyList);
-//        System.out.println( getUrl());
-        String title = catalogItemTitleList.get(num).getText();
-        System.out.println(title);
+        String title = catalogItemTitleList.get(num).getText().toLowerCase().replaceAll(" ","");
+        cartItemName.add(title);
+        //System.out.println("Наименование: " +title);
         wait(1);
         moveTo(catalogQuickBuyList.get(num));
         wait(1);
@@ -68,8 +73,14 @@ public class CatalogListPage extends Settings {
                 getRandom(driver.findElements(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button")).size()) + 1;
         String randomSize =
                 driver.findElement(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button[" + randomQuickBuSize + "]")).getText().replaceAll(" ", "");
-        System.out.println("рандом 2: " + randomQuickBuSize);
-        System.out.println("размер " + randomSize);
+        cartItemSize.add(randomSize);
+        waitVisibilityElement(priceInList);
+        String price = priceItemTitleList.get(num).getText().replaceAll(" ","").replaceAll("₽","");
+        cartItemPrice.add(price);
+        driver.findElement(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button[" + randomQuickBuSize + "]")).click();
+        //System.out.println("Цена: " + price);
+        //System.out.println("рандом 2: " + randomQuickBuSize);
+        //System.out.println("размер: " + randomSize);
     }
 
     /*public int randomQuickBuSize() {
