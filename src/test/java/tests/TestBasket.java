@@ -15,7 +15,7 @@ public class TestBasket extends Settings {
 
     @Test
         /*
-    Проверка вложеных элементов главного меню и добавления/удаления товаров корзины
+    Проверка вложеных элементов главного меню и добавления/удаления товаров корзины из карточки товара
      */ public void testCategory() throws InterruptedException {
         open("https://lgcity.ru");
         ArrayList<String> cartItemPrice = new ArrayList<>();
@@ -67,5 +67,29 @@ public class TestBasket extends Settings {
         waitVisibilityElement(basketPage.basketEmptyPage);
         waitVisibilityElement(basketPage.basketEmptyHeader);
         basketPage.setBasketClose();
+    }
+    @Test
+    /*
+    Проверка вложеных элементов главного меню и добавления/удаления товаров корзины из каталога товаров
+     */
+    public void testAddToBasketFromListing () throws InterruptedException {
+        open("https://lgcity.ru");
+        ArrayList<String> cartItemPrice = new ArrayList<>();
+        ArrayList<String> cartItemSize = new ArrayList<>();
+        ArrayList<String> cartItemName = new ArrayList<>();
+        //for (int i = 0; i < BasketPage.countProductsForTest; i++) {
+            waitVisibilityElement(favoritePage.menuItem);
+            favoritePage.selectRandomMenu();
+            String randomMenuItem = favoritePage.selectRandomMenuItem();
+            //System.out.println("Итерация "+ (i+1)+": Заголовок страницы: " + favoritePage.getTitle() + "; Заголовок меню: " + randomMenuItem);
+            //Assert.assertTrue("Итерация "+ (i+1)+": Заголовок страницы каталога: " + favoritePage.getTitle() + "; Заголовок меню: " + randomMenuItem,favoritePage.getTitle().contains(randomMenuItem));
+            sendKeysToBody(Keys.PAGE_DOWN);
+            waitVisibilityElement(favoritePage.catalogListBlock);
+            catalogListPage.selectQuickBuyList();
+        //System.out.println(catalogListPage.randomQuickBuSize());
+            //catalogListPage.randomQuickBuSize();
+            Thread.sleep(1500);
+
+        //}
     }
 }

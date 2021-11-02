@@ -43,10 +43,11 @@ public class CardProductPage extends Settings {
     }
 
     //Размер товара из карточки
-    public String getSizeCartItem() {
-        waitVisibilityElement(sizeMenuClick);
+    public String getSizeCartItem() throws InterruptedException {
+        Thread.sleep(1000);
+        //waitVisibilityElement(sizeMenuClick);
         sizeMenuClick.click();
-        waitVisibilityElement(sizesMenu);
+        //waitVisibilityElement(sizesMenu);
         waitVisibilityElement(sizeItemCart);
         String cartSize = sizeItemCart.getAttribute("data-size").toLowerCase();
         colorItemCart.click();
