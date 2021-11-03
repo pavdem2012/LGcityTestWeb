@@ -111,6 +111,10 @@ public class TestBasket extends Settings {
         //System.out.println("Сумма цен из карточек: " + sumInCarts + ", Общая цена в корзине: " + totalPrice);
         waitVisibilityElement(basketPage.basketEmptyPage);
         waitVisibilityElement(basketPage.basketEmptyHeader);
-        basketPage.setBasketClose();
+//        basketPage.setBasketClose();
+        basketPage.clickCheckoutBtn();
+        basketPage.clickBtnWithoutRegistration();
+        basketPage.setOrderData();
+
     }
 }

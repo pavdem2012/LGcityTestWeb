@@ -55,6 +55,24 @@ public class BasketPage extends Settings {
     @FindBy(xpath = "//div[@class='basket__header-icon-box js-popup-close']")
     static
     WebElement basketPopupClose;
+    //кнопка "К оформлению" в корзине
+    @FindBy(xpath = "//button[text()='К оформлению']")
+    WebElement checkoutBtn;
+    //кнопка "Продолжить без регистрации"
+    @FindBy(xpath = "//button[text()='Продолжить без регистрации']")
+    WebElement btnWithoutRegistration;
+    //поле "Имя" в оформлении заказа
+    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Имя']/following-sibling::input")
+    WebElement nameField;
+    //поле "Фамилия" в оформлении заказа
+    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Фамилия']/following-sibling::input")
+    WebElement lastname;
+    //поле "Имя" в оформлении заказа
+    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='E-mail']/following-sibling::input")
+    WebElement email;
+    //поле "Имя" в оформлении заказа
+    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Телефон']/following-sibling::input")
+    WebElement phone;
     //Количество товаров для теста
     public static int countProductsForTest = 2;
 
@@ -100,5 +118,20 @@ public class BasketPage extends Settings {
     public void setBasketClose() {
         //waitVisibilityElement(basketPopupClose);
         basketPopupClose.click();
+    }
+
+    public void clickCheckoutBtn(){
+        checkoutBtn.click();
+    }
+
+    public void clickBtnWithoutRegistration(){
+        btnWithoutRegistration.click();
+    }
+
+    public void setOrderData(){
+        nameField.sendKeys();
+        lastname.sendKeys();
+        email.sendKeys();
+        phone.sendKeys();
     }
 }
