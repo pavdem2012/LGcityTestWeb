@@ -26,6 +26,7 @@ public class Settings {
     public FavoritePage favoritePage;
     public FunctionsForTests functions;
     public BasketPage basketPage;
+    public CatalogListPage catalogListPage;
 
     @Before
     public void before() {
@@ -40,6 +41,7 @@ public class Settings {
         favoritePage = new FavoritePage(driver, wait);
         functions = new FunctionsForTests();
         basketPage = new BasketPage(driver,wait);
+        catalogListPage = new CatalogListPage(driver,wait);
     }
 
     public void open(String baseUrl) {
@@ -96,6 +98,15 @@ public class Settings {
     public void moveTo(WebElement element) {
         Actions actions = new Actions(driver);
         actions.moveToElement(element).perform();
+    }
+
+    public String getUrl(){
+        return driver.getCurrentUrl();
+    }
+
+    public void wait(int second) throws InterruptedException {
+        int time = second * 1000;
+        Thread.sleep(time);
     }
 
     @After

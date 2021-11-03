@@ -55,6 +55,24 @@ public class BasketPage extends Settings {
     @FindBy(xpath = "//div[@class='basket__header-icon-box js-popup-close']")
     static
     WebElement basketPopupClose;
+    //кнопка "К оформлению" в корзине
+    @FindBy(xpath = "//button[text()='К оформлению']")
+    WebElement checkoutBtn;
+    //кнопка "Продолжить без регистрации"
+    @FindBy(xpath = "//button[text()='Продолжить без регистрации']")
+    WebElement btnWithoutRegistration;
+    //поле "Имя" в оформлении заказа
+    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Имя']/following-sibling::input")
+    WebElement nameField;
+    //поле "Фамилия" в оформлении заказа
+    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Фамилия']/following-sibling::input")
+    WebElement lastname;
+    //поле "Имя" в оформлении заказа
+    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='E-mail']/following-sibling::input")
+    WebElement email;
+    //поле "Имя" в оформлении заказа
+    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Телефон']/following-sibling::input")
+    WebElement phone;
     //Количество товаров для теста
     public static int countProductsForTest = 2;
 
@@ -62,37 +80,58 @@ public class BasketPage extends Settings {
     //Функции
     //Общая цена в корзине число
     public int totalPrice() {
-        int totalPrice = Integer.parseInt(basketTotalPrice.getText().replaceAll(" ", ""));
-        return totalPrice;
+        //waitVisibilityElement(basketTotalPrice);
+        return Integer.parseInt(basketTotalPrice.getText().replaceAll(" ", ""));
     }
 
     //Цена товара в корзине
-    public static String getPriceOfProductInCart() {
-        return priceOfProductInCart.getText().replaceAll(" ", "").replaceAll("₽", "");
+    public  String getPriceOfProductInCart() {
+
+        return  priceOfProductInCart.getText().replaceAll(" ", "").replaceAll("₽", "");
     }
 
     //Название товара в корзине
-    public static String nameOfProductInCart() {
-        return nameOfProductInCart.getText().toLowerCase().replaceAll("[^\\da-zA-Z]", "");
+    public  String nameOfProductInCart() {
+        //waitVisibilityElement(nameOfProductInCart);
+        return nameOfProductInCart.getText().toLowerCase().replaceAll(" ", "");//!!
     }
 
     //Цвет товара в корзине
-    public static String colorOfProductInCart() {
+    public  String colorOfProductInCart() {
+        //waitVisibilityElement(colorOfProductInCart);
         return colorOfProductInCart.getText().toLowerCase().replaceAll("цвет:", "").replaceAll(" ", "");
     }
 
     //Размер товара в корзине
-    public static String sizeOfProductInCart() {
+    public  String sizeOfProductInCart() {
+        //waitVisibilityElement(sizeOfProductInCart);
         return sizeOfProductInCart.getText().replaceAll(" ", "").toLowerCase().replaceAll("размер:", "");
     }
 
     //Удалить товар из корзины
-    public static void setBasketItemRemove() {
+    public void setBasketItemRemove() {
+        //waitVisibilityElement(basketItemRemove);
         basketItemRemove.click();
     }
 
     //Закрыть корзину
-    public static void setBasketClose() {
+    public void setBasketClose() {
+        //waitVisibilityElement(basketPopupClose);
         basketPopupClose.click();
+    }
+
+    public void clickCheckoutBtn(){
+        checkoutBtn.click();
+    }
+
+    public void clickBtnWithoutRegistration(){
+        btnWithoutRegistration.click();
+    }
+
+    public void setOrderData(){
+        nameField.sendKeys();
+        lastname.sendKeys();
+        email.sendKeys();
+        phone.sendKeys();
     }
 }
