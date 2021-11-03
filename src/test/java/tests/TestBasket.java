@@ -38,6 +38,7 @@ public class TestBasket extends Settings {
             cartItemColor.add(cartProductPage.getColorCartItem());
             cartItemSize.add(cartProductPage.getSizeCartItem());
             cartItemPrice.add(cartProductPage.getPriceCartItem());
+            wait(1);
             CardProductPage.addProductToBasket();
             pages.goToMainPage();
         }
