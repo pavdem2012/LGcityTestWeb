@@ -37,8 +37,9 @@ public void setCloseCookieBtn(){
     /*
 Войти в Корзину
  */
-    public static void goToBasket(){
+    public void goToBasket() throws InterruptedException {
         basketIcon.click();
+        wait(2);
     }
     /*
     Перейти на главную страницу по логотипу

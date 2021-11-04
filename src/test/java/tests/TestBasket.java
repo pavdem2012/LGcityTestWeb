@@ -43,7 +43,7 @@ public class TestBasket extends Settings {
             pages.goToMainPage();
         }
 
-        Pages.goToBasket();
+        pages.goToBasket();
         waitVisibilityElement(BasketPage.basketNonEmptyPage);
         Thread.sleep(2000);
         int totalPrice = basketPage.totalPrice();
@@ -89,7 +89,7 @@ public class TestBasket extends Settings {
         //System.out.println(catalogListPage.cartItemPrice);
         //System.out.println(catalogListPage.cartItemSize);
         //System.out.println(catalogListPage.cartItemName);
-        Pages.goToBasket();
+        pages.goToBasket();
         waitVisibilityElement(BasketPage.basketNonEmptyPage);
         Thread.sleep(2000);
         int totalPrice = basketPage.totalPrice();
@@ -101,7 +101,7 @@ public class TestBasket extends Settings {
             //System.out.println("Итерация "+ (i+1)+": Размер в карточке: " + cartItemSize + ", Размер в корзине: " + basketPage.sizeOfProductInCart());
             Assert.assertTrue("Итерация "+ (i+1)+": Размер в карточке: " + catalogListPage.cartItemSize + ", Размер в корзине: " + basketPage.sizeOfProductInCart(), catalogListPage.cartItemSize.contains(basketPage.sizeOfProductInCart()));
 
-            basketPage.setBasketItemRemove();
+//            basketPage.setBasketItemRemove();
         }
         int sumInCarts = 0;
         for (int i = 0; i < catalogListPage.cartItemPrice.size(); i++) {
@@ -109,12 +109,14 @@ public class TestBasket extends Settings {
         }
         Assert.assertEquals("Сумма цен из карточек: " + sumInCarts + ", Общая цена в корзине: " + totalPrice, sumInCarts, totalPrice);
         //System.out.println("Сумма цен из карточек: " + sumInCarts + ", Общая цена в корзине: " + totalPrice);
-        waitVisibilityElement(basketPage.basketEmptyPage);
-        waitVisibilityElement(basketPage.basketEmptyHeader);
+//        waitVisibilityElement(basketPage.basketEmptyPage);
+//        waitVisibilityElement(basketPage.basketEmptyHeader);
 //        basketPage.setBasketClose();
         basketPage.clickCheckoutBtn();
         basketPage.clickBtnWithoutRegistration();
         basketPage.setOrderData();
+        basketPage.setAddress();
+        basketPage.setDelivery("Курьер");
 
     }
 }
