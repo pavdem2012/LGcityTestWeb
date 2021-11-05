@@ -2,10 +2,7 @@ package common;
 
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -34,6 +31,7 @@ public class Settings {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().window().setPosition(new Point(1500, 0));
         driver.manage().window().maximize();
         cityPage = new CityPage(driver, wait);
         cartProductPage = new CardProductPage(driver, wait);
