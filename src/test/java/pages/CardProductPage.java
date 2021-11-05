@@ -35,7 +35,9 @@ public class CardProductPage extends Settings {
     //Кнопка "В корзину"
     @FindBy(id = "btn-add-to-cart")
     static WebElement addToBasketBtn;
-
+    // Кнопка Перейти в корзину
+    @FindBy(xpath = "//button[(contains(text(), 'Перейти в корзину'))]")
+    WebElement buttonFillCardYellow;
     //Цвет товара из карточки
     public String getColorCartItem() {
         //waitVisibilityElement(colorItemCart);
