@@ -2,10 +2,7 @@ package common;
 
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,6 +24,7 @@ public class Settings {
     public FunctionsForTests functions;
     public BasketPage basketPage;
     public CatalogListPage catalogListPage;
+    public CheckoutPage checkoutPage;
 
     @Before
     public void before() {
@@ -34,7 +32,8 @@ public class Settings {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+        //driver.manage().window().setPosition(new Point(2000,0));//Старт правый экран (не убирать)
+        //driver.manage().window().setPosition(new Point(-2000,0));//Старт левый экран (не убирать)
         cityPage = new CityPage(driver, wait);
         cartProductPage = new CardProductPage(driver, wait);
         pages = new Pages(driver, wait);
@@ -42,6 +41,7 @@ public class Settings {
         functions = new FunctionsForTests();
         basketPage = new BasketPage(driver,wait);
         catalogListPage = new CatalogListPage(driver,wait);
+        checkoutPage = new CheckoutPage(driver,wait);
     }
 
     public void open(String baseUrl) {
@@ -109,8 +109,8 @@ public class Settings {
         Thread.sleep(time);
     }
 
-    @After
+    /*@After
     public void quit() {
         driver.quit();
-    }
+    }*/
 }
