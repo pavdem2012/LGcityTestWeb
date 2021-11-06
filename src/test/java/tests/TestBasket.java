@@ -1,6 +1,6 @@
 package tests;
 
-import common.Pages;
+
 import common.Settings;
 import org.junit.Assert;
 import org.junit.Test;

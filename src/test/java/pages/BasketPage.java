@@ -75,10 +75,11 @@ public class BasketPage extends Settings {
     WebElement phoneField;
     //поле "Адрес" в оформлении заказа
     @FindBy(xpath = "//label[text()='Населенный пункт']/following-sibling::input")
+    public
     WebElement addressField;
     //первый элемент в выпадающем списке адреса
     @FindBy(xpath = "//li[@class='selected-city']")
-    WebElement addressListElement;
+    public WebElement addressListElement;
     //Количество товаров для теста
     public static int countProductsForTest = 2;
 
@@ -126,7 +127,8 @@ public class BasketPage extends Settings {
         basketPopupClose.click();
     }
 
-    public void clickCheckoutBtn() {
+    public void clickCheckoutBtn() throws InterruptedException {
+        wait(2);
         checkoutBtn.click();
     }
 
