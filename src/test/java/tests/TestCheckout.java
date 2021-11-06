@@ -16,11 +16,11 @@ public class TestCheckout extends Settings {
     @Test
     public void testCheckout() throws InterruptedException {
         open("https://lgcity.ru");
-        ArrayList<String> cartItemPrice = new ArrayList<>();
+        //ArrayList<String> cartItemPrice = new ArrayList<>();
         waitVisibilityElement(favoritePage.menuItem);
         favoritePage.selectRandomMenu();
         favoritePage.selectRandomMenuItem();
-        //sendKeysToBody(Keys.PAGE_DOWN);
+        sendKeysToBody(Keys.PAGE_DOWN);
         waitVisibilityElement(favoritePage.catalogListBlock);
         catalogListPage.selectQuickBuyList();
         pages.goToMainPage();
@@ -28,7 +28,7 @@ public class TestCheckout extends Settings {
         favoritePage.selectRandomMenuItem();
         waitVisibilityElement(favoritePage.catalogListBlock);
         favoritePage.selectRandomCard();
-        cartItemPrice.add(cartProductPage.getPriceCartItem());
+        //cartItemPrice.add(cartProductPage.getPriceCartItem());
         wait(1);
         CardProductPage.addProductToBasket();
         cartProductPage.goToBasketFromCart();
@@ -58,6 +58,7 @@ public class TestCheckout extends Settings {
         checkoutPage.selectPickupPoint();
         checkoutPage.assertPrisesInOrder();
         checkoutPage.clickCheckoutButton();
+        checkoutPage.chekPaymentPage();
         Thread.sleep(7000);
     }
 }

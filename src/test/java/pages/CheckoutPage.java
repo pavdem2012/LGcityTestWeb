@@ -79,12 +79,20 @@ public class CheckoutPage extends Settings {
     //Кнопка Оформить заказ
     @FindBy(xpath = "//div[@class='cart__cta-button']/button")
             WebElement checkoutButton;
+    //Заголовок страницы оплаты
+    @FindBy(xpath = "//div[@class='styles_merchantName__1GDx-']")
+            WebElement merchantName;
+    //цена на стронице оплаты
+    @FindBy(xpath = "//div[@class='styles_amount__10kWS']/div")
+            WebElement merchantPrice;
+    String merchantNameExam = "lgcity";
     String commentToOrder = "тест заказ";
     String name = "петро 1";
     String surName = "testovui";
     String e_Mail = "lysenko.d@qasquad.com";
     String telephone = "+7 (961) 222-60-17";
     public String city = "Новосибирск";
+    int cartScopeTotal;
 
     //Нажать ссылку "Войти с помощью пароля"
     public void loginLinkTogglePassLogin() {
@@ -144,7 +152,7 @@ public class CheckoutPage extends Settings {
         System.out.println(cartScope);
         int discountValue = Integer.parseInt(onlineCardRadioBtn.getText().toLowerCase().replaceAll("[^0-9]", ""));
         System.out.println(discountValue);
-        int cartScopeTotal = Integer.parseInt(cartScopeRowTotal.getText().toLowerCase().replaceAll(" ","").replaceAll("₽",""));
+        cartScopeTotal = Integer.parseInt(cartScopeRowTotal.getText().toLowerCase().replaceAll(" ","").replaceAll("₽",""));
         System.out.println(cartScopeTotal);
         int cartScopeTotalCheck = cartScope - (cartScope / 100) * discountValue;
         System.out.println(cartScopeTotalCheck);
@@ -154,4 +162,15 @@ public class CheckoutPage extends Settings {
     public void clickCheckoutButton(){
         checkoutButton.click();
     }
+    //Проверить страницу оплаты
+    public void chekPaymentPage(){
+        waitVisibilityElement(merchantName);
+        String merchantNameCheck=merchantName.getText();
+        System.out.println(merchantNameCheck);
+        Assert.assertEquals("Неверная страница оплаты",true, merchantNameExam.contains(merchantNameCheck));
+        int merchantPrice1 = Integer.parseInt(merchantPrice.getText().replaceAll(" ","").replaceAll("₽",""));
+        System.out.println(merchantPrice1);
+        Assert.assertTrue("Цена на странице оплаты отличается от цены заказа",merchantPrice1==cartScopeTotal);
+    }
+
 }
