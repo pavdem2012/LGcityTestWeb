@@ -31,7 +31,7 @@ public class TestCheckout extends Settings {
         favoritePage.selectRandomCard();
         //cartItemPrice.add(cartProductPage.getPriceCartItem());
         wait(1);
-        CardProductPage.addProductToBasket();
+        cartProductPage.addProductToBasket();
         wait(2);
         //moveTo(driver.findElement(By.xpath("//div[(contains(text(), 'Поделиться'))]")));
         cartProductPage.goToBasketFromCart();

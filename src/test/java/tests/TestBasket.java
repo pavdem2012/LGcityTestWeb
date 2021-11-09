@@ -39,7 +39,7 @@ public class TestBasket extends Settings {
             cartItemSize.add(cartProductPage.getSizeCartItem());
             cartItemPrice.add(cartProductPage.getPriceCartItem());
             wait(1);
-            CardProductPage.addProductToBasket();
+            cartProductPage.addProductToBasket();
             pages.goToMainPage();
         }
 

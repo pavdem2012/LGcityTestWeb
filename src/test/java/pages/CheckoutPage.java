@@ -89,10 +89,10 @@ public class CheckoutPage extends Settings {
             WebElement merchantPrice;
     String merchantNameExam = "lgcity";
     String commentToOrder = "тест заказ";
-    String name = "петро 1";
-    String surName = "testovui";
-    String e_Mail = "lysenko.d@qasquad.com";
-    String telephone = "+7 (961) 222-60-17";
+    String name = "Павел";
+    String surName = "Тестеров";
+
+    String telephone = "+7 (983) 303-20-67";
     public String city = "Новосибирск";
     int cartScopeTotal;
 

@@ -65,7 +65,7 @@ public class CardProductPage extends Settings {
     }
 
     //Добавить товар в корзину
-    public static void addProductToBasket() {
+    public void addProductToBasket() {
         //waitVisibilityElement(addToBasketBtn);
         addToBasketBtn.click();
 
