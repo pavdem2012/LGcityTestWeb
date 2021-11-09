@@ -1,5 +1,6 @@
 package common;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.*;
@@ -9,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -32,6 +35,7 @@ public class Settings {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
         //driver.manage().window().setPosition(new Point(2000,0));//Старт правый экран (не убирать)
         //driver.manage().window().setPosition(new Point(-2000,0));//Старт левый экран (не убирать)
         cityPage = new CityPage(driver, wait);
@@ -42,6 +46,11 @@ public class Settings {
         basketPage = new BasketPage(driver,wait);
         catalogListPage = new CatalogListPage(driver,wait);
         checkoutPage = new CheckoutPage(driver,wait);
+    }
+    public void getScreen() throws IOException {
+        TakesScreenshot screenshot = (TakesScreenshot) driver;
+        File file = screenshot.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(file, new File("screenshot/qe.jpg"));
     }
 
     public void open(String baseUrl) {
@@ -109,8 +118,8 @@ public class Settings {
         Thread.sleep(time);
     }
 
-    /*@After
+    @After
     public void quit() {
         driver.quit();
-    }*/
+    }
 }

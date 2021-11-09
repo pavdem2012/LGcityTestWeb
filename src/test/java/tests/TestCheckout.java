@@ -8,13 +8,14 @@ import pages.BasketPage;
 import pages.CardProductPage;
 import pages.CheckoutPage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TestCheckout extends Settings {
     public int totalPrice;
 
     @Test
-    public void testCheckout() throws InterruptedException {
+    public void testCheckout() throws InterruptedException, IOException {
         open("https://lgcity.ru");
         //ArrayList<String> cartItemPrice = new ArrayList<>();
         waitVisibilityElement(favoritePage.menuItem);
@@ -31,8 +32,10 @@ public class TestCheckout extends Settings {
         //cartItemPrice.add(cartProductPage.getPriceCartItem());
         wait(1);
         CardProductPage.addProductToBasket();
+        wait(2);
+        //moveTo(driver.findElement(By.xpath("//div[(contains(text(), 'Поделиться'))]")));
         cartProductPage.goToBasketFromCart();
-        //waitVisibilityElement(BasketPage.basketNonEmptyPage);
+        waitVisibilityElement(BasketPage.basketNonEmptyPage);
         //Thread.sleep(2000);
         //int totalPrice = basketPage.totalPrice();
         //System.out.println(totalPrice);

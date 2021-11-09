@@ -68,9 +68,11 @@ public class CardProductPage extends Settings {
     public static void addProductToBasket() {
         //waitVisibilityElement(addToBasketBtn);
         addToBasketBtn.click();
+
     }
     //Перейти в корзину.
     public void goToBasketFromCart (){
+        waitVisibilityElement(buttonFillCardYellow);
         buttonFillCardYellow.click();
     }
 

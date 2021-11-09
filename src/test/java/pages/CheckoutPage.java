@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.TestCheckout;
 
+import java.io.IOException;
+
 public class CheckoutPage extends Settings {
     WebDriver driver;
     WebDriverWait wait;
@@ -20,8 +22,8 @@ public class CheckoutPage extends Settings {
     }
 
     //Данные авторизации
-    String eMail = "lysenko.d@qasquad.com";
-    String pass = "qweqwe123";
+    String eMail = "testerQAsquad@yandex.ru";
+    String pass = "QAsquadAcadem";
     //Кнопка "Войти с помощью пароля"
     @FindBy(xpath = "//div[@class='links-bottom-center']//a[text() ='Войти с помощью пароля']")
     WebElement loginLinkTogglePassLogin;
@@ -145,7 +147,7 @@ public class CheckoutPage extends Settings {
 
     }
     //Проверка соответствия цен
-    public void assertPrisesInOrder() throws InterruptedException {
+    public void assertPrisesInOrder() throws InterruptedException, IOException {
         moveTo(cartScopeRowTotal);
         wait(2);
         int cartScope = Integer.parseInt(cartScopeValue.getText().toLowerCase().replaceAll(" ","").replaceAll("₽",""));
@@ -154,8 +156,9 @@ public class CheckoutPage extends Settings {
         System.out.println(discountValue);
         cartScopeTotal = Integer.parseInt(cartScopeRowTotal.getText().toLowerCase().replaceAll(" ","").replaceAll("₽",""));
         System.out.println(cartScopeTotal);
-        int cartScopeTotalCheck = cartScope - (cartScope / 100) * discountValue;
+        int cartScopeTotalCheck = (int) Math.ceil(cartScope - ((double)cartScope / 100) * discountValue);
         System.out.println(cartScopeTotalCheck);
+        getScreen();
         Assert.assertTrue("Расчет скидки онлайн-заказа неверен!",cartScopeTotalCheck==cartScopeTotal);
     }
     //Нажать кнопку Оформить заказ
@@ -163,10 +166,13 @@ public class CheckoutPage extends Settings {
         checkoutButton.click();
     }
     //Проверить страницу оплаты
-    public void chekPaymentPage(){
+    public void chekPaymentPage() throws IOException, InterruptedException {
+        wait(2);
+        //getScreen();
         waitVisibilityElement(merchantName);
         String merchantNameCheck=merchantName.getText();
         System.out.println(merchantNameCheck);
+
         Assert.assertEquals("Неверная страница оплаты",true, merchantNameExam.contains(merchantNameCheck));
         int merchantPrice1 = Integer.parseInt(merchantPrice.getText().replaceAll(" ","").replaceAll("₽",""));
         System.out.println(merchantPrice1);
