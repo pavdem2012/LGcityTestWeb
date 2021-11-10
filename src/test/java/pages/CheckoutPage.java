@@ -162,7 +162,7 @@ public class CheckoutPage extends Settings {
 
     //Выбрать ПВЗ на странице Пункты выдачи
     public void selectPickupPoint() throws InterruptedException {
-        wait(1);
+        wait(2);
         firstPickupPoint.click();
         selectThisItemButton.click();
         wait(2);
