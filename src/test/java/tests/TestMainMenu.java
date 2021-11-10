@@ -16,7 +16,6 @@ public class TestMainMenu extends Settings {
     @Test
     public void testMenu() {
         open("https://lgcity.ru");
-        driver.findElement(By.id("confirm-use-cookies")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")));
         int menuItems = driver.findElements(By.xpath("//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")).size() - 1;
         Random random = new Random();
