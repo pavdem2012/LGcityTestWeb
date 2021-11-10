@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class Settings {
     public static WebDriver driver;
     public static WebDriverWait wait;
-    public static MainPage mainPage = new MainPage();
+    public static MainPage mainPage;
     public CityPage cityPage;
     public CardProductPage cartProductPage;
     public Pages pages;
@@ -29,6 +29,7 @@ public class Settings {
     public CatalogListPage catalogListPage;
     public CheckoutPage checkoutPage;
 
+
     @Before
     public void before() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
@@ -36,6 +37,7 @@ public class Settings {
         wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+
         //driver.manage().window().setPosition(new Point(2000,0));//Старт правый экран (не убирать)
         //driver.manage().window().setPosition(new Point(-2000,0));//Старт левый экран (не убирать)
         cityPage = new CityPage(driver, wait);
@@ -43,10 +45,11 @@ public class Settings {
         pages = new Pages(driver, wait);
         favoritePage = new FavoritePage(driver, wait);
         functions = new FunctionsForTests();
-        basketPage = new BasketPage(driver,wait);
-        catalogListPage = new CatalogListPage(driver,wait);
-        checkoutPage = new CheckoutPage(driver,wait);
+        basketPage = new BasketPage(driver, wait);
+        catalogListPage = new CatalogListPage(driver, wait);
+        checkoutPage = new CheckoutPage(driver, wait);
     }
+
     public void getScreen() throws IOException {
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File file = screenshot.getScreenshotAs(OutputType.FILE);
@@ -56,7 +59,6 @@ public class Settings {
     public void open(String baseUrl) {
         driver.get(baseUrl);
         pages.setCloseCookieBtn();
-        waitInvisibilityElement(pages.closeCookieBtn);
     }
 
     public WebElement getElementByXpath(String string) {
@@ -109,7 +111,7 @@ public class Settings {
         actions.moveToElement(element).perform();
     }
 
-    public String getUrl(){
+    public String getUrl() {
         return driver.getCurrentUrl();
     }
 

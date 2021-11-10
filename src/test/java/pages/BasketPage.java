@@ -61,25 +61,8 @@ public class BasketPage extends Settings {
     //кнопка "Продолжить без регистрации"
     @FindBy(xpath = "//button[text()='Продолжить без регистрации']")
     WebElement btnWithoutRegistration;
-    //поле "Имя" в оформлении заказа
-    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Имя']/following-sibling::input")
-    WebElement nameField;
-    //поле "Фамилия" в оформлении заказа
-    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Фамилия']/following-sibling::input")
-    WebElement lastnameField;
-    //поле "Имя" в оформлении заказа
-    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='E-mail']/following-sibling::input")
-    WebElement emailField;
-    //поле "Имя" в оформлении заказа
-    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Телефон']/following-sibling::input")
-    WebElement phoneField;
-    //поле "Адрес" в оформлении заказа
-    @FindBy(xpath = "//label[text()='Населенный пункт']/following-sibling::input")
-    public
-    WebElement addressField;
-    //первый элемент в выпадающем списке адреса
-    @FindBy(xpath = "//li[@class='selected-city']")
-    public WebElement addressListElement;
+
+
     //Количество товаров для теста
     public static int countProductsForTest = 2;
 
@@ -130,29 +113,10 @@ public class BasketPage extends Settings {
     public void clickCheckoutBtn() throws InterruptedException {
         wait(2);
         checkoutBtn.click();
+
     }
 
-    public void clickBtnWithoutRegistration() {
-        btnWithoutRegistration.click();
-    }
 
-    public void setOrderData() throws InterruptedException {
-        nameField.sendKeys("Тест");
-        wait(1);
-        lastnameField.sendKeys("Тестов");
-        wait(1);
-        emailField.sendKeys("test@test.ru");
-        wait(1);
-        phoneField.click();
-        phoneField.sendKeys("9999999999");
-        wait(1);
-    }
-
-    public void setAddress() throws InterruptedException {
-        addressField.sendKeys("Новосибирск");
-        wait(1);
-        addressListElement.click();
-    }
 
     //доставка курьером
     @FindBy(xpath = "//span[text()='Доставка курьером']")
@@ -180,7 +144,7 @@ public class BasketPage extends Settings {
         if (string.equals("Курьер")) {
             courierDelivery.click();
             courierDeliveryStreet.sendKeys("Ленина");
-            addressListElement.click();
+            checkoutPage.addressListElement.click();
             wait(1);
             courierDeliveryHouse.sendKeys("12");
             wait(1);

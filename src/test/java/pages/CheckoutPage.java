@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import tests.TestCheckout;
 
 import java.io.IOException;
 
@@ -22,8 +21,21 @@ public class CheckoutPage extends Settings {
     }
 
     //Данные авторизации
-    String eMail = "testerQAsquad@yandex.ru";
+    String eMail = "testerqasquad@yandex.ru";
     String pass = "QAsquadAcadem";
+
+    //поле "Имя" в оформлении заказа
+    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Имя']/following-sibling::input")
+    WebElement nameField;
+    //поле "Фамилия" в оформлении заказа
+    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Фамилия']/following-sibling::input")
+    WebElement lastnameField;
+    //поле "E-mail" в оформлении заказа
+    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='E-mail']/following-sibling::input")
+    WebElement emailField;
+    //поле "Телефон" в оформлении заказа
+    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Телефон']/following-sibling::input")
+    WebElement phoneField;
     //Кнопка "Войти с помощью пароля"
     @FindBy(xpath = "//div[@class='links-bottom-center']//a[text() ='Войти с помощью пароля']")
     WebElement loginLinkTogglePassLogin;
@@ -44,7 +56,7 @@ public class CheckoutPage extends Settings {
     @FindBy(xpath = "//button[@class='button button--fill login__button']")
     WebElement toComeInBtn;
     //Кнопка самовывоз
-    @FindBy(xpath = "//a[@class='button-with-icon ']//span[(contains(text(), 'Самовывоз'))]")
+    @FindBy(xpath = "//div[@class='delivery-methods']//span[(contains(text(), 'Самовывоз'))]")
     public WebElement pickUpBtn;
     //Заголовок "Оформление заказа"
     @FindBy(xpath = "//h1[@class='cart__title']")
@@ -66,18 +78,28 @@ public class CheckoutPage extends Settings {
     WebElement clickTextareaPlaceholder;
     @FindBy(xpath = "//div[@class='ui-textarea']/textarea")
     WebElement textareaPlaceholder;
+    //радиобатон Картой онлайн
+    @FindBy (xpath = "//div[text()='Скидка 2%']/../self::div/preceding-sibling::div/div")
+    public WebElement getOnlineCardRadioBtn;
     //Кнопка выбора способа оплаты Картой онлайн
-    @FindBy(xpath = "//div[@class='radio__text']/div[@class='pay_notice']") //еще вариант ()(//div[@class='radio__text']/div[(contains(text(), 'Скидка 2%'))])
+    @FindBy(xpath = "//div[@class='radio__text']/div[@class='pay_notice']")
+    public //еще вариант ()(//div[@class='radio__text']/div[(contains(text(), 'Скидка 2%'))])
             WebElement onlineCardRadioBtn;
+    //радиобатон звонок оператора
+    @FindBy(xpath = "//div[text()='Звонок оператора']/../self::div/preceding-sibling::div/div")
+    public WebElement getOperatorCallRadioBtn;
     //Кнопка выбора подтверждения заказа Звонок оператора
     @FindBy(xpath = "//div[@class='radio__text']/div[(contains(text(), 'Звонок оператора'))]")
-    WebElement operatorCallRadioBtn;
+    public WebElement operatorCallRadioBtn;
     //строка сумма товаров
     @FindBy(xpath = "//div[@class='cart-scope__row']/span[@class='cart-scope__value']")
     WebElement cartScopeValue;
+    //Чекбокс
+    @FindBy(xpath = "//div[@class='checkbox__text']")
+    WebElement checkbox;
     //Строка сумма заказа
     @FindBy(xpath = "//div[@class='cart-scope__row cart-scope__row--total']/span[@class='cart-scope__value']")
-    WebElement cartScopeRowTotal;
+    WebElement orderScopeValue;
     //Кнопка Оформить заказ
     @FindBy(xpath = "//div[@class='cart__cta-button']/button")
             WebElement checkoutButton;
@@ -87,6 +109,13 @@ public class CheckoutPage extends Settings {
     //цена на стронице оплаты
     @FindBy(xpath = "//div[@class='styles_amount__10kWS']/div")
             WebElement merchantPrice;
+    //поле "Адрес" в оформлении заказа
+    @FindBy(xpath = "//label[text()='Населенный пункт']/following-sibling::input")
+    public
+    WebElement addressField;
+    //первый элемент в выпадающем списке адреса
+    @FindBy(xpath = "//li[@class='selected-city']")
+    public WebElement addressListElement;
     String merchantNameExam = "lgcity";
     String commentToOrder = "тест заказ";
     String name = "Павел";
@@ -98,6 +127,7 @@ public class CheckoutPage extends Settings {
 
     //Нажать ссылку "Войти с помощью пароля"
     public void loginLinkTogglePassLogin() {
+        waitVisibilityElement(loginTitle);
         loginLinkTogglePassLogin.click();
     }
 
@@ -109,16 +139,12 @@ public class CheckoutPage extends Settings {
 
     //Ввести в поле 'E-mail или номер телефона' аунтификационные данные
     public void Authorization() throws InterruptedException {
+        waitVisibilityElement(eMailInput);
+        eMailInput.isEnabled();
         eMailInput.sendKeys(eMail);
         passInput.sendKeys(pass);
         wait(1);
         toComeInBtn.click();
-
-    }
-
-    //Проверить состояние полей формы Получатель
-    public void recipientForm() {
-        System.out.println(basketPage.nameField.getAttribute("value").toString());
 
     }
 
@@ -130,6 +156,7 @@ public class CheckoutPage extends Settings {
 
     //Нажать кнопку выбрать ПВЗ
     public void clickSelectBtn() {
+        selectBtn.isEnabled();
         selectBtn.click();
     }
 
@@ -143,21 +170,28 @@ public class CheckoutPage extends Settings {
         clickTextareaPlaceholder.click();
         textareaPlaceholder.sendKeys(commentToOrder);
         onlineCardRadioBtn.click();
+
         operatorCallRadioBtn.click();
 
     }
     //Проверка соответствия цен
-    public void assertPrisesInOrder() throws InterruptedException, IOException {
-        moveTo(cartScopeRowTotal);
-        wait(2);
+    public void assertSendingFormsInOrder() throws InterruptedException, IOException {
+        wait(1);
+        String nameA = nameField.getAttribute("value");
+        Assert.assertEquals("Неверное имя пользователя: "+nameA+", должно быть: "+name,nameA,name);
+        String surNameA = lastnameField.getAttribute("value");
+        Assert.assertEquals("Неверная фамилия пользователя:" + surNameA +", должно быть: "+surName,surNameA,surName);
+        String e_mailA = emailField.getAttribute("value");
+        Assert.assertEquals("Неверный e-mail пользователя:" + e_mailA +", должен быть: "+eMail,e_mailA,eMail);
+        String phoneA = phoneField.getAttribute("value");
+        Assert.assertEquals("Неверный телефон пользователя:" + phoneA +", должен быть: "+telephone,phoneA,telephone);
+        Assert.assertTrue("Кнопка \"Картой онлайн\" не нажата",getOnlineCardRadioBtn.getAttribute("style").contains("translate"));
+        Assert.assertTrue("Кнопка \"Звонок оператора\" не нажата",getOperatorCallRadioBtn.getAttribute("style").contains("translate"));
+        moveTo(checkbox);
         int cartScope = Integer.parseInt(cartScopeValue.getText().toLowerCase().replaceAll(" ","").replaceAll("₽",""));
-        System.out.println(cartScope);
         int discountValue = Integer.parseInt(onlineCardRadioBtn.getText().toLowerCase().replaceAll("[^0-9]", ""));
-        System.out.println(discountValue);
-        cartScopeTotal = Integer.parseInt(cartScopeRowTotal.getText().toLowerCase().replaceAll(" ","").replaceAll("₽",""));
-        System.out.println(cartScopeTotal);
+        cartScopeTotal = Integer.parseInt(orderScopeValue.getText().toLowerCase().replaceAll(" ","").replaceAll("₽",""));
         int cartScopeTotalCheck = (int) Math.ceil(cartScope - ((double)cartScope / 100) * discountValue);
-        System.out.println(cartScopeTotalCheck);
         getScreen();
         Assert.assertTrue("Расчет скидки онлайн-заказа неверен!",cartScopeTotalCheck==cartScopeTotal);
     }
@@ -166,7 +200,7 @@ public class CheckoutPage extends Settings {
         checkoutButton.click();
     }
     //Проверить страницу оплаты
-    public void chekPaymentPage() throws IOException, InterruptedException {
+    public void chekPaymentPage() throws  InterruptedException {
         wait(2);
         //getScreen();
         waitVisibilityElement(merchantName);
@@ -177,6 +211,31 @@ public class CheckoutPage extends Settings {
         int merchantPrice1 = Integer.parseInt(merchantPrice.getText().replaceAll(" ","").replaceAll("₽",""));
         System.out.println(merchantPrice1);
         Assert.assertTrue("Цена на странице оплаты отличается от цены заказа",merchantPrice1==cartScopeTotal);
+    }
+    public void setDeliveryAddress() throws InterruptedException {
+        addressField.click();
+        wait(1);
+        addressField.sendKeys(city);
+        wait(1);
+        addressListElement.click();
+    }
+
+
+    public void setAddress() throws InterruptedException {
+        addressField.sendKeys("Новосибирск");
+        wait(1);
+        addressListElement.click();
+    }
+    public void setOrderData() throws InterruptedException {
+        nameField.sendKeys("Тест");
+        wait(1);
+        lastnameField.sendKeys("Тестов");
+        wait(1);
+        emailField.sendKeys("test@test.ru");
+        wait(1);
+        phoneField.click();
+        phoneField.sendKeys("9999999999");
+        wait(1);
     }
 
 }

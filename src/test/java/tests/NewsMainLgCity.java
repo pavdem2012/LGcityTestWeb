@@ -2,8 +2,7 @@ package tests;
 
 import common.Settings;
 import org.junit.Test;
-import common.Pages;
-import pages.MainPage;
+
 
 public class NewsMainLgCity extends Settings {
     /*
@@ -14,7 +13,7 @@ public class NewsMainLgCity extends Settings {
     public void setNews() {
         open("https://lgcity.ru");
         mainPage.scrollToNews();
-        waitVisibilityElement(MainPage.newsItemBlock);
+        waitVisibilityElement(mainPage.newsItemBlock);
         mainPage.randomNews();
         waitTextToBe(mainPage.newsPageBlockTitle, "Акции и новости");
     }
