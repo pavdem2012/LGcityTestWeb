@@ -43,8 +43,9 @@ public class Settings {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
 
-        //driver.manage().window().setPosition(new Point(2000,0));//Старт правый экран (не убирать)
+        driver.manage().window().setPosition(new Point(2000,0));//Старт правый экран (не убирать)
         //driver.manage().window().setPosition(new Point(-2000,0));//Старт левый экран (не убирать)
+        driver.manage().window().maximize();
         cityPage = new CityPage(driver, wait);
         cartProductPage = new CardProductPage(driver, wait);
         pages = new Pages(driver, wait);
