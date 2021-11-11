@@ -1,9 +1,9 @@
 package tests;
 
 import common.Settings;
-import org.junit.Assert;
-import org.junit.Test;
 import org.openqa.selenium.Keys;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class TestFavorites extends Settings {
 
@@ -11,7 +11,7 @@ public class TestFavorites extends Settings {
     Проверка добавления в "Избранное" из карточки товара
      */
     @Test
-    public void addFavoritesFromCartOfProduct() {
+    public void addFavoritesFromCartOfProduct() throws InterruptedException {
         open("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem);
         favoritePage.selectRandomMenu();
@@ -38,7 +38,7 @@ public class TestFavorites extends Settings {
     Проверка добавления в "Избранное" из каталога
      */
     @Test
-    public void addFavoritesFromCatalogue() {
+    public void addFavoritesFromCatalogue() throws InterruptedException {
         open("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem);
         favoritePage.selectRandomMenu();

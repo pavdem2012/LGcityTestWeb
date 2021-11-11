@@ -1,18 +1,19 @@
 package tests;
 
 import common.Settings;
-import org.junit.Assert;
-import org.junit.Test;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.util.Random;
 
 public class TestSearch extends Settings {
     @Test
-    public void SearchByName(){
+    public void SearchByName() throws InterruptedException {
         open("https://lgcity.ru");
         driver.findElement(By.xpath("//div[@class='header__right-side-icons']/a[@data-popup='popup--search']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='header__search popup popup--search js-popup-open']")));

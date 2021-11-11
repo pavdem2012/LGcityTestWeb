@@ -63,8 +63,9 @@ public class CardProductPage extends Settings {
     }
 
     //Добавить товар в корзину
-    public void addProductToBasket() {
+    public void addProductToBasket() throws InterruptedException {
         waitVisibilityElement(addToBasketBtn);
+        wait(1);
         addToBasketBtn.isEnabled();
         addToBasketBtn.click();
     }

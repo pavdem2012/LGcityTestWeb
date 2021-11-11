@@ -1,12 +1,13 @@
 package pages;
 
 import common.Settings;
-import org.junit.Assert;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.io.IOException;
 
@@ -155,8 +156,9 @@ public class CheckoutPage extends Settings {
     }
 
     //Нажать кнопку выбрать ПВЗ
-    public void clickSelectBtn() {
+    public void clickSelectBtn() throws InterruptedException {
         selectBtn.isEnabled();
+        wait(1);
         selectBtn.click();
     }
 
@@ -178,22 +180,22 @@ public class CheckoutPage extends Settings {
     public void assertSendingFormsInOrder() throws InterruptedException, IOException {
         wait(1);
         String nameA = nameField.getAttribute("value");
-        Assert.assertEquals("Неверное имя пользователя: "+nameA+", должно быть: "+name,nameA,name);
+        Assert.assertEquals(nameA,name,"Неверное имя пользователя: "+nameA+", должно быть: "+name);
         String surNameA = lastnameField.getAttribute("value");
-        Assert.assertEquals("Неверная фамилия пользователя:" + surNameA +", должно быть: "+surName,surNameA,surName);
+        Assert.assertEquals(surNameA,surName,"Неверная фамилия пользователя:" + surNameA +", должно быть: "+surName);
         String e_mailA = emailField.getAttribute("value");
-        Assert.assertEquals("Неверный e-mail пользователя:" + e_mailA +", должен быть: "+eMail,e_mailA,eMail);
+        Assert.assertEquals(e_mailA,eMail, "Неверный e-mail пользователя:" + e_mailA +", должен быть: "+eMail);
         String phoneA = phoneField.getAttribute("value");
-        Assert.assertEquals("Неверный телефон пользователя:" + phoneA +", должен быть: "+telephone,phoneA,telephone);
-        Assert.assertTrue("Кнопка \"Картой онлайн\" не нажата",getOnlineCardRadioBtn.getAttribute("style").contains("translate"));
-        Assert.assertTrue("Кнопка \"Звонок оператора\" не нажата",getOperatorCallRadioBtn.getAttribute("style").contains("translate"));
+        Assert.assertEquals(phoneA,telephone,"Неверный телефон пользователя:" + phoneA +", должен быть: "+telephone);
+        Assert.assertTrue(getOnlineCardRadioBtn.getAttribute("style").contains("translate"),"Кнопка \"Картой онлайн\" не нажата");
+        Assert.assertTrue(getOperatorCallRadioBtn.getAttribute("style").contains("translate"),"Кнопка \"Звонок оператора\" не нажата");
         moveTo(checkbox);
         int cartScope = Integer.parseInt(cartScopeValue.getText().toLowerCase().replaceAll(" ","").replaceAll("₽",""));
         int discountValue = Integer.parseInt(onlineCardRadioBtn.getText().toLowerCase().replaceAll("[^0-9]", ""));
         cartScopeTotal = Integer.parseInt(orderScopeValue.getText().toLowerCase().replaceAll(" ","").replaceAll("₽",""));
         int cartScopeTotalCheck = (int) Math.ceil(cartScope - ((double)cartScope / 100) * discountValue);
         getScreen();
-        Assert.assertTrue("Расчет скидки онлайн-заказа неверен!",cartScopeTotalCheck==cartScopeTotal);
+        Assert.assertTrue(cartScopeTotalCheck==cartScopeTotal,"Расчет скидки онлайн-заказа неверен!"+"; Сумма заказа: "+cartScope+"; Размер скидки: "+discountValue+"; Сумма заказа со скидкой: "+cartScopeTotalCheck);
     }
     //Нажать кнопку Оформить заказ
     public void clickCheckoutButton(){
@@ -207,10 +209,10 @@ public class CheckoutPage extends Settings {
         String merchantNameCheck=merchantName.getText();
         System.out.println(merchantNameCheck);
 
-        Assert.assertEquals("Неверная страница оплаты",true, merchantNameExam.contains(merchantNameCheck));
+        Assert.assertEquals( merchantNameExam.contains(merchantNameCheck),"Неверная страница оплаты");
         int merchantPrice1 = Integer.parseInt(merchantPrice.getText().replaceAll(" ","").replaceAll("₽",""));
         System.out.println(merchantPrice1);
-        Assert.assertTrue("Цена на странице оплаты отличается от цены заказа",merchantPrice1==cartScopeTotal);
+        Assert.assertTrue(merchantPrice1==cartScopeTotal,"Цена на странице оплаты отличается от цены заказа");
     }
     public void setDeliveryAddress() throws InterruptedException {
         addressField.click();

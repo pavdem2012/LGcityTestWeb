@@ -1,8 +1,9 @@
 package tests;
 
 import common.Settings;
-import org.junit.Assert;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ public class TestCityLgCity extends Settings {
     Проверка ввода названия города.
      */
     @Test
-    public void setCity() {
+        public void setCity() throws InterruptedException {
         String city = "Омск";
         open("https://lgcity.ru");
         cityPage.selectCity(city);
@@ -42,7 +43,7 @@ public class TestCityLgCity extends Settings {
     Проверка работоспособности крестика
      */
     @Test
-    public void closePopup() {
+    public void closePopup() throws InterruptedException {
         String city = "Омск";
         open("https://lgcity.ru");
         String cityInHeader = cityPage.getHeaderCity();
@@ -59,12 +60,12 @@ public class TestCityLgCity extends Settings {
     Проверка автоматического определения города
      */
     @Test
-    public void automaticSetCity() {
+    public void automaticSetCity() throws InterruptedException {
         open("https://lgcity.ru");
         String city = "Воронеж";
         String autoCity = "Москва";
         cityPage.selectCity(city);
-        Assert.assertEquals("Город в шапке и выбранный город в попапе не совпали", city, cityPage.getHeaderCity());
+        Assert.assertEquals( city, cityPage.getHeaderCity(),"Город в шапке и выбранный город в попапе не совпали");
         cityPage.setAutoCity(autoCity);
         waitInvisibilityElement(cityPage.popupSetCity);
         Assert.assertNotEquals(cityPage.getHeaderCity(), city);
@@ -74,12 +75,13 @@ public class TestCityLgCity extends Settings {
     Проверка заполнения выпадающего списка популярных городов
      */
     @Test
-    public void popularCityList() {
+    public void popularCityList() throws InterruptedException {
         open("https://lgcity.ru");
         cityPage.iconSetCity.click();
         waitVisibilityElement(cityPage.popupSetCity);
         int popularCityAmount = getElementsByXpath(cityPage.popularCityList).size();
-        Assert.assertTrue("Список популярных городов пуст", popularCityAmount > 0);
-        Assert.assertTrue("В списке отстутствует город 'Москва'", cityPage.checkPopularCityList(popularCityAmount));
+        Assert.assertTrue(popularCityAmount > 0,"Список популярных городов пуст");
+        Assert.assertTrue(cityPage.checkPopularCityList(popularCityAmount),"В списке отстутствует город 'Москва'");
+
     }
 }

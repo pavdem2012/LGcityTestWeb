@@ -1,14 +1,16 @@
 package common;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.After;
-import org.junit.Before;
+
+
+import org.aspectj.lang.annotation.After;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.*;
 import pages.*;
 
 import java.io.File;
@@ -20,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class Settings {
     public static WebDriver driver;
     public static WebDriverWait wait;
-    public static MainPage mainPage;
+    public MainPage mainPage;
     public CityPage cityPage;
     public CardProductPage cartProductPage;
     public Pages pages;
@@ -31,7 +33,7 @@ public class Settings {
     public CheckoutPage checkoutPage;
 
 
-    @Before
+    @BeforeMethod
     public void before() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 
@@ -51,6 +53,7 @@ public class Settings {
         basketPage = new BasketPage(driver, wait);
         catalogListPage = new CatalogListPage(driver, wait);
         checkoutPage = new CheckoutPage(driver, wait);
+        mainPage = new MainPage(driver,wait);
     }
 
     public void getScreen() throws IOException {
@@ -59,8 +62,10 @@ public class Settings {
         FileUtils.copyFile(file, new File("screenshot/qe.jpg"));
     }
 
-    public void open(String baseUrl) {
+    public void open(String baseUrl) throws InterruptedException {
+
         driver.get(baseUrl);
+        wait(1);
         pages.setCloseCookieBtn();
     }
 
@@ -123,7 +128,7 @@ public class Settings {
         Thread.sleep(time);
     }
 
-    @After
+    @AfterMethod
     public void quit() {
         driver.quit();
     }

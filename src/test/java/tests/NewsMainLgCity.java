@@ -1,7 +1,7 @@
 package tests;
 
 import common.Settings;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 
 public class NewsMainLgCity extends Settings {
@@ -10,7 +10,7 @@ public class NewsMainLgCity extends Settings {
      */
 
     @Test
-    public void setNews() {
+    public void setNews() throws InterruptedException {
         open("https://lgcity.ru");
         mainPage.scrollToNews();
         waitVisibilityElement(mainPage.newsItemBlock);

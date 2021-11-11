@@ -1,8 +1,9 @@
 package tests;
 
 import common.Settings;
-import org.junit.Test;
+
 import org.openqa.selenium.Keys;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 

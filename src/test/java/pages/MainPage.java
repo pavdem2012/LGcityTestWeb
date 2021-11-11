@@ -10,18 +10,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Random;
 
 public class MainPage extends Settings {
+    WebDriver driver;
+    WebDriverWait wait;
+
     public MainPage(WebDriver driver, WebDriverWait wait) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
         this.wait = wait;
     }
+
     //Блок новостей на главной странице
     public String newsBlock = "news";
     //Элемент блока новостей на Главной странице
     public String newsItemBlock = "//div[@class = 'news__item']";
     //Элемент блока новостей на главной странице с исключением
-    public String newsItemWithException =
-            "//div[@class = 'news__item']//a[not(contains(text(), 'Бестселлеры " + "коллекций'))]";
+    public String newsItemWithException = "//div[@class = 'news__item']//a[not(contains(text(), 'Бестселлеры " +
+            "коллекций'))]";
     //Заголовок страницы новостей
     public String newsPageBlockTitle = "//div[@class='news-page__back-title']";
 
