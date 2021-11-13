@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
 
 public class CatalogListPage extends Settings {
 
@@ -65,7 +65,6 @@ public class CatalogListPage extends Settings {
         moveTo(randomCard);
         String title = catalogItemTitleList.get(num).getText().toLowerCase().replaceAll(" ","");
         cartItemName.add(title);
-        //System.out.println("Наименование: " +title);
         wait(1);
         moveTo(catalogQuickBuyList.get(num));
         wait(2);
@@ -78,23 +77,13 @@ public class CatalogListPage extends Settings {
         String price = priceItemTitleList.get(num).getText().replaceAll(" ","").replaceAll("₽","");
         cartItemPrice.add(price);
         driver.findElement(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button[" + randomQuickBuSize + "]")).click();
-        //System.out.println("Цена: " + price);
-        //System.out.println("рандом 2: " + randomQuickBuSize);
-        //System.out.println("размер: " + randomSize);
+
     }
 
-    /*public int randomQuickBuSize() {
-        System.out.println(randomQuickBuyList);
-*//*        int randomQuickBuyList = getRandom(catalogQuickBuyList.size());
-        moveTo(catalogQuickBuyList.get(randomQuickBuyList));*//*
-        return   getRandom(driver.findElements(By.xpath("(//div[@class='catalog__quick-buy-list'])[" +
-        randomQuickBuyList + "]/button")).size());
-        }*/
+
 
     //Размер товара из листинга каталога
     public String getCatalogQuickBuyItem() {
-        //getCatalogQuickBuyItem = getRandom(driver.findElements(By.xpath
-        // ("//button[@class='catalog__quick-buy-item'])["+randomQuickBuSize+"]")))
         return catalogQuickBuyItem.getText().toLowerCase().replaceAll(" ", "");
     }
 

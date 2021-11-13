@@ -1,15 +1,15 @@
 package tests;
 
 import common.Settings;
-import org.junit.Assert;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class testMainPage extends Settings {
     /*
 Проверка элементов главного меню.
  */
     @Test
-    public void testMenu() {
+    public void testMenu() throws InterruptedException {
         open("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem);
         favoritePage.selectRandomMenu();

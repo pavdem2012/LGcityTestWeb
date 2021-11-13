@@ -34,7 +34,10 @@ public class CardProductPage extends Settings {
     WebElement priceItemCart;
     //Кнопка "В корзину"
     @FindBy(id = "btn-add-to-cart")
-    static WebElement addToBasketBtn;
+    WebElement addToBasketBtn;
+    //Кнопка "Прейти в корзину"
+    @FindBy (xpath = "//button[text()='Перейти в корзину']")
+    WebElement buttonFillCardYellow;
 
     //Цвет товара из карточки
     public String getColorCartItem() {
@@ -45,9 +48,7 @@ public class CardProductPage extends Settings {
     //Размер товара из карточки
     public String getSizeCartItem() throws InterruptedException {
         Thread.sleep(1000);
-        //waitVisibilityElement(sizeMenuClick);
         sizeMenuClick.click();
-        //waitVisibilityElement(sizesMenu);
         waitVisibilityElement(sizeItemCart);
         String cartSize = sizeItemCart.getAttribute("data-size").toLowerCase();
         colorItemCart.click();
@@ -62,9 +63,16 @@ public class CardProductPage extends Settings {
     }
 
     //Добавить товар в корзину
-    public static void addProductToBasket() {
-        //waitVisibilityElement(addToBasketBtn);
+    public void addProductToBasket() throws InterruptedException {
+        waitVisibilityElement(addToBasketBtn);
+        wait(1);
+        addToBasketBtn.isEnabled();
         addToBasketBtn.click();
+    }
+    //Перейти в корзину.
+    public void goToBasketFromCart () {
+        waitVisibilityElement(buttonFillCardYellow);
+        buttonFillCardYellow.click();
     }
 
 }

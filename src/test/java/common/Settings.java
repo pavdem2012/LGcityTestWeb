@@ -1,17 +1,20 @@
 package common;
 
-import org.junit.After;
-import org.junit.Before;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+
+
+import org.aspectj.lang.annotation.After;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.*;
 import pages.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -19,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class Settings {
     public static WebDriver driver;
     public static WebDriverWait wait;
-    public static MainPage mainPage = new MainPage();
+    public MainPage mainPage;
     public CityPage cityPage;
     public CardProductPage cartProductPage;
     public Pages pages;
@@ -27,27 +30,44 @@ public class Settings {
     public FunctionsForTests functions;
     public BasketPage basketPage;
     public CatalogListPage catalogListPage;
+    public CheckoutPage checkoutPage;
 
-    @Before
+
+    @BeforeMethod
     public void before() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+
         driver = new ChromeDriver();
+
         wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+
+        driver.manage().window().setPosition(new Point(2000,0));//Старт правый экран (не убирать)
+        //driver.manage().window().setPosition(new Point(-2000,0));//Старт левый экран (не убирать)
         driver.manage().window().maximize();
         cityPage = new CityPage(driver, wait);
         cartProductPage = new CardProductPage(driver, wait);
         pages = new Pages(driver, wait);
         favoritePage = new FavoritePage(driver, wait);
         functions = new FunctionsForTests();
-        basketPage = new BasketPage(driver,wait);
-        catalogListPage = new CatalogListPage(driver,wait);
+        basketPage = new BasketPage(driver, wait);
+        catalogListPage = new CatalogListPage(driver, wait);
+        checkoutPage = new CheckoutPage(driver, wait);
+        mainPage = new MainPage(driver,wait);
     }
 
-    public void open(String baseUrl) {
+    public void getScreen() throws IOException {
+        TakesScreenshot screenshot = (TakesScreenshot) driver;
+        File file = screenshot.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(file, new File("screenshot/qe.jpg"));
+    }
+
+    public void open(String baseUrl) throws InterruptedException {
+
         driver.get(baseUrl);
+        wait(1);
         pages.setCloseCookieBtn();
-        waitInvisibilityElement(pages.closeCookieBtn);
     }
 
     public WebElement getElementByXpath(String string) {
@@ -100,7 +120,7 @@ public class Settings {
         actions.moveToElement(element).perform();
     }
 
-    public String getUrl(){
+    public String getUrl() {
         return driver.getCurrentUrl();
     }
 
@@ -109,7 +129,7 @@ public class Settings {
         Thread.sleep(time);
     }
 
-    @After
+    @AfterMethod
     public void quit() {
         driver.quit();
     }

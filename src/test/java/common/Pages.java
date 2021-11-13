@@ -25,12 +25,16 @@ public class Pages extends Settings{
     //Логотип
     @FindBy(xpath = "//a[@class='header__logo-link']")
     WebElement logo;
+    //Лоадер вращающийся
+    @FindBy(xpath = "//div[@class='lds-dual-ring']")
+    public WebElement loader;
 
 /*
 Закрыть куки
  */
-public void setCloseCookieBtn(){
+public void setCloseCookieBtn()  {
     closeCookieBtn.click();
+    waitInvisibilityElement(closeCookieBtn);
 }
 
 
@@ -47,4 +51,17 @@ public void setCloseCookieBtn(){
     public void goToMainPage(){
         logo.click();
     }
+    /*
+    Ожидание лоадера
+     */
+    public void loaderWait(){
+        try {
+            waitInvisibilityElement(pages.loader);
+            System.out.println("Лоадер виден");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("Лоадер не виден");
+        }
+    }
 }
+
