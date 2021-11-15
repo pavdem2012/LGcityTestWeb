@@ -185,7 +185,7 @@ public class CheckoutPage extends Settings {
 
     }
     //Проверка соответствия цен
-    @Step("Проверка соответствия заполнения полей в Оформлении заказа")
+    @Step("Проверка соответствия заполнения полей в Оформлении заказа {nameA} {name}")
     public void assertSendingFormsInOrder() throws InterruptedException, IOException {
         wait(1);
         String nameA = nameField.getAttribute("value");

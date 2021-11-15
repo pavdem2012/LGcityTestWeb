@@ -130,6 +130,8 @@
         <webdriver.manager>4.3.1</webdriver.manager>
         <aspectj.version>1.9.6</aspectj.version>
         <cucumber.version>7.0.0</cucumber.version>
+        <allure.results.directory>target/allure-results</allure.results.directory>
+        <allure.report.directory>target/allure-report</allure.report.directory>
     </properties>
 
 </project>

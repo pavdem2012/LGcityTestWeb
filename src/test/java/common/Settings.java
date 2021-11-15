@@ -63,7 +63,7 @@ public class Settings {
         File file = screenshot.getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(file, new File("screenshot/qe.jpg"));
     }
-    @Step("Открытие главной страницы")
+    @Step("Открытие главной страницы {baseUrl}")
     public void open(String baseUrl) throws InterruptedException {
 
         driver.get(baseUrl);
