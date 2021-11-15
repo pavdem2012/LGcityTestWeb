@@ -4,4 +4,10 @@
     <test verbose="2" preserve-order="true" name="C:/LGcityTestWeb/pom.xml">
         <classes/>
     </test>
+
+    <test name="Test 1">
+        <classes>
+            <class name="tests.TestCheckout"/>
+        </classes>
+    </test>
 </suite>
