@@ -1,5 +1,6 @@
 package common;
 
+import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 
 
@@ -62,7 +63,7 @@ public class Settings {
         File file = screenshot.getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(file, new File("screenshot/qe.jpg"));
     }
-
+    @Step("Открытие главной страницы")
     public void open(String baseUrl) throws InterruptedException {
 
         driver.get(baseUrl);
@@ -89,7 +90,7 @@ public class Settings {
     public void waitVisibilityElement(String string) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(string)));
     }
-
+    @Step("Ожидание видимости элемента")
     public static void waitVisibilityElement(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
@@ -105,7 +106,7 @@ public class Settings {
     public void waitValueInElement(WebElement element, String string) {
         wait.until(ExpectedConditions.textToBePresentInElementValue(element, string));
     }
-
+@Step("Передать текст в поле")
     public void sendKeysToBody(Keys keys) {
         driver.findElement(By.xpath("//body")).sendKeys(keys);
     }

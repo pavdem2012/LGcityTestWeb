@@ -1,6 +1,7 @@
 package pages;
 
 import common.Settings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -63,6 +64,7 @@ public class CardProductPage extends Settings {
     }
 
     //Добавить товар в корзину
+    @Step("Добавить товар в корзину")
     public void addProductToBasket() throws InterruptedException {
         waitVisibilityElement(addToBasketBtn);
         wait(1);

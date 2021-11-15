@@ -1,5 +1,6 @@
 package common;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,6 +33,7 @@ public class Pages extends Settings{
 /*
 Закрыть куки
  */
+    @Step("Закрыть куки")
 public void setCloseCookieBtn()  {
     closeCookieBtn.click();
     waitInvisibilityElement(closeCookieBtn);
@@ -41,6 +43,7 @@ public void setCloseCookieBtn()  {
     /*
 Войти в Корзину
  */
+    @Step("Переход в корзину по иконке")
     public void goToBasket() throws InterruptedException {
         basketIcon.click();
         wait(2);
@@ -48,6 +51,7 @@ public void setCloseCookieBtn()  {
     /*
     Перейти на главную страницу по логотипу
      */
+    @Step("Переход на главную страницу по логотипу")
     public void goToMainPage(){
         logo.click();
     }

@@ -1,6 +1,7 @@
 package pages;
 
 import common.Settings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -109,7 +110,7 @@ public class BasketPage extends Settings {
         //waitVisibilityElement(basketPopupClose);
         basketPopupClose.click();
     }
-
+    @Step("Нажать кнопку 'К оформлению'")
     public void clickCheckoutBtn() throws InterruptedException {
         wait(2);
         checkoutBtn.click();

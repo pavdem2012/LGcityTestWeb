@@ -2,6 +2,7 @@ package tests;
 
 import common.Settings;
 
+import io.qameta.allure.Description;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
@@ -9,7 +10,7 @@ import java.io.IOException;
 
 public class TestCheckout extends Settings {
 
-
+    @Description(value = "Проверка оформления заказа")
     @Test
 
 

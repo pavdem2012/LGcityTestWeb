@@ -2,6 +2,7 @@ package pages;
 
 import common.Settings;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -127,18 +128,21 @@ public class CheckoutPage extends Settings {
     int cartScopeTotal;
 
     //Нажать ссылку "Войти с помощью пароля"
+    @Step("Нажать ссылку \"Войти с помощью пароля\"")
     public void loginLinkTogglePassLogin() {
         waitVisibilityElement(loginTitle);
         loginLinkTogglePassLogin.click();
     }
 
     //Нажать кнопку "Зарегистрироваться"
+    @Step("ажать кнопку \"Зарегистрироваться\"")
     public void clickLoginBtn() {
         loginBtn.click();
     }
 
 
     //Ввести в поле 'E-mail или номер телефона' аунтификационные данные
+    @Step("Заполнить поля Авторизации и нажать кнопку Войти в Личный кабинет")
     public void Authorization() throws InterruptedException {
         waitVisibilityElement(eMailInput);
         eMailInput.isEnabled();
@@ -150,12 +154,15 @@ public class CheckoutPage extends Settings {
     }
 
     //Нажать кнопку самовывоз
+
+    @Step("Нажать кнопку самовывоз")
     public void clickPickUpBtn() {
         moveTo(textareaPlaceholder);
         pickUpBtn.click();
     }
 
     //Нажать кнопку выбрать ПВЗ
+    @Step("Нажать кнопку выбрать ПВЗ")
     public void clickSelectBtn() throws InterruptedException {
         selectBtn.isEnabled();
         wait(1);
@@ -163,6 +170,7 @@ public class CheckoutPage extends Settings {
     }
 
     //Выбрать ПВЗ на странице Пункты выдачи
+    @Step("Выбрать ПВЗ на странице Пункты выдачи")
     public void selectPickupPoint() throws InterruptedException {
         wait(2);
         firstPickupPoint.click();
@@ -177,6 +185,7 @@ public class CheckoutPage extends Settings {
 
     }
     //Проверка соответствия цен
+    @Step("Проверка соответствия заполнения полей в Оформлении заказа")
     public void assertSendingFormsInOrder() throws InterruptedException, IOException {
         wait(1);
         String nameA = nameField.getAttribute("value");
@@ -214,6 +223,7 @@ public class CheckoutPage extends Settings {
         System.out.println(merchantPrice1);
         Assert.assertTrue(merchantPrice1==cartScopeTotal,"Цена на странице оплаты отличается от цены заказа");
     }
+    @Step("Выбрать город доставки")
     public void setDeliveryAddress() throws InterruptedException {
         addressField.click();
         wait(1);

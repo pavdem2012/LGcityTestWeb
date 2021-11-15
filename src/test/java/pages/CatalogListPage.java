@@ -1,6 +1,7 @@
 package pages;
 
 import common.Settings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -56,9 +57,11 @@ public class CatalogListPage extends Settings {
 
 
     //Выбрать рандомный товар
+
     public ArrayList<String> cartItemPrice = new ArrayList<>();
     public ArrayList<String> cartItemSize = new ArrayList<>();
     public ArrayList<String> cartItemName = new ArrayList<>();
+    @Step("Выбор рандомного товара из листинга для покупки ")
     public void selectQuickBuyList() throws InterruptedException {
         int num = getRandom(cardsList.size());
         WebElement randomCard = cardsList.get(num);

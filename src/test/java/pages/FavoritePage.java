@@ -1,6 +1,7 @@
 package pages;
 
 import common.Settings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -84,13 +85,13 @@ public class FavoritePage extends Settings {
     @FindBy(xpath = "//div[@class='favorite__button btn-add-to-favorite owox-add-to-favorite-listing checked']")
     List<WebElement> favoritesIconsInCatalog;
     int randomItem;
-
+    @Step("Выбор рандомного элемента меню")
     public void selectRandomMenu() {
         int menuItems = menuItemsList.size() - 4;
         randomItem = getRandom(menuItems);
         moveTo(menuItemsList.get(randomItem));
     }
-
+@Step("Выбор рандомной карточки товара")
     public String selectRandomMenuItem() {
         int menuItemsInner =
                 driver.findElements(By.xpath("//div[@id='gmenu-tab-327']//div[@class='header__nav-list-item'][" + (randomItem + 1) + "]//div[@class='header__drop-inner']/div[@class='header__drop-category-col']//a")).size();
@@ -99,7 +100,7 @@ public class FavoritePage extends Settings {
         driver.findElement(By.xpath("(//div[@id='gmenu-tab-327']//div[@class='header__nav-list-item'][" + (randomItem + 1) + "]//div[@class='header__drop-inner']/div[@class='header__drop-category-col']//a)[" + randomInner + "]")).click();
         return randomItemInner;
     }
-
+@Step("Выбор рандомной карточки товара")
     public void selectRandomCard() {
         int randomCatalogItem = getRandom(catalogItems.size());
         catalogItems.get(randomCatalogItem).click();
