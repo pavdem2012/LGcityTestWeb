@@ -132,6 +132,7 @@
         <cucumber.version>7.0.0</cucumber.version>
         <allure.results.directory>target/allure-results</allure.results.directory>
         <allure.report.directory>target/allure-report</allure.report.directory>
+        <allure.version>2.16.0</allure.version>
     </properties>
 
 </project>
