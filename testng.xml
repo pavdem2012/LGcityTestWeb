@@ -4,8 +4,9 @@
 
 
     <test name="Test 1">
-        <classes>
-            <class name="tests.TestCheckout"/>
-        </classes>
+        <packages>
+            <package name="tests"/>
+        </packages>
+
     </test>
 </suite>

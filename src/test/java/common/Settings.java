@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 
 
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -44,7 +43,7 @@ public class Settings {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
 
-        driver.manage().window().setPosition(new Point(2000,0));//Старт правый экран (не убирать)
+        driver.manage().window().setPosition(new Point(2000, 0));//Старт правый экран (не убирать)
         //driver.manage().window().setPosition(new Point(-2000,0));//Старт левый экран (не убирать)
         driver.manage().window().maximize();
         cityPage = new CityPage(driver, wait);
@@ -55,7 +54,7 @@ public class Settings {
         basketPage = new BasketPage(driver, wait);
         catalogListPage = new CatalogListPage(driver, wait);
         checkoutPage = new CheckoutPage(driver, wait);
-        mainPage = new MainPage(driver,wait);
+        mainPage = new MainPage(driver, wait);
     }
 
     public void getScreen() throws IOException {
@@ -63,9 +62,9 @@ public class Settings {
         File file = screenshot.getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(file, new File("screenshot/qe.jpg"));
     }
+
     @Step("Открытие главной страницы {baseUrl}")
     public void open(String baseUrl) throws InterruptedException {
-
         driver.get(baseUrl);
         wait(1);
         pages.setCloseCookieBtn();
@@ -74,7 +73,7 @@ public class Settings {
     public WebElement getElementByXpath(String string) {
         return driver.findElement(By.xpath(string));
     }
-
+    @Step("Получить список элементов")
     public List<WebElement> getElementsByXpath(By string) {
         return driver.findElements(string);
     }
@@ -87,18 +86,20 @@ public class Settings {
         return driver.findElement(By.id(string));
     }
 
+    @Step("Ожидание видимости элемента")
     public void waitVisibilityElement(String string) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(string)));
     }
+
     @Step("Ожидание видимости элемента")
     public static void waitVisibilityElement(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
-
+    @Step("Ожидание невидимости элемента")
     public void waitInvisibilityElement(WebElement element) {
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
-
+    @Step("Ожидание присутствия текста")
     public void waitTextToBe(String string, String text) {
         wait.until(ExpectedConditions.textToBe(By.xpath(string), text));
     }
@@ -106,7 +107,8 @@ public class Settings {
     public void waitValueInElement(WebElement element, String string) {
         wait.until(ExpectedConditions.textToBePresentInElementValue(element, string));
     }
-@Step("Передать текст в поле")
+
+    @Step("Передать текст в поле")
     public void sendKeysToBody(Keys keys) {
         driver.findElement(By.xpath("//body")).sendKeys(keys);
     }
@@ -114,6 +116,10 @@ public class Settings {
     public int getRandom(int number) {
         Random random = new Random();
         return random.nextInt(number);
+    }
+    @Step("Передать строку в поле ввода")
+    public void sendString(WebElement element, String string){
+        element.sendKeys(string);
     }
 
     public void moveTo(WebElement element) {

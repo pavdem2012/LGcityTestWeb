@@ -1,6 +1,7 @@
 package pages;
 
 import common.Settings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,20 +46,33 @@ public class CityPage extends Settings {
     //список элементов списка популярных городов
     @FindBy(xpath = "//a[@class='locate__popular-list-item']")
     List<WebElement> popularCityElements;
-
+    @Step("Нажать иконку открытия попапа 'Укажите свой город' и ввести название города в попапе")
     public void selectCity(String city) {
         iconSetCity.click();
         waitVisibilityElement(popupSetCity);
         inputUserLocate.clear();
-        inputUserLocate.sendKeys(city);
+        sendString(inputUserLocate,city);
         btnSaveUserLocate.click();
         waitInvisibilityElement(popupSetCity);
     }
-
+    @Step("Получить текст иконки открытия попапа 'Укажите свой город'")
     public String getHeaderCity() {
         return iconSetCity.getText();
     }
+    @Step("Нажать иконку открытия попапа 'Укажите свой город'")
+    public void clickIconSetCity() throws InterruptedException {
+        iconSetCity.click();
+        wait(1);
+        waitVisibilityElement(popupSetCity);
+    }
+    @Step("Нажать кнопку 'Сохранить' в попапе 'УКАЖИТЕ СВОЙ ГОРОД'")
+    public void clickBtnSaveUserLocate() throws InterruptedException {
+        btnSaveUserLocate.click();
+        waitInvisibilityElement(popupSetCity);
+        wait(1);
 
+    }
+    @Step("Нажать кнопку 'Определить автоматически'")
     public void setAutoCity(String city) {
         iconSetCity.click();
         waitInvisibilityElement(popupSetCity);
@@ -66,8 +80,9 @@ public class CityPage extends Settings {
         locateInputAuto.click();
         waitValueInElement(inputUserLocate, city);
         btnSaveUserLocate.click();
+        waitInvisibilityElement(popupSetCity);
     }
-
+    @Step("Выбрать рандомный город из списка популярных городов")
     public ArrayList<String> getRandomCity(int cityAmount) {
         Random random = new Random();
         int randomNumber = random.nextInt(cityAmount);
@@ -79,7 +94,13 @@ public class CityPage extends Settings {
         list.add(cityInField);
         return list;
     }
-
+    @Step("Нажать кнопку 'Закрыть'(Крестик)  в попапе 'УКАЖИТЕ СВОЙ ГОРОД'")
+    public void clickIconBoxPopupClose() throws InterruptedException {
+        iconBoxPopupClose.click();
+        wait(1);
+        waitInvisibilityElement(popupSetCity);
+    }
+    @Step("Собрать список популярных городов")
     public boolean checkPopularCityList(int popularCityAmount) {
         List<String> cityList = new ArrayList<>();
         for (int i = 0; i < popularCityAmount; i++) {

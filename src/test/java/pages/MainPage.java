@@ -1,6 +1,7 @@
 package pages;
 
 import common.Settings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -33,6 +34,7 @@ public class MainPage extends Settings {
     /*
     Переход к блоку новостей
      */
+    @Step("Подвести указатель к блоку 'Новости'")
     public void scrollToNews() {
         Actions scroll = new Actions(driver);
         scroll.moveToElement(getElementByClassName(newsBlock)).perform();
@@ -41,11 +43,13 @@ public class MainPage extends Settings {
     /*
     Выбор рандомной новости
      */
+    @Step("Выбор рандомной новости")
     public void randomNews() {
         int newsBlock = driver.findElements(By.xpath(newsItemBlock)).size();
         Random random = new Random();
         int randomNumber = random.nextInt(newsBlock) + 1;
         getElementByXpath("(" + newsItemWithException + ")[" + randomNumber + "]").click();
+        waitTextToBe(newsPageBlockTitle, "Акции и новости");
     }
 
 }

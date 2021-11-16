@@ -28,7 +28,7 @@ public class TestBasket extends Settings {
             sendKeysToBody(Keys.PAGE_DOWN);
             waitVisibilityElement(favoritePage.catalogListBlock);
             favoritePage.selectRandomCard();
-            System.out.println("Итерация " + (i + 1) + ": URL карточки товара: " + getUrl());
+            //System.out.println("Итерация " + (i + 1) + ": URL карточки товара: " + getUrl());
             waitVisibilityElement(favoritePage.cardPage);
             cartItemName.add(favoritePage.getCardTitle());
             cartItemColor.add(cartProductPage.getColorCartItem());

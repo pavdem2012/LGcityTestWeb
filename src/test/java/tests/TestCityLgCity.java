@@ -1,6 +1,7 @@
 package tests;
 
 import common.Settings;
+import common.TestData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -17,9 +18,9 @@ public class TestCityLgCity extends Settings {
     @Test
         public void setCity() throws InterruptedException {
         String city = "Омск";
-        open("https://lgcity.ru");
+        open(TestData.getProperty("baseUrl"));
         cityPage.selectCity(city);
-        Assert.assertEquals(city, cityPage.getHeaderCity());
+        Assert.assertEquals(city, cityPage.getHeaderCity(), "Введеный текст: "+city+"; Текст иконки открытия попапа 'Укажите свой город': "+cityPage.getHeaderCity());
     }
 
     /*
@@ -27,16 +28,13 @@ public class TestCityLgCity extends Settings {
      */
     @Test
     public void setPopularCity() throws InterruptedException {
-        open("https://lgcity.ru");
-        cityPage.iconSetCity.click();
-        waitVisibilityElement(cityPage.popupSetCity);
+        open(TestData.getProperty("baseUrl"));
+        cityPage.clickIconSetCity();
         int popularCityAmount = getElementsByXpath(cityPage.popularCityList).size();
         ArrayList<String> list = cityPage.getRandomCity(popularCityAmount);
-        Assert.assertEquals(list.get(0), list.get(1));
-        cityPage.btnSaveUserLocate.click();
-        waitInvisibilityElement(cityPage.popupSetCity);
-        Thread.sleep(1000);
-        Assert.assertEquals(list.get(0), cityPage.getHeaderCity());
+        Assert.assertEquals(list.get(0), list.get(1), "Выбранный населенный пункт: "+list.get(0)+"; Населенный пункт из списка:" +list.get(1));
+        cityPage.clickBtnSaveUserLocate();
+        Assert.assertEquals(list.get(0), cityPage.getHeaderCity(),"Выбранный населенный пункт: "+list.get(0)+"; Текст иконки открытия попапа 'Укажите свой город': "+cityPage.getHeaderCity());
     }
 
     /*
@@ -45,15 +43,13 @@ public class TestCityLgCity extends Settings {
     @Test
     public void closePopup() throws InterruptedException {
         String city = "Омск";
-        open("https://lgcity.ru");
+        open(TestData.getProperty("baseUrl"));
         String cityInHeader = cityPage.getHeaderCity();
-        cityPage.iconSetCity.click();
-        waitVisibilityElement(cityPage.popupSetCity);
+        cityPage.clickIconSetCity();
         cityPage.inputUserLocate.clear();
-        cityPage.inputUserLocate.sendKeys(city);
-        cityPage.iconBoxPopupClose.click();
-        waitInvisibilityElement(cityPage.popupSetCity);
-        Assert.assertNotEquals(cityInHeader, city);
+        sendString(cityPage.inputUserLocate,city);
+        cityPage.clickIconBoxPopupClose();
+        Assert.assertNotEquals(cityInHeader, city, "Текст иконки открытия попапа 'Укажите свой город': "+cityPage.getHeaderCity() + "; Введеный текст: "+city);
     }
 
     /*
@@ -61,14 +57,13 @@ public class TestCityLgCity extends Settings {
      */
     @Test
     public void automaticSetCity() throws InterruptedException {
-        open("https://lgcity.ru");
+        open(TestData.getProperty("baseUrl"));
         String city = "Воронеж";
         String autoCity = "Москва";
         cityPage.selectCity(city);
         Assert.assertEquals( city, cityPage.getHeaderCity(),"Город в шапке и выбранный город в попапе не совпали");
         cityPage.setAutoCity(autoCity);
-        waitInvisibilityElement(cityPage.popupSetCity);
-        Assert.assertNotEquals(cityPage.getHeaderCity(), city);
+        Assert.assertNotEquals(cityPage.getHeaderCity(), city,"Текст иконки открытия попапа 'Укажите свой город': "+cityPage.getHeaderCity() + "; Населенный пункт для сравнения: "+city);
     }
 
     /*
@@ -76,10 +71,9 @@ public class TestCityLgCity extends Settings {
      */
     @Test
     public void popularCityList() throws InterruptedException {
-        open("https://lgcity.ru");
-        cityPage.iconSetCity.click();
-        waitVisibilityElement(cityPage.popupSetCity);
-        int popularCityAmount = getElementsByXpath(cityPage.popularCityList).size();
+        open(TestData.getProperty("baseUrl"));
+        cityPage.clickIconSetCity();
+         int popularCityAmount = getElementsByXpath(cityPage.popularCityList).size();
         Assert.assertTrue(popularCityAmount > 0,"Список популярных городов пуст");
         Assert.assertTrue(cityPage.checkPopularCityList(popularCityAmount),"В списке отстутствует город 'Москва'");
 
