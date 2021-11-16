@@ -66,6 +66,7 @@ public class TestCityLgCity extends Settings {
         String getHeaderCity=cityPage.getHeaderCity();
         Assert.assertEquals( city, getHeaderCity,"Город в шапке и выбранный город в попапе не совпали");
         cityPage.setAutoCity(autoCity);
+        getHeaderCity=cityPage.getHeaderCity();
         Assert.assertNotEquals(getHeaderCity, city,"Текст иконки открытия попапа 'Укажите свой город': "+getHeaderCity + "; Населенный пункт для сравнения: "+city);
     }
 
