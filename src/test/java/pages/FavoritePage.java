@@ -26,9 +26,7 @@ public class FavoritePage extends Settings {
     @FindBy(xpath = "//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")
     public List<WebElement> menuItemsList;
     //элемент подкатегории товаров
-
     @FindBy(xpath = "//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")
-    @TestInstanceParameter("элемент подкатегории товаров")
     public WebElement menuItem;
     //заголовок в КТ
     @FindBy(tagName = "h1")
