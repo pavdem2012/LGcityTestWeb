@@ -1,7 +1,8 @@
 package pages;
 
 import common.Settings;
-import io.qameta.allure.Step;
+import io.qameta.allure.*;
+import jdk.jfr.Label;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,6 +26,8 @@ public class FavoritePage extends Settings {
     @FindBy(xpath = "//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")
     public List<WebElement> menuItemsList;
     //элемент подкатегории товаров
+    @Label("элемент подкатегории товаров")
+
     @FindBy(xpath = "//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")
     public WebElement menuItem;
     //заголовок в КТ

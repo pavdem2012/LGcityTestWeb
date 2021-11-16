@@ -3,6 +3,7 @@ package tests;
 import common.Settings;
 
 import io.qameta.allure.Description;
+
 import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
@@ -12,8 +13,6 @@ public class TestCheckout extends Settings {
 
     @Description(value = "Проверка оформления заказа")
     @Test
-
-
     public void testCheckout() throws InterruptedException, IOException {
         open("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem);
