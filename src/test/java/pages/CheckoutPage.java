@@ -185,7 +185,7 @@ public class CheckoutPage extends Settings {
 
     }
     //Проверка соответствия цен
-    @Step("Проверка соответствия заполнения полей в Оформлении заказа {nameA} {name}")
+    @Step("Проверка соответствия заполнения полей в Оформлении заказа")
     public void assertSendingFormsInOrder() throws InterruptedException, IOException {
         wait(1);
         String nameA = nameField.getAttribute("value");
@@ -208,10 +208,12 @@ public class CheckoutPage extends Settings {
     }
 
     //Нажать кнопку Оформить заказ
+    @Step("Нажать кнопку Оформить заказ")
     public void clickCheckoutButton(){
         checkoutButton.click();
     }
     //Проверить страницу оплаты
+    @Step("Проверить страницу оплаты")
     public void chekPaymentPage() throws  InterruptedException {
         wait(2);
         //getScreen();
@@ -233,9 +235,9 @@ public class CheckoutPage extends Settings {
         addressListElement.click();
     }
 
-
+    @Step("Передать в поле 'Адрес' String city.CheckoutPage ")
     public void setAddress() throws InterruptedException {
-        addressField.sendKeys("Новосибирск");
+        addressField.sendKeys(city);
         wait(1);
         addressListElement.click();
     }
