@@ -105,8 +105,8 @@ public class Pages extends Settings {
                 driver.findElement(By.xpath("(//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a)" + "[" + randomItem + "]")).getText().toLowerCase();
 
         driver.findElement(By.xpath("(//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a)[" + randomItem + "]")).click();
-        headerName();
-        Assert.assertTrue(headerName().contains(randomMenuItem),"Заголовок страницы: "+headerName() + "; Заголовок элемента меню: " +randomMenuItem);
+        String headerName = headerName();
+        Assert.assertTrue(headerName.contains(randomMenuItem),"Заголовок страницы: "+headerName + "; Заголовок элемента меню: " +randomMenuItem);
 
     }
     @Step("Нажать иконку Избранное в шапке")

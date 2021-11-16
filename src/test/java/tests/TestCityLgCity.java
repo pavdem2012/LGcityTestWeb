@@ -20,7 +20,8 @@ public class TestCityLgCity extends Settings {
         String city = "Омск";
         open(TestData.getProperty("baseUrl"));
         cityPage.selectCity(city);
-        Assert.assertEquals(city, cityPage.getHeaderCity(), "Введеный текст: "+city+"; Текст иконки открытия попапа 'Укажите свой город': "+cityPage.getHeaderCity());
+        String getHeaderCity= cityPage.getHeaderCity();
+        Assert.assertEquals(city, getHeaderCity, "Введеный текст: "+city+"; Текст иконки открытия попапа 'Укажите свой город': "+getHeaderCity);
     }
 
     /*
@@ -34,7 +35,8 @@ public class TestCityLgCity extends Settings {
         ArrayList<String> list = cityPage.getRandomCity(popularCityAmount);
         Assert.assertEquals(list.get(0), list.get(1), "Выбранный населенный пункт: "+list.get(0)+"; Населенный пункт из списка:" +list.get(1));
         cityPage.clickBtnSaveUserLocate();
-        Assert.assertEquals(list.get(0), cityPage.getHeaderCity(),"Выбранный населенный пункт: "+list.get(0)+"; Текст иконки открытия попапа 'Укажите свой город': "+cityPage.getHeaderCity());
+        String getHeaderCity= cityPage.getHeaderCity();
+        Assert.assertEquals(list.get(0), getHeaderCity,"Выбранный населенный пункт: "+list.get(0)+"; Текст иконки открытия попапа 'Укажите свой город': "+getHeaderCity);
     }
 
     /*
@@ -61,9 +63,10 @@ public class TestCityLgCity extends Settings {
         String city = "Воронеж";
         String autoCity = "Москва";
         cityPage.selectCity(city);
-        Assert.assertEquals( city, cityPage.getHeaderCity(),"Город в шапке и выбранный город в попапе не совпали");
+        String getHeaderCity=cityPage.getHeaderCity();
+        Assert.assertEquals( city, getHeaderCity,"Город в шапке и выбранный город в попапе не совпали");
         cityPage.setAutoCity(autoCity);
-        Assert.assertNotEquals(cityPage.getHeaderCity(), city,"Текст иконки открытия попапа 'Укажите свой город': "+cityPage.getHeaderCity() + "; Населенный пункт для сравнения: "+city);
+        Assert.assertNotEquals(getHeaderCity, city,"Текст иконки открытия попапа 'Укажите свой город': "+getHeaderCity + "; Населенный пункт для сравнения: "+city);
     }
 
     /*
