@@ -13,7 +13,6 @@ public class TestCheckout extends Settings {
     @Description(value = "Проверка оформления заказа")
     @Test
 
-
     public void testCheckout() throws InterruptedException, IOException {
         open("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem);
