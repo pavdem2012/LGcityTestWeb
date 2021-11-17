@@ -21,7 +21,7 @@ public class Pages extends Settings {
         this.wait = wait;
     }
 
-    //Куки
+    /*Куки*/
     @FindBy(id = "confirm-use-cookies")
     WebElement closeCookieBtn;
     //Иконка "Корзина"

@@ -56,7 +56,7 @@ public class Settings {
         checkoutPage = new CheckoutPage(driver, wait);
         mainPage = new MainPage(driver, wait);
     }
-
+    @Step("Получить скриншот страницы")
     public void getScreen() throws IOException {
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File file = screenshot.getScreenshotAs(OutputType.FILE);
@@ -69,7 +69,7 @@ public class Settings {
         wait(1);
         pages.setCloseCookieBtn();
     }
-
+    @Step("Получить элемент по Xpath")
     public WebElement getElementByXpath(String string) {
         return driver.findElement(By.xpath(string));
     }
@@ -77,11 +77,11 @@ public class Settings {
     public List<WebElement> getElementsByXpath(By string) {
         return driver.findElements(string);
     }
-
+    @Step("Получить элемент по имени класса")
     public WebElement getElementByClassName(String string) {
         return driver.findElement(By.className(string));
     }
-
+    @Step("Получить элемент по ID")
     public WebElement getElementById(String string) {
         return driver.findElement(By.id(string));
     }
@@ -103,7 +103,7 @@ public class Settings {
     public void waitTextToBe(String string, String text) {
         wait.until(ExpectedConditions.textToBe(By.xpath(string), text));
     }
-
+    @Step("Ожидание значение элемента")
     public void waitValueInElement(WebElement element, String string) {
         wait.until(ExpectedConditions.textToBePresentInElementValue(element, string));
     }
@@ -112,7 +112,7 @@ public class Settings {
     public void sendKeysToBody(Keys keys) {
         driver.findElement(By.xpath("//body")).sendKeys(keys);
     }
-
+    @Step("Выбор рандомного элемента")
     public int getRandom(int number) {
         Random random = new Random();
         return random.nextInt(number);
@@ -121,12 +121,12 @@ public class Settings {
     public void sendString(WebElement element, String string){
         element.sendKeys(string);
     }
-
+    @Step("Переместиться к элементу")
     public void moveTo(WebElement element) {
         Actions actions = new Actions(driver);
         actions.moveToElement(element).perform();
     }
-
+    @Step("Получить URL страницы")
     public String getUrl() {
         return driver.getCurrentUrl();
     }
