@@ -1,9 +1,8 @@
 package tests;
 
 import common.Settings;
-import org.junit.Test;
-import common.Pages;
-import pages.MainPage;
+import org.testng.annotations.Test;
+
 
 public class NewsMainLgCity extends Settings {
     /*
@@ -11,12 +10,12 @@ public class NewsMainLgCity extends Settings {
      */
 
     @Test
-    public void setNews() {
+    public void setNews() throws InterruptedException {
         open("https://lgcity.ru");
         mainPage.scrollToNews();
-        waitVisibilityElement(MainPage.newsItemBlock);
+        waitVisibilityElement(mainPage.newsItemBlock);
         mainPage.randomNews();
-        waitTextToBe(mainPage.newsPageBlockTitle, "Акции и новости");
+
     }
     /*    *//*
     Проверка "Шапка сайта"

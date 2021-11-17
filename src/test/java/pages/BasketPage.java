@@ -1,6 +1,7 @@
 package pages;
 
 import common.Settings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,7 +24,7 @@ public class BasketPage extends Settings {
     public static WebElement basketNonEmptyPage;
     //Общая цена в корзине
     @FindBy(id = "basket-total-price")
-    WebElement basketTotalPrice;
+    public WebElement basketTotalPrice;
     //Цвет товара в корзине
     @FindBy(xpath = "//div[@class='basket__item-props']/div[(contains(text(), 'Цвет:'))]")
     static
@@ -61,77 +62,106 @@ public class BasketPage extends Settings {
     //кнопка "Продолжить без регистрации"
     @FindBy(xpath = "//button[text()='Продолжить без регистрации']")
     WebElement btnWithoutRegistration;
-    //поле "Имя" в оформлении заказа
-    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Имя']/following-sibling::input")
-    WebElement nameField;
-    //поле "Фамилия" в оформлении заказа
-    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Фамилия']/following-sibling::input")
-    WebElement lastname;
-    //поле "Имя" в оформлении заказа
-    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='E-mail']/following-sibling::input")
-    WebElement email;
-    //поле "Имя" в оформлении заказа
-    @FindBy(xpath = "//div[@name='scroll-user']//label[text()='Телефон']/following-sibling::input")
-    WebElement phone;
+
+
     //Количество товаров для теста
     public static int countProductsForTest = 2;
 
 
     //Функции
     //Общая цена в корзине число
+    @Step("Получить общую цену в корзине")
     public int totalPrice() {
         //waitVisibilityElement(basketTotalPrice);
         return Integer.parseInt(basketTotalPrice.getText().replaceAll(" ", ""));
     }
 
     //Цена товара в корзине
-    public  String getPriceOfProductInCart() {
+    @Step("Получить цену одного товара в корзине")
+    public String getPriceOfProductInCart() {
 
-        return  priceOfProductInCart.getText().replaceAll(" ", "").replaceAll("₽", "");
+        return priceOfProductInCart.getText().replaceAll(" ", "").replaceAll("₽", "");
     }
 
     //Название товара в корзине
-    public  String nameOfProductInCart() {
+    @Step("Получить наименование одного товара в корзине")
+    public String nameOfProductInCart() {
         //waitVisibilityElement(nameOfProductInCart);
         return nameOfProductInCart.getText().toLowerCase().replaceAll(" ", "");//!!
     }
 
     //Цвет товара в корзине
-    public  String colorOfProductInCart() {
+    @Step("Получить цвет одного товара в корзине")
+    public String colorOfProductInCart() {
         //waitVisibilityElement(colorOfProductInCart);
         return colorOfProductInCart.getText().toLowerCase().replaceAll("цвет:", "").replaceAll(" ", "");
     }
 
     //Размер товара в корзине
-    public  String sizeOfProductInCart() {
+    @Step("Получить размер одного товара в корзине")
+    public String sizeOfProductInCart() {
         //waitVisibilityElement(sizeOfProductInCart);
         return sizeOfProductInCart.getText().replaceAll(" ", "").toLowerCase().replaceAll("размер:", "");
     }
 
     //Удалить товар из корзины
+    @Step("Удалить товар из корзины")
     public void setBasketItemRemove() {
         //waitVisibilityElement(basketItemRemove);
         basketItemRemove.click();
     }
 
     //Закрыть корзину
+    @Step("Закрыть корзину")
     public void setBasketClose() {
         //waitVisibilityElement(basketPopupClose);
         basketPopupClose.click();
     }
-
-    public void clickCheckoutBtn(){
+    @Step("Нажать кнопку 'К оформлению'")
+    public void clickCheckoutBtn() throws InterruptedException {
+        wait(2);
         checkoutBtn.click();
+
     }
 
-    public void clickBtnWithoutRegistration(){
-        btnWithoutRegistration.click();
-    }
 
-    public void setOrderData(){
-        nameField.sendKeys();
-        lastname.sendKeys();
-        email.sendKeys();
-        phone.sendKeys();
+
+    //доставка курьером
+    @FindBy(xpath = "//span[text()='Доставка курьером']")
+    WebElement courierDelivery;
+    //самовывоз
+    @FindBy(xpath = "//span[text()='Самовывоз']")
+    WebElement pickup;
+    //улица в доставке курьером
+    @FindBy(xpath = "//label[text()='Улица']/following-sibling::input")
+    WebElement courierDeliveryStreet;
+    //дом в доставке курьером
+    @FindBy(xpath = "//label[text()='Дом*']/following-sibling::input")
+    WebElement courierDeliveryHouse;
+    //корпус в доставке курьером
+    @FindBy(xpath = "//label[text()='Корпус']/following-sibling::input")
+    WebElement courierDeliveryBuilding;
+    //квартира в доставке курьером
+    @FindBy(xpath = "//label[text()='Квартира']/following-sibling::input")
+    WebElement courierDeliveryApartment;
+    //индекс в доставке курьером
+    @FindBy(xpath = "//label[text()='Индекс']/following-sibling::input")
+    WebElement courierDeliveryIndex;
+
+    public void setDelivery(String string) throws InterruptedException {
+        if (string.equals("Курьер")) {
+            courierDelivery.click();
+            courierDeliveryStreet.sendKeys("Ленина");
+            checkoutPage.addressListElement.click();
+            wait(1);
+            courierDeliveryHouse.sendKeys("12");
+            wait(1);
+            courierDeliveryBuilding.sendKeys("1");
+            wait(1);
+            courierDeliveryApartment.sendKeys("1");
+//            courierDeliveryIndex.sendKeys();
+        } else {
+            pickup.click();
+        }
     }
 }

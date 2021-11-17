@@ -1,9 +1,9 @@
 package tests;
 
 import common.Settings;
-import org.junit.Assert;
-import org.junit.Test;
 import org.openqa.selenium.Keys;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class TestFavorites extends Settings {
 
@@ -11,7 +11,7 @@ public class TestFavorites extends Settings {
     Проверка добавления в "Избранное" из карточки товара
      */
     @Test
-    public void addFavoritesFromCartOfProduct() {
+    public void addFavoritesFromCartOfProduct() throws InterruptedException {
         open("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem);
         favoritePage.selectRandomMenu();
@@ -22,15 +22,15 @@ public class TestFavorites extends Settings {
         favoritePage.selectRandomCard();
         waitVisibilityElement(favoritePage.cardPage);
         String cardTitle = favoritePage.getCardTitle();
-        favoritePage.addToFavoriteBtn.click();
+        favoritePage.clickAddToFavorites();
 //        favoritePage.addToFavoriteIcon.isEnabled();
         waitVisibilityElement(favoritePage.favoriteCounter1);
-        favoritePage.favoriteInHeader.click();
+        pages.clickIconFavorites();
         waitVisibilityElement(favoritePage.favoriteBlock);
         Assert.assertTrue(cardTitle.contains(favoritePage.getFavoriteCardTitle()));
-        favoritePage.deleteFavoriteBtn.click();
+        favoritePage.clickDeleteFavoriteBtn();
         waitVisibilityElement(favoritePage.favoriteEmptyPage);
-        favoritePage.goToMainPage.click();
+        favoritePage.clickGoToMainPage();
         waitVisibilityElement(favoritePage.favoriteCounter0);
     }
 
@@ -38,7 +38,7 @@ public class TestFavorites extends Settings {
     Проверка добавления в "Избранное" из каталога
      */
     @Test
-    public void addFavoritesFromCatalogue() {
+    public void addFavoritesFromCatalogue() throws InterruptedException {
         open("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem);
         favoritePage.selectRandomMenu();
@@ -50,12 +50,12 @@ public class TestFavorites extends Settings {
 //        favoritePage.addToFavoriteIcon.isEnabled();
         moveTo(favoritePage.headerElement);
         waitVisibilityElement(favoritePage.favoriteCounter1);
-        favoritePage.favoriteInHeader.click();
+        pages.clickIconFavorites();
         waitVisibilityElement(favoritePage.favoriteBlock);
         Assert.assertTrue(itemTitleInCatalog.contains(favoritePage.getFavoriteCardTitle()));
-        favoritePage.deleteFavoriteBtn.click();
+        favoritePage.clickDeleteFavoriteBtn();
         waitVisibilityElement(favoritePage.favoriteEmptyPage);
-        favoritePage.goToMainPage.click();
+        favoritePage.clickGoToMainPage();
         waitVisibilityElement(favoritePage.favoriteCounter0);
     }
 }

@@ -1,6 +1,8 @@
 package pages;
 
 import common.Settings;
+import io.qameta.allure.*;
+import io.qameta.allure.testng.TestInstanceParameter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -53,9 +55,7 @@ public class FavoritePage extends Settings {
     //значок 0(невидимый?) на иконке избранного
     @FindBy(xpath = "//div[@class='basket-counter__value' and contains (text(),'0')]")
     public WebElement favoriteCounter0;
-    //кнопка избранного в шапке
-    @FindBy(xpath = "//a[@class='header__r-icons-link header__r-icons-link--favorite js-header-favorite']")
-    public WebElement favoriteInHeader;
+
     //блок избранного
     @FindBy(xpath = "//div[@class='lk__favorites']")
     public WebElement favoriteBlock;
@@ -85,41 +85,62 @@ public class FavoritePage extends Settings {
     List<WebElement> favoritesIconsInCatalog;
     int randomItem;
 
+    @Step("Выбор рандомного элемента меню")
     public void selectRandomMenu() {
         int menuItems = menuItemsList.size() - 4;
         randomItem = getRandom(menuItems);
         moveTo(menuItemsList.get(randomItem));
     }
 
+    @Step("Выбор рандомного пункта меню")
     public String selectRandomMenuItem() {
-        int menuItemsInner =
-                driver.findElements(By.xpath("//div[@id='gmenu-tab-327']//div[@class='header__nav-list-item'][" + (randomItem + 1) + "]//div[@class='header__drop-inner']/div[@class='header__drop-category-col']//a")).size();
+        int menuItemsInner = driver.findElements(By.xpath("//div[@id='gmenu-tab-327']//div[@class='header__nav-list" +
+                "-item'][" + (randomItem + 1) + "]//div[@class='header__drop-inner']/div[@class='header__drop" +
+                "-category-col']//a")).size();
         int randomInner = getRandom(menuItemsInner) + 1;
-        String randomItemInner = driver.findElement(By.xpath("(//div[@id='gmenu-tab-327']//div[@class='header__nav-list-item'][" + (randomItem + 1) + "]//div[@class='header__drop-inner']/div[@class='header__drop-category-col']//a)[" + randomInner + "]")).getText().toLowerCase();
+        String randomItemInner = driver.findElement(By.xpath("(//div[@id='gmenu-tab-327']//div[@class='header__nav" +
+                "-list-item'][" + (randomItem + 1) + "]//div[@class='header__drop-inner']/div[@class='header__drop" +
+                "-category-col']//a)[" + randomInner + "]")).getText().toLowerCase();
         driver.findElement(By.xpath("(//div[@id='gmenu-tab-327']//div[@class='header__nav-list-item'][" + (randomItem + 1) + "]//div[@class='header__drop-inner']/div[@class='header__drop-category-col']//a)[" + randomInner + "]")).click();
         return randomItemInner;
     }
 
+    @Step("Выбор рандомной карточки товара")
     public void selectRandomCard() {
         int randomCatalogItem = getRandom(catalogItems.size());
         catalogItems.get(randomCatalogItem).click();
     }
-
+    @Step("Заголовок карточки товара")
     public String getTitle() {
         return title.getText().toLowerCase();
     }
-
+    @Step("Получить название товара в карточке товара")
     public String getCardTitle() {
         return cardTitle.getText().toLowerCase().replaceAll(" ", "").split("\n")[0];
     }
+    @Step("Нажать кнопку 'Добавить в избранное'")
+    public void clickAddToFavorites(){
+        addToFavoriteBtn.click();
+    }
 
+    @Step("Получить название товара в избранном")
     public String getFavoriteCardTitle() {
         return favoriteCardTitle.getText().toLowerCase().replaceAll("[^\\da-zA-Z]", "");
     }
-
+    @Step("Нажать кнопку перейти на главную (в избранном)")
+    public void clickGoToMainPage(){
+        goToMainPage.click();
+    }
+    @Step("Нажать кнопку удаления из избранного")
+    public void clickDeleteFavoriteBtn() throws InterruptedException {
+        wait(1);
+        deleteFavoriteBtn.click();
+    }
+    @Step("Выбрать рандомную иконку добавления в избранное в листинге товара")
     public String selectFavoritesIcons() {
         int randomCatalogIconsToFavorites = getRandom(favoritesIconsInCatalogInput.size());
-        String nameOfItemInCatalogue = favoriteCardTitleList.get(randomCatalogIconsToFavorites).getText().toLowerCase().replaceAll(" ", "");
+        String nameOfItemInCatalogue =
+                favoriteCardTitleList.get(randomCatalogIconsToFavorites).getText().toLowerCase().replaceAll(" ", "");
         favoritesIconsInCatalog.get(randomCatalogIconsToFavorites).click();
         return nameOfItemInCatalogue;
     }
