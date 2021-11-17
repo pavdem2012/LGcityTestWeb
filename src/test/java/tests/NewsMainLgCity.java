@@ -11,10 +11,10 @@ public class NewsMainLgCity extends Settings {
     /*
     Проверка "Новостные баннеры"
      */
-    @Description(value = "Проверка перехода по\"Новостные баннеры\"")
+    @Description(value = "Проверка перехода по 'Новостные баннеры'")
     @Epic(value = "Главная страница")
-    @Feature(value = "Блок \"Новостные баннеры\"")
-    @Test
+    @Feature(value = "Блок 'Новостные баннеры'")
+    @Test(description="Проверка перехода по 'Новостные баннеры'")
     public void setNews() throws InterruptedException {
         open("https://lgcity.ru");
         mainPage.scrollToNews();
