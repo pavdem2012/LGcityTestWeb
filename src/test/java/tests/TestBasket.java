@@ -2,6 +2,9 @@ package tests;
 
 
 import common.Settings;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -12,7 +15,9 @@ import static pages.BasketPage.nameOfProductInCart;
 
 public class TestBasket extends Settings {
 
-
+    @Epic(value = "Корзина")
+    @Feature(value = "Проверка добавления и удаления товаров в корзину из карточки товара")
+    @Description("Проверка добавления и удаления товаров в корзину из карточки товара")
     @Test
         /*
     Проверка вложеных элементов главного меню и добавления/удаления товаров корзины из карточки товара
@@ -65,7 +70,9 @@ public class TestBasket extends Settings {
         waitVisibilityElement(basketPage.basketEmptyHeader, "В корзине нет товаров");
         basketPage.setBasketClose();
     }
-
+    @Epic(value = "Корзина")
+    @Feature(value = "Проверка добавления и удаления товаров в корзину из листинга товаров")
+    @Description("Проверка добавления и удаления товаров в корзину из листинга товаров")
     @Test
     /*
     Проверка вложеных элементов главного меню и добавления/удаления товаров корзины из каталога товаров

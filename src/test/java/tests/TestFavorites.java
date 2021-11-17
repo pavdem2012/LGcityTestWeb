@@ -1,6 +1,9 @@
 package tests;
 
 import common.Settings;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,6 +13,9 @@ public class TestFavorites extends Settings {
     /*
     Проверка добавления в "Избранное" из карточки товара
      */
+    @Epic(value = "Избранное")
+    @Feature(value = "Добавление в избранное из карточки товара")
+    @Description("Добавление в избранное из карточки товара")
     @Test
     public void addFavoritesFromCartOfProduct() throws InterruptedException {
         open("https://lgcity.ru");
@@ -37,6 +43,9 @@ public class TestFavorites extends Settings {
     /*
     Проверка добавления в "Избранное" из каталога
      */
+    @Epic(value = "Избранное")
+    @Feature(value = "Добавление в избранное из листинга товаров")
+    @Description("Добавление в избранное из листинга товаров")
     @Test
     public void addFavoritesFromCatalogue() throws InterruptedException {
         open("https://lgcity.ru");

@@ -2,6 +2,9 @@ package tests;
 
 import common.Settings;
 import common.TestData;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,6 +18,9 @@ public class TestCityLgCity extends Settings {
     /*
     Проверка ввода названия города.
      */
+    @Epic(value = "Главная страница")
+    @Feature(value = "Попап 'Укажите свой город'")
+    @Description("Проверка выбора населенного пункта по названию")
     @Test
         public void setCity() throws InterruptedException {
         String city = "Омск";
@@ -27,6 +33,9 @@ public class TestCityLgCity extends Settings {
     /*
     Проверка выбора города из выпадающего списка
      */
+    @Epic(value = "Главная страница")
+    @Feature(value = "Попап 'Укажите свой город'")
+    @Description("Проверка выбора города из выпадающего списка")
     @Test
     public void setPopularCity() throws InterruptedException {
         open(TestData.getProperty("baseUrl"));
@@ -42,6 +51,9 @@ public class TestCityLgCity extends Settings {
     /*
     Проверка работоспособности крестика
      */
+    @Epic(value = "Главная страница")
+    @Feature(value = "Попап 'Укажите свой город'")
+    @Description("Проверка работоспособности крестика")
     @Test
     public void closePopup() throws InterruptedException {
         String city = "Омск";
@@ -57,6 +69,9 @@ public class TestCityLgCity extends Settings {
     /*
     Проверка автоматического определения города
      */
+    @Epic(value = "Главная страница")
+    @Feature(value = "Попап 'Укажите свой город'")
+    @Description("Проверка автоматического определения города")
     @Test
     public void automaticSetCity() throws InterruptedException {
         open(TestData.getProperty("baseUrl"));
@@ -73,6 +88,9 @@ public class TestCityLgCity extends Settings {
     /*
     Проверка заполнения выпадающего списка популярных городов
      */
+    @Epic(value = "Главная страница")
+    @Feature(value = "Попап 'Укажите свой город'")
+    @Description("Проверка заполнения выпадающего списка популярных городов")
     @Test
     public void popularCityList() throws InterruptedException {
         open(TestData.getProperty("baseUrl"));
