@@ -136,7 +136,7 @@ public class Settings {
         int time = second * 1000;
         Thread.sleep(time);
     }
-    @Step("Проверка строковых элементов")
+    @Step("Проверка строковых элементов: {string}, {verificationString}.")
     public void assertString(String string,String verificationString){
 
         Assert.assertTrue(string.contains(verificationString),"Проверяемый элемент: "+string+" не совпадает с проверочным: "+verificationString);
