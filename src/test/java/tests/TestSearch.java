@@ -2,6 +2,9 @@ package tests;
 
 import common.Settings;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -12,6 +15,9 @@ import org.testng.annotations.Test;
 import java.util.Random;
 
 public class TestSearch extends Settings {
+    @Epic(value = "Главная страница")
+    @Feature(value = "Строка поиска")
+    @Description("Поиск по наименованию товара")
     @Test
     public void SearchByName() throws InterruptedException {
         open("https://lgcity.ru");

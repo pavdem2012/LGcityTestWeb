@@ -49,11 +49,11 @@ public class CityPage extends Settings {
     @Step("Нажать иконку открытия попапа 'Укажите свой город' и ввести название города в попапе")
     public void selectCity(String city) {
         iconSetCity.click();
-        waitVisibilityElement(popupSetCity);
+        waitVisibilityElement(popupSetCity,"Попап выбора населенного пункта");
         inputUserLocate.clear();
         sendString(inputUserLocate,city);
         btnSaveUserLocate.click();
-        waitInvisibilityElement(popupSetCity);
+        waitInvisibilityElement(popupSetCity, "Попап выбора населенного пункта");
     }
     @Step("Получить текст иконки открытия попапа 'Укажите свой город'")
     public String getHeaderCity() {
@@ -63,24 +63,24 @@ public class CityPage extends Settings {
     public void clickIconSetCity() throws InterruptedException {
         iconSetCity.click();
         wait(1);
-        waitVisibilityElement(popupSetCity);
+        waitVisibilityElement(popupSetCity,"Попап выбора населенного пункта");
     }
     @Step("Нажать кнопку 'Сохранить' в попапе 'УКАЖИТЕ СВОЙ ГОРОД'")
     public void clickBtnSaveUserLocate() throws InterruptedException {
         btnSaveUserLocate.click();
-        waitInvisibilityElement(popupSetCity);
+        waitInvisibilityElement(popupSetCity,"Попап выбора населенного пункта");
         wait(1);
 
     }
     @Step("Нажать кнопку 'Определить автоматически'")
     public void setAutoCity(String city) {
         iconSetCity.click();
-        waitInvisibilityElement(popupSetCity);
+        waitInvisibilityElement(popupSetCity,"Попап выбора населенного пункта");
         inputUserLocate.clear();
         locateInputAuto.click();
         waitValueInElement(inputUserLocate, city);
         btnSaveUserLocate.click();
-        waitInvisibilityElement(popupSetCity);
+        waitInvisibilityElement(popupSetCity,"Попап выбора населенного пункта");
     }
     @Step("Выбрать рандомный город из списка популярных городов")
     public ArrayList<String> getRandomCity(int cityAmount) {
@@ -98,7 +98,7 @@ public class CityPage extends Settings {
     public void clickIconBoxPopupClose() throws InterruptedException {
         iconBoxPopupClose.click();
         wait(1);
-        waitInvisibilityElement(popupSetCity);
+        waitInvisibilityElement(popupSetCity,"Попап выбора населенного пункта");
     }
     @Step("Собрать список популярных городов")
     public boolean checkPopularCityList(int popularCityAmount) {

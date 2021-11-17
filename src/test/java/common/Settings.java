@@ -42,11 +42,11 @@ public class Settings {
 
         wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().window().setPosition(new Point(1500, 0));
         driver.manage().window().maximize();
 
-        driver.manage().window().setPosition(new Point(2000, 0));//Старт правый экран (не убирать)
+        //driver.manage().window().setPosition(new Point(2000, 0));//Старт правый экран (не убирать)
         //driver.manage().window().setPosition(new Point(-2000,0));//Старт левый экран (не убирать)
+
         driver.manage().window().maximize();
         cityPage = new CityPage(driver, wait);
         cartProductPage = new CardProductPage(driver, wait);
@@ -65,14 +65,14 @@ public class Settings {
         FileUtils.copyFile(file, new File("screenshot/qe.jpg"));
     }
 
-    @Step("Открытие главной страницы {baseUrl}")
+    @Step("Открываем главную страницу {baseUrl}")
     public void open(String baseUrl) throws InterruptedException {
         driver.get(baseUrl);
         wait(1);
         pages.setCloseCookieBtn();
     }
-    @Step("Получить элемент по Xpath")
-    public WebElement getElementByXpath(String string) {
+    @Step("Переходим к элементу '{commentString}'")
+    public WebElement getElementByXpath(String string, String commentString) {
         return driver.findElement(By.xpath(string));
     }
     @Step("Получить список элементов")
@@ -88,20 +88,20 @@ public class Settings {
         return driver.findElement(By.id(string));
     }
 
-    @Step("Ожидание видимости элемента")
-    public void waitVisibilityElement(String string) {
+    @Step("Ожидаем видимость '{commentString}'")
+    public void waitVisibilityElement(String string, String commentString) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(string)));
     }
 
-    @Step("Ожидание видимости элемента")
-    public static void waitVisibilityElement(WebElement element) {
+    @Step("Ожидаем видимость элемента '{string}'")
+    public static void waitVisibilityElement(WebElement element,String string) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
-    @Step("Ожидание невидимости элемента")
-    public void waitInvisibilityElement(WebElement element) {
+    @Step("Ожидание невидимости элемента 'string'")
+    public void waitInvisibilityElement(WebElement element, String string) {
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
-    @Step("Ожидание присутствия текста")
+    @Step("Ожидание присутствия текста '{text}'")
     public void waitTextToBe(String string, String text) {
         wait.until(ExpectedConditions.textToBe(By.xpath(string), text));
     }
@@ -137,10 +137,17 @@ public class Settings {
         int time = second * 1000;
         Thread.sleep(time);
     }
-    @Step("Проверка строковых элементов: {string}, {verificationString}.")
+    @Step("Проверяем содержит ли элемент '{string}', проверочное слово '{verificationString}'.")
     public void assertString(String string,String verificationString){
-
-        Assert.assertTrue(string.contains(verificationString),"Проверяемый элемент: "+string+" не совпадает с проверочным: "+verificationString);
+        Assert.assertTrue(string.contains(verificationString),"Проверяемый элемент: "+string+" не содержит: "+verificationString);
+    }
+    @Step("Клик по элементу {string}")
+    public void clickElement(WebElement element, String string){
+        element.click();
+    }
+    @Step("Получаем текст элемента '{string}'")
+    public String getTextElement(WebElement element, String string){
+       return element.getText().toLowerCase();
     }
     @AfterMethod
     public void quit() {

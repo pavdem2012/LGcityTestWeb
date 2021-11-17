@@ -1,6 +1,9 @@
 package tests;
 
 import common.Settings;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.testng.annotations.Test;
 
 
@@ -8,12 +11,14 @@ public class NewsMainLgCity extends Settings {
     /*
     Проверка "Новостные баннеры"
      */
-
-    @Test
+    @Description(value = "Проверка перехода по 'Новостные баннеры'")
+    @Epic(value = "Главная страница")
+    @Feature(value = "Блок 'Новостные баннеры'")
+    @Test(description="Проверка перехода по 'Новостные баннеры'")
     public void setNews() throws InterruptedException {
         open("https://lgcity.ru");
         mainPage.scrollToNews();
-        waitVisibilityElement(mainPage.newsItemBlock);
+        waitVisibilityElement(mainPage.newsItemBlock,",блока новостей");
         mainPage.randomNews();
 
     }

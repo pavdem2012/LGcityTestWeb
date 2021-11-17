@@ -34,7 +34,7 @@ public class MainPage extends Settings {
     /*
     Переход к блоку новостей
      */
-    @Step("Подвести указатель к блоку 'Новости'")
+    @Step("Подводим указатель к блоку 'Новости'")
     public void scrollToNews() {
         Actions scroll = new Actions(driver);
         scroll.moveToElement(getElementByClassName(newsBlock)).perform();
@@ -43,12 +43,12 @@ public class MainPage extends Settings {
     /*
     Выбор рандомной новости
      */
-    @Step("Выбор рандомной новости")
+    @Step("Выбираем рандомную новость")
     public void randomNews() {
         int newsBlock = driver.findElements(By.xpath(newsItemBlock)).size();
         Random random = new Random();
         int randomNumber = random.nextInt(newsBlock) + 1;
-        getElementByXpath("(" + newsItemWithException + ")[" + randomNumber + "]").click();
+        getElementByXpath("(" + newsItemWithException + ")[" + randomNumber + "]", "рандомная новость").click();
         waitTextToBe(newsPageBlockTitle, "Акции и новости");
     }
 
