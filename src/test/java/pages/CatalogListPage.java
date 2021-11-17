@@ -76,7 +76,7 @@ public class CatalogListPage extends Settings {
         String randomSize =
                 driver.findElement(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button[" + randomQuickBuSize + "]")).getText().toLowerCase().replaceAll(" ", "");
         cartItemSize.add(randomSize);
-        waitVisibilityElement(priceInList);
+        waitVisibilityElement(priceInList,"Цена в листинге товара");
         String price = priceItemTitleList.get(num).getText().replaceAll(" ","").replaceAll("₽","");
         cartItemPrice.add(price);
         driver.findElement(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button[" + randomQuickBuSize + "]")).click();

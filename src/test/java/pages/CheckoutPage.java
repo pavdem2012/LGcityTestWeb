@@ -130,7 +130,7 @@ public class CheckoutPage extends Settings {
     //Нажать ссылку "Войти с помощью пароля"
     @Step("Нажать ссылку \"Войти с помощью пароля\"")
     public void loginLinkTogglePassLogin() {
-        waitVisibilityElement(loginTitle);
+        waitVisibilityElement(loginTitle,"Личный кабинет");
         loginLinkTogglePassLogin.click();
     }
 
@@ -144,7 +144,7 @@ public class CheckoutPage extends Settings {
     //Ввести в поле 'E-mail или номер телефона' аунтификационные данные
     @Step("Заполнить поля Авторизации и нажать кнопку Войти в Личный кабинет")
     public void Authorization() throws InterruptedException {
-        waitVisibilityElement(eMailInput);
+        waitVisibilityElement(eMailInput,"Поле ввода \"E-mail или номер телефона\"");
         eMailInput.isEnabled();
         eMailInput.sendKeys(eMail);
         passInput.sendKeys(pass);
@@ -215,7 +215,7 @@ public class CheckoutPage extends Settings {
     public void chekPaymentPage() throws  InterruptedException {
         wait(2);
         //getScreen();
-        waitVisibilityElement(merchantName);
+        waitVisibilityElement(merchantName,"Заголовок страницы оплаты");
         String merchantNameCheck=merchantName.getText();
         System.out.println(merchantNameCheck);
 

@@ -42,11 +42,11 @@ public class Settings {
 
         wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().window().setPosition(new Point(1500, 0));
         driver.manage().window().maximize();
 
-        driver.manage().window().setPosition(new Point(2000, 0));//Старт правый экран (не убирать)
+        //driver.manage().window().setPosition(new Point(2000, 0));//Старт правый экран (не убирать)
         //driver.manage().window().setPosition(new Point(-2000,0));//Старт левый экран (не убирать)
+
         driver.manage().window().maximize();
         cityPage = new CityPage(driver, wait);
         cartProductPage = new CardProductPage(driver, wait);
@@ -93,12 +93,12 @@ public class Settings {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(string)));
     }
 
-    @Step("Ожидание видимости элемента")
-    public static void waitVisibilityElement(WebElement element) {
+    @Step("Ожидаем видимость элемента '{string}'")
+    public static void waitVisibilityElement(WebElement element,String string) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
-    @Step("Ожидание невидимости элемента")
-    public void waitInvisibilityElement(WebElement element) {
+    @Step("Ожидание невидимости элемента 'string'")
+    public void waitInvisibilityElement(WebElement element, String string) {
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
     @Step("Ожидание присутствия текста '{text}'")

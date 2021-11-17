@@ -11,7 +11,7 @@ public class testMainPage extends Settings {
     @Test
     public void testMenu() throws InterruptedException {
         open("https://lgcity.ru");
-        waitVisibilityElement(favoritePage.menuItem);
+        waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
         favoritePage.selectRandomMenu();
         String randomMenuItem = favoritePage.selectRandomMenuItem();
         String getTitle =favoritePage.getTitle();

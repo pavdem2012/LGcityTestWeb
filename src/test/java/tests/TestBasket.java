@@ -23,17 +23,17 @@ public class TestBasket extends Settings {
         ArrayList<String> cartItemName = new ArrayList<>();
         ArrayList<String> cartItemColor = new ArrayList<>();
         for (int i = 0; i < BasketPage.countProductsForTest; i++) {
-            waitVisibilityElement(favoritePage.menuItem);
+            waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
             favoritePage.selectRandomMenu();
             String randomMenuItem = favoritePage.selectRandomMenuItem();
 
             Assert.assertTrue(favoritePage.getTitle().contains(randomMenuItem),"Итерация " + (i + 1) + ": Заголовок страницы каталога: " + favoritePage.getTitle() + "; Заголовок меню: " + randomMenuItem);
             sendKeysToBody(Keys.PAGE_DOWN);
-            waitVisibilityElement(favoritePage.catalogListBlock);
+            waitVisibilityElement(favoritePage.catalogListBlock,"Блок с карточками товаров");
             favoritePage.selectRandomCard();
             //System.out.println("Итерация " + (i + 1) + ": URL карточки товара: " + getUrl());
 
-            waitVisibilityElement(favoritePage.cardPage);
+            waitVisibilityElement(favoritePage.cardPage,"Карточка товара");
             cartItemName.add(favoritePage.getCardTitle());
             cartItemColor.add(cartProductPage.getColorCartItem());
             cartItemSize.add(cartProductPage.getSizeCartItem());
@@ -44,7 +44,7 @@ public class TestBasket extends Settings {
         }
 
         pages.goToBasket();
-        waitVisibilityElement(BasketPage.basketNonEmptyPage);
+        waitVisibilityElement(BasketPage.basketNonEmptyPage,"Корзина с товарами");
         Thread.sleep(2000);
         int totalPrice = basketPage.totalPrice();
         for (int i = 0; i < BasketPage.countProductsForTest; i++) {
@@ -61,8 +61,8 @@ public class TestBasket extends Settings {
             sumInCarts += Integer.parseInt(cartItemPrice.get(i));
         }
         Assert.assertEquals( sumInCarts, totalPrice,"Сумма цен из карточек: " + sumInCarts + ", Общая цена в корзине: " + totalPrice);
-        waitVisibilityElement(basketPage.basketEmptyPage);
-        waitVisibilityElement(basketPage.basketEmptyHeader);
+        waitVisibilityElement(basketPage.basketEmptyPage,"Пустая корзина");
+        waitVisibilityElement(basketPage.basketEmptyHeader, "В корзине нет товаров");
         basketPage.setBasketClose();
     }
 
@@ -73,18 +73,18 @@ public class TestBasket extends Settings {
         open("https://lgcity.ru");
 
         for (int i = 0; i < BasketPage.countProductsForTest; i++) {
-            waitVisibilityElement(favoritePage.menuItem);
+            waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
             favoritePage.selectRandomMenu();
             String randomMenuItem = favoritePage.selectRandomMenuItem();
 
             String getTitle =favoritePage.getTitle();
             Assert.assertTrue(getTitle.contains(randomMenuItem),"Итерация "+ (i+1)+": Заголовок страницы каталога: " + getTitle + "; Заголовок меню: " + randomMenuItem+ "; URL: " + getUrl());
 
-            waitVisibilityElement(favoritePage.catalogListBlock);
+            waitVisibilityElement(favoritePage.catalogListBlock,"Блок с карточками товаров");
             catalogListPage.selectQuickBuyList();
         }
         pages.goToBasket();
-        waitVisibilityElement(BasketPage.basketNonEmptyPage);
+        waitVisibilityElement(BasketPage.basketNonEmptyPage,"Корзина с товарами");
         Thread.sleep(2000);
         int totalPrice = basketPage.totalPrice();
         for (int i = 0; i < BasketPage.countProductsForTest; i++) {
@@ -100,8 +100,8 @@ public class TestBasket extends Settings {
             sumInCarts += Integer.parseInt(catalogListPage.cartItemPrice.get(i));
         }
         Assert.assertEquals(sumInCarts, totalPrice,"Сумма цен из карточек: " + sumInCarts + ", Общая цена в корзине: " + totalPrice);
-        waitVisibilityElement(basketPage.basketEmptyPage);
-        waitVisibilityElement(basketPage.basketEmptyHeader);
+        waitVisibilityElement(basketPage.basketEmptyPage,"Пустая корзина");
+        waitVisibilityElement(basketPage.basketEmptyHeader, "В корзине нет товаров");
         basketPage.setBasketClose();
 
 

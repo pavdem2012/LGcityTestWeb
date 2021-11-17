@@ -62,7 +62,7 @@ public class Pages extends Settings {
     @Step("Закрываем куки")
     public void setCloseCookieBtn() {
         closeCookieBtn.click();
-        waitInvisibilityElement(closeCookieBtn);
+        waitInvisibilityElement(closeCookieBtn, "куки");
     }
 
 
@@ -88,7 +88,7 @@ public class Pages extends Settings {
      */
     public void loaderWait() {
         try {
-            waitInvisibilityElement(pages.loader);
+            waitInvisibilityElement(pages.loader, "лоадер");
             System.out.println("Лоадер виден");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

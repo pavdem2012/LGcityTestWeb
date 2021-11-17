@@ -15,16 +15,16 @@ public class TestCheckout extends Settings {
     @Test
     public void testCheckout() throws InterruptedException, IOException {
         open("https://lgcity.ru");
-        waitVisibilityElement(favoritePage.menuItem);
+        waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
         favoritePage.selectRandomMenu();
         favoritePage.selectRandomMenuItem();
         sendKeysToBody(Keys.PAGE_DOWN);
-        waitVisibilityElement(favoritePage.catalogListBlock);
+        waitVisibilityElement(favoritePage.catalogListBlock,"Блок с карточками товаров");
         catalogListPage.selectQuickBuyList();
         pages.goToMainPage();
         favoritePage.selectRandomMenu();
         favoritePage.selectRandomMenuItem();
-        waitVisibilityElement(favoritePage.catalogListBlock);
+        waitVisibilityElement(favoritePage.catalogListBlock,"Блок с карточками товаров");
         favoritePage.selectRandomCard();
         cartProductPage.addProductToBasket();
         pages.goToBasket();
