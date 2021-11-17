@@ -97,7 +97,7 @@ public class Settings {
     public static void waitVisibilityElement(WebElement element,String string) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
-    @Step("Ожидание невидимости элемента 'string'")
+    @Step("Ожидание невидимости элемента '{string}'")
     public void waitInvisibilityElement(WebElement element, String string) {
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
