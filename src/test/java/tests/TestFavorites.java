@@ -16,7 +16,7 @@ public class TestFavorites extends Settings {
     @Epic(value = "Избранное")
     @Feature(value = "Добавление в избранное из карточки товара")
     @Description("Добавление в избранное из карточки товара")
-    @Test
+    @Test(description="Добавление в избранное из карточки товара")
     public void addFavoritesFromCartOfProduct() throws InterruptedException {
         open("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
@@ -46,7 +46,7 @@ public class TestFavorites extends Settings {
     @Epic(value = "Избранное")
     @Feature(value = "Добавление в избранное из листинга товаров")
     @Description("Добавление в избранное из листинга товаров")
-    @Test
+    @Test(description="Добавление в избранное из листинга товаров")
     public void addFavoritesFromCatalogue() throws InterruptedException {
         open("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");

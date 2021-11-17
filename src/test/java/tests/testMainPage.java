@@ -14,7 +14,7 @@ public class testMainPage extends Settings {
     @Epic(value = "Главная страница")
     @Feature(value = "Главное меню")
     @Description("Проверка перехода из главного меню в каталог")
-    @Test
+    @Test(description="Проверка перехода из главного меню в каталог")
     public void testMenu() throws InterruptedException {
         open("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");

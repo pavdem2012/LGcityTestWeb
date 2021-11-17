@@ -18,7 +18,7 @@ public class TestBasket extends Settings {
     @Epic(value = "Корзина")
     @Feature(value = "Проверка добавления и удаления товаров в корзину из карточки товара")
     @Description("Проверка добавления и удаления товаров в корзину из карточки товара")
-    @Test
+    @Test(description="Проверка добавления и удаления товаров в корзину из карточки товара")
         /*
     Проверка вложеных элементов главного меню и добавления/удаления товаров корзины из карточки товара
      */ public void testCategory() throws InterruptedException {
@@ -73,7 +73,7 @@ public class TestBasket extends Settings {
     @Epic(value = "Корзина")
     @Feature(value = "Проверка добавления и удаления товаров в корзину из листинга товаров")
     @Description("Проверка добавления и удаления товаров в корзину из листинга товаров")
-    @Test
+    @Test(description="Проверка добавления и удаления товаров в корзину из листинга товаров")
     /*
     Проверка вложеных элементов главного меню и добавления/удаления товаров корзины из каталога товаров
      */ public void testAddToBasketFromListing() throws InterruptedException {

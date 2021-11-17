@@ -17,7 +17,7 @@ public class TestCheckout extends Settings {
     @Epic(value = "Оформление заказа")
     @Feature(value = "Проверка оформления заказа, соответствия цен и скидки")
 
-    @Test
+    @Test(description="Проверка оформления заказа, соответствия цен и скидки")
     public void testCheckout() throws InterruptedException, IOException {
         open("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
