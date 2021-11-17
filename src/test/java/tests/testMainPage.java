@@ -17,7 +17,5 @@ public class testMainPage extends Settings {
         String getTitle =favoritePage.getTitle();
         Assert.assertTrue(getTitle.contains(randomMenuItem));
     }
-}
-public void assertString(String string,String string1){
-    Assert.assertTrue(string.contains(string1),);
+
 }

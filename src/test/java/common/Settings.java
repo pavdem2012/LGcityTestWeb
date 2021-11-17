@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.*;
 
@@ -135,7 +136,11 @@ public class Settings {
         int time = second * 1000;
         Thread.sleep(time);
     }
+    @Step("Проверка строковых элементов")
+    public void assertString(String string,String verificationString){
 
+        Assert.assertTrue(string.contains(verificationString),"Проверяемый элемент: "+string+" не совпадает с проверочным: "+verificationString);
+    }
     @AfterMethod
     public void quit() {
         driver.quit();
