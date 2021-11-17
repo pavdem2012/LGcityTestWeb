@@ -1,8 +1,8 @@
 package common;
 
+
 import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
-
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -42,6 +42,7 @@ public class Settings {
 
         wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().window().setPosition(new Point(1500, 0));
         driver.manage().window().maximize();
 
         driver.manage().window().setPosition(new Point(2000, 0));//Старт правый экран (не убирать)
