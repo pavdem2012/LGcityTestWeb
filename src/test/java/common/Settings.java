@@ -1,9 +1,8 @@
 package common;
 
+
 import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
-
-
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.*;
 
@@ -42,9 +42,10 @@ public class Settings {
 
         wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().window().setPosition(new Point(1500, 0));
         driver.manage().window().maximize();
 
-        driver.manage().window().setPosition(new Point(2000,0));//Старт правый экран (не убирать)
+        driver.manage().window().setPosition(new Point(2000, 0));//Старт правый экран (не убирать)
         //driver.manage().window().setPosition(new Point(-2000,0));//Старт левый экран (не убирать)
         driver.manage().window().maximize();
         cityPage = new CityPage(driver, wait);
@@ -55,72 +56,79 @@ public class Settings {
         basketPage = new BasketPage(driver, wait);
         catalogListPage = new CatalogListPage(driver, wait);
         checkoutPage = new CheckoutPage(driver, wait);
-        mainPage = new MainPage(driver,wait);
+        mainPage = new MainPage(driver, wait);
     }
-
+    @Step("Получить скриншот страницы")
     public void getScreen() throws IOException {
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File file = screenshot.getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(file, new File("screenshot/qe.jpg"));
     }
+
     @Step("Открытие главной страницы {baseUrl}")
     public void open(String baseUrl) throws InterruptedException {
-
         driver.get(baseUrl);
         wait(1);
         pages.setCloseCookieBtn();
     }
-
+    @Step("Получить элемент по Xpath")
     public WebElement getElementByXpath(String string) {
         return driver.findElement(By.xpath(string));
     }
-
+    @Step("Получить список элементов")
     public List<WebElement> getElementsByXpath(By string) {
         return driver.findElements(string);
     }
-
+    @Step("Получить элемент по имени класса")
     public WebElement getElementByClassName(String string) {
         return driver.findElement(By.className(string));
     }
-
+    @Step("Получить элемент по ID")
     public WebElement getElementById(String string) {
         return driver.findElement(By.id(string));
     }
 
+    @Step("Ожидание видимости элемента")
     public void waitVisibilityElement(String string) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(string)));
     }
+
     @Step("Ожидание видимости элемента")
     public static void waitVisibilityElement(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
-
+    @Step("Ожидание невидимости элемента")
     public void waitInvisibilityElement(WebElement element) {
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
-
+    @Step("Ожидание присутствия текста")
     public void waitTextToBe(String string, String text) {
         wait.until(ExpectedConditions.textToBe(By.xpath(string), text));
     }
-
+    @Step("Ожидание значение элемента")
     public void waitValueInElement(WebElement element, String string) {
         wait.until(ExpectedConditions.textToBePresentInElementValue(element, string));
     }
-@Step("Передать текст в поле")
+
+    @Step("Передать текст в поле")
     public void sendKeysToBody(Keys keys) {
         driver.findElement(By.xpath("//body")).sendKeys(keys);
     }
-
+    @Step("Выбор рандомного элемента")
     public int getRandom(int number) {
         Random random = new Random();
         return random.nextInt(number);
     }
-
+    @Step("Передать строку в поле ввода")
+    public void sendString(WebElement element, String string){
+        element.sendKeys(string);
+    }
+    @Step("Переместиться к элементу")
     public void moveTo(WebElement element) {
         Actions actions = new Actions(driver);
         actions.moveToElement(element).perform();
     }
-
+    @Step("Получить URL страницы")
     public String getUrl() {
         return driver.getCurrentUrl();
     }
@@ -129,7 +137,11 @@ public class Settings {
         int time = second * 1000;
         Thread.sleep(time);
     }
+    @Step("Проверка строковых элементов: {string}, {verificationString}.")
+    public void assertString(String string,String verificationString){
 
+        Assert.assertTrue(string.contains(verificationString),"Проверяемый элемент: "+string+" не совпадает с проверочным: "+verificationString);
+    }
     @AfterMethod
     public void quit() {
         driver.quit();

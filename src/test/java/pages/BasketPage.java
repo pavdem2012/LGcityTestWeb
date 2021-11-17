@@ -69,42 +69,49 @@ public class BasketPage extends Settings {
 
     //Функции
     //Общая цена в корзине число
+    @Step("Получить общую цену в корзине")
     public int totalPrice() {
         //waitVisibilityElement(basketTotalPrice);
         return Integer.parseInt(basketTotalPrice.getText().replaceAll(" ", ""));
     }
 
     //Цена товара в корзине
+    @Step("Получить цену одного товара в корзине")
     public String getPriceOfProductInCart() {
 
         return priceOfProductInCart.getText().replaceAll(" ", "").replaceAll("₽", "");
     }
 
     //Название товара в корзине
+    @Step("Получить наименование одного товара в корзине")
     public String nameOfProductInCart() {
         //waitVisibilityElement(nameOfProductInCart);
         return nameOfProductInCart.getText().toLowerCase().replaceAll(" ", "");//!!
     }
 
     //Цвет товара в корзине
+    @Step("Получить цвет одного товара в корзине")
     public String colorOfProductInCart() {
         //waitVisibilityElement(colorOfProductInCart);
         return colorOfProductInCart.getText().toLowerCase().replaceAll("цвет:", "").replaceAll(" ", "");
     }
 
     //Размер товара в корзине
+    @Step("Получить размер одного товара в корзине")
     public String sizeOfProductInCart() {
         //waitVisibilityElement(sizeOfProductInCart);
         return sizeOfProductInCart.getText().replaceAll(" ", "").toLowerCase().replaceAll("размер:", "");
     }
 
     //Удалить товар из корзины
+    @Step("Удалить товар из корзины")
     public void setBasketItemRemove() {
         //waitVisibilityElement(basketItemRemove);
         basketItemRemove.click();
     }
 
     //Закрыть корзину
+    @Step("Закрыть корзину")
     public void setBasketClose() {
         //waitVisibilityElement(basketPopupClose);
         basketPopupClose.click();

@@ -22,15 +22,15 @@ public class TestFavorites extends Settings {
         favoritePage.selectRandomCard();
         waitVisibilityElement(favoritePage.cardPage);
         String cardTitle = favoritePage.getCardTitle();
-        favoritePage.addToFavoriteBtn.click();
+        favoritePage.clickAddToFavorites();
 //        favoritePage.addToFavoriteIcon.isEnabled();
         waitVisibilityElement(favoritePage.favoriteCounter1);
-        favoritePage.favoriteInHeader.click();
+        pages.clickIconFavorites();
         waitVisibilityElement(favoritePage.favoriteBlock);
         Assert.assertTrue(cardTitle.contains(favoritePage.getFavoriteCardTitle()));
-        favoritePage.deleteFavoriteBtn.click();
+        favoritePage.clickDeleteFavoriteBtn();
         waitVisibilityElement(favoritePage.favoriteEmptyPage);
-        favoritePage.goToMainPage.click();
+        favoritePage.clickGoToMainPage();
         waitVisibilityElement(favoritePage.favoriteCounter0);
     }
 
@@ -50,12 +50,12 @@ public class TestFavorites extends Settings {
 //        favoritePage.addToFavoriteIcon.isEnabled();
         moveTo(favoritePage.headerElement);
         waitVisibilityElement(favoritePage.favoriteCounter1);
-        favoritePage.favoriteInHeader.click();
+        pages.clickIconFavorites();
         waitVisibilityElement(favoritePage.favoriteBlock);
         Assert.assertTrue(itemTitleInCatalog.contains(favoritePage.getFavoriteCardTitle()));
-        favoritePage.deleteFavoriteBtn.click();
+        favoritePage.clickDeleteFavoriteBtn();
         waitVisibilityElement(favoritePage.favoriteEmptyPage);
-        favoritePage.goToMainPage.click();
+        favoritePage.clickGoToMainPage();
         waitVisibilityElement(favoritePage.favoriteCounter0);
     }
 }

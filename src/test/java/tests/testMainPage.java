@@ -14,6 +14,8 @@ public class testMainPage extends Settings {
         waitVisibilityElement(favoritePage.menuItem);
         favoritePage.selectRandomMenu();
         String randomMenuItem = favoritePage.selectRandomMenuItem();
-        Assert.assertTrue(favoritePage.getTitle().contains(randomMenuItem));
+        String getTitle =favoritePage.getTitle();
+        Assert.assertTrue(getTitle.contains(randomMenuItem));
     }
+
 }

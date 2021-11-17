@@ -154,7 +154,6 @@ public class CheckoutPage extends Settings {
     }
 
     //Нажать кнопку самовывоз
-
     @Step("Нажать кнопку самовывоз")
     public void clickPickUpBtn() {
         moveTo(textareaPlaceholder);

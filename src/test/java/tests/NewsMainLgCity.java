@@ -15,7 +15,7 @@ public class NewsMainLgCity extends Settings {
         mainPage.scrollToNews();
         waitVisibilityElement(mainPage.newsItemBlock);
         mainPage.randomNews();
-        waitTextToBe(mainPage.newsPageBlockTitle, "Акции и новости");
+
     }
     /*    *//*
     Проверка "Шапка сайта"
