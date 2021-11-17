@@ -18,7 +18,7 @@ public class TestSearch extends Settings {
     @Epic(value = "Главная страница")
     @Feature(value = "Строка поиска")
     @Description("Поиск по наименованию товара")
-    @Test
+    @Test(description="Поиск по наименованию товара")
     public void SearchByName() throws InterruptedException {
         open("https://lgcity.ru");
         driver.findElement(By.xpath("//div[@class='header__right-side-icons']/a[@data-popup='popup--search']")).click();

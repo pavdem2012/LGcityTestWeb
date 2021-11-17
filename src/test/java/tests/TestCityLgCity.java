@@ -21,7 +21,7 @@ public class TestCityLgCity extends Settings {
     @Epic(value = "Главная страница")
     @Feature(value = "Попап 'Укажите свой город'")
     @Description("Проверка выбора населенного пункта по названию")
-    @Test
+    @Test(description="Проверка выбора населенного пункта по названию")
         public void setCity() throws InterruptedException {
         String city = "Омск";
         open(TestData.getProperty("baseUrl"));
@@ -36,7 +36,7 @@ public class TestCityLgCity extends Settings {
     @Epic(value = "Главная страница")
     @Feature(value = "Попап 'Укажите свой город'")
     @Description("Проверка выбора города из выпадающего списка")
-    @Test
+    @Test(description="Проверка выбора города из выпадающего списка")
     public void setPopularCity() throws InterruptedException {
         open(TestData.getProperty("baseUrl"));
         cityPage.clickIconSetCity();
@@ -54,7 +54,7 @@ public class TestCityLgCity extends Settings {
     @Epic(value = "Главная страница")
     @Feature(value = "Попап 'Укажите свой город'")
     @Description("Проверка работоспособности крестика")
-    @Test
+    @Test(description="Проверка работоспособности крестика")
     public void closePopup() throws InterruptedException {
         String city = "Омск";
         open(TestData.getProperty("baseUrl"));
@@ -72,7 +72,7 @@ public class TestCityLgCity extends Settings {
     @Epic(value = "Главная страница")
     @Feature(value = "Попап 'Укажите свой город'")
     @Description("Проверка автоматического определения города")
-    @Test
+    @Test(description="Проверка автоматического определения города")
     public void automaticSetCity() throws InterruptedException {
         open(TestData.getProperty("baseUrl"));
         String city = "Воронеж";
@@ -91,7 +91,7 @@ public class TestCityLgCity extends Settings {
     @Epic(value = "Главная страница")
     @Feature(value = "Попап 'Укажите свой город'")
     @Description("Проверка заполнения выпадающего списка популярных городов")
-    @Test
+    @Test(description="Проверка заполнения выпадающего списка популярных городов")
     public void popularCityList() throws InterruptedException {
         open(TestData.getProperty("baseUrl"));
         cityPage.clickIconSetCity();
