@@ -65,7 +65,7 @@ public class Settings {
         FileUtils.copyFile(file, new File("screenshot/qe.jpg"));
     }
 
-    @Step("Открытие главной страницы {baseUrl}")
+    @Step("Открываем главную страницу {baseUrl}")
     public void open(String baseUrl) throws InterruptedException {
         driver.get(baseUrl);
         wait(1);
@@ -139,11 +139,15 @@ public class Settings {
     }
     @Step("Проверяем содержит ли элемент '{string}', проверочное слово '{verificationString}'.")
     public void assertString(String string,String verificationString){
-        Assert.assertTrue(string.contains(verificationString),"Проверяемый элемент: "+string+" не совпадает с проверочным: "+verificationString);
+        Assert.assertTrue(string.contains(verificationString),"Проверяемый элемент: "+string+" не содержит: "+verificationString);
     }
-    @Step("Клик по {string}")
+    @Step("Клик по элементу {string}")
     public void clickElement(WebElement element, String string){
         element.click();
+    }
+    @Step("Получаем текст элемента '{string}'")
+    public String getTextElement(WebElement element, String string){
+       return element.getText().toLowerCase();
     }
     @AfterMethod
     public void quit() {

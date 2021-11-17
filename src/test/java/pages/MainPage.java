@@ -34,7 +34,7 @@ public class MainPage extends Settings {
     /*
     Переход к блоку новостей
      */
-    @Step("Подвести указатель к блоку 'Новости'")
+    @Step("Подводим указатель к блоку 'Новости'")
     public void scrollToNews() {
         Actions scroll = new Actions(driver);
         scroll.moveToElement(getElementByClassName(newsBlock)).perform();
