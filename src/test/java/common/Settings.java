@@ -70,8 +70,8 @@ public class Settings {
         wait(1);
         pages.setCloseCookieBtn();
     }
-    @Step("Получить элемент по Xpath")
-    public WebElement getElementByXpath(String string) {
+    @Step("Переходим к элементу '{commentString}'")
+    public WebElement getElementByXpath(String string, String commentString) {
         return driver.findElement(By.xpath(string));
     }
     @Step("Получить список элементов")
@@ -87,8 +87,8 @@ public class Settings {
         return driver.findElement(By.id(string));
     }
 
-    @Step("Ожидание видимости элемента")
-    public void waitVisibilityElement(String string) {
+    @Step("Ожидаем видимость '{commentString}'")
+    public void waitVisibilityElement(String string, String commentString) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(string)));
     }
 
@@ -100,7 +100,7 @@ public class Settings {
     public void waitInvisibilityElement(WebElement element) {
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
-    @Step("Ожидание присутствия текста")
+    @Step("Ожидание присутствия текста '{text}'")
     public void waitTextToBe(String string, String text) {
         wait.until(ExpectedConditions.textToBe(By.xpath(string), text));
     }
@@ -136,10 +136,13 @@ public class Settings {
         int time = second * 1000;
         Thread.sleep(time);
     }
-    @Step("Проверка строковых элементов: {string}, {verificationString}.")
+    @Step("Проверяем содержит ли элемент '{string}', проверочное слово '{verificationString}'.")
     public void assertString(String string,String verificationString){
-
         Assert.assertTrue(string.contains(verificationString),"Проверяемый элемент: "+string+" не совпадает с проверочным: "+verificationString);
+    }
+    @Step("Клик по {string}")
+    public void clickElement(WebElement element, String string){
+        element.click();
     }
     @AfterMethod
     public void quit() {

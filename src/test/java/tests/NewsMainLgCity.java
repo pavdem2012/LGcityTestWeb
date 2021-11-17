@@ -13,7 +13,7 @@ public class NewsMainLgCity extends Settings {
     public void setNews() throws InterruptedException {
         open("https://lgcity.ru");
         mainPage.scrollToNews();
-        waitVisibilityElement(mainPage.newsItemBlock);
+        waitVisibilityElement(mainPage.newsItemBlock,",блока новостей");
         mainPage.randomNews();
 
     }
