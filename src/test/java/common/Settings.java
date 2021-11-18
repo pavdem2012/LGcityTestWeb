@@ -65,9 +65,15 @@ public class Settings {
         File file = screenshot.getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(file, new File("screenshot/qe.jpg"));
     }
+    @Step("Открываем страницу {baseUrl} ")
+    public void openPage(String baseUrl) throws InterruptedException {
+        driver.get(baseUrl);
+        wait(1);
+    }
 
-    @Step("Открываем главную страницу {baseUrl}")
-    public void open(String baseUrl) throws InterruptedException {
+
+    @Step("Открываем страницу {baseUrl} c закрытием куков")
+    public void openWithCloseCookie(String baseUrl) throws InterruptedException {
         driver.get(baseUrl);
         wait(1);
         pages.setCloseCookieBtn();
@@ -149,6 +155,11 @@ public class Settings {
     @Step("Получаем текст элемента '{string}'")
     public String getTextElement(WebElement element, String string){
        return element.getText().toLowerCase();
+    }
+
+    @Step("Получаем заголовок страницы")
+    public String getTitle(){
+        return driver.getTitle();
     }
     @AfterMethod
     public void quit() {

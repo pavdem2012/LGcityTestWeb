@@ -5,7 +5,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.openqa.selenium.Keys;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
@@ -15,7 +14,7 @@ public class TestSearch extends Settings {
     @Description("Поиск по наименованию товара")
     @Test(description = "Поиск по наименованию товара")
     public void SearchByName() throws InterruptedException {
-        open("https://lgcity.ru");
+        openWithCloseCookie("https://lgcity.ru");
         clickElement(pages.searchIcon, "иконка поиска");
         waitVisibilityElement(pages.searchPopup, "Попап поиска");
         clickElement(pages.searchString, "Поле поиска");

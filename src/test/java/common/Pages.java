@@ -70,6 +70,12 @@ public class Pages extends Settings {
     //Блок подписки в Футере
     @FindBy(xpath = "//input[@placeholder='Ваш e-mail']")
     public WebElement subscriptionBlockFooterMenu;
+    //Фавикон
+    @FindBy(xpath = "//link[@rel='icon']")
+    public WebElement favicon;
+    //К сожалению, данная страница не найдена или возникла непредвиденная ошибка
+    public @FindBy(xpath = "//div[contains(text(), 'Что-то пошло не так...')]")
+    WebElement somethingWentWrong;
 
     /*
     Название заголовка страницы

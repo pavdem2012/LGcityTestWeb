@@ -12,8 +12,6 @@ import pages.BasketPage;
 
 import java.util.ArrayList;
 
-import static pages.BasketPage.nameOfProductInCart;
-
 public class TestBasket extends Settings {
 
     @Epic(value = "Корзина")
@@ -23,7 +21,7 @@ public class TestBasket extends Settings {
         /*
     Проверка вложеных элементов главного меню и добавления/удаления товаров корзины из карточки товара
      */ public void testCategory() throws InterruptedException {
-        open("https://lgcity.ru");
+        openWithCloseCookie("https://lgcity.ru");
         ArrayList<String> cartItemPrice = new ArrayList<>();
         ArrayList<String> cartItemSize = new ArrayList<>();
         ArrayList<String> cartItemName = new ArrayList<>();
@@ -83,7 +81,7 @@ public class TestBasket extends Settings {
     /*
     Проверка вложеных элементов главного меню и добавления/удаления товаров корзины из каталога товаров
      */ public void testAddToBasketFromListing() throws InterruptedException {
-        open("https://lgcity.ru");
+        openWithCloseCookie("https://lgcity.ru");
 
         for (int i = 0; i < BasketPage.countProductsForTest; i++) {
             waitVisibilityElement(favoritePage.menuItem, "элемент подкатегории товаров");

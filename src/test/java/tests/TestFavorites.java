@@ -5,7 +5,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.openqa.selenium.Keys;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TestFavorites extends Settings {
@@ -18,7 +17,7 @@ public class TestFavorites extends Settings {
     @Description("Добавление в избранное из карточки товара")
     @Test(description="Добавление в избранное из карточки товара")
     public void addFavoritesFromCartOfProduct() throws InterruptedException {
-        open("https://lgcity.ru");
+        openWithCloseCookie("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
         favoritePage.selectRandomMenu();
         String randomMenuItem = favoritePage.selectRandomMenuItem();
@@ -49,7 +48,7 @@ public class TestFavorites extends Settings {
     @Description("Добавление в избранное из листинга товаров")
     @Test(description="Добавление в избранное из листинга товаров")
     public void addFavoritesFromCatalogue() throws InterruptedException {
-        open("https://lgcity.ru");
+        openWithCloseCookie("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
         favoritePage.selectRandomMenu();
         String randomMenuItem = favoritePage.selectRandomMenuItem();

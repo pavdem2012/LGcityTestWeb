@@ -16,7 +16,7 @@ public class TestNewsBlock extends Settings {
     @Feature(value = "Блок 'Новостные баннеры'")
     @Test(description="Проверка перехода по 'Новостные баннеры'")
     public void setNews() throws InterruptedException {
-        open("https://lgcity.ru");
+        openWithCloseCookie("https://lgcity.ru");
         mainPage.scrollToNews();
         waitVisibilityElement(mainPage.newsItemBlock,",блока новостей");
         mainPage.randomNews();

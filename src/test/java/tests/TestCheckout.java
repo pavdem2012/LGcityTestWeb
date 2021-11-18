@@ -19,7 +19,7 @@ public class TestCheckout extends Settings {
 
     @Test(description="Проверка оформления заказа, соответствия цен и скидки")
     public void testCheckout() throws InterruptedException, IOException {
-        open("https://lgcity.ru");
+        openWithCloseCookie("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
         favoritePage.selectRandomMenu();
         favoritePage.selectRandomMenuItem();

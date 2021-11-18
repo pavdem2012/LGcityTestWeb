@@ -23,7 +23,20 @@ public class MainPage extends Settings {
         this.driver = driver;
         this.wait = wait;
     }
-
+    //Слайдер
+    //Текущая страница слайдера
+    @FindBy(xpath = "//div[@class='swiper-pagination swiper-pagination-fraction']/span[@class='swiper-pagination-current']")
+    public WebElement swiperPaginationCurrent;
+    //Количество страниц слайдера
+    @FindBy(xpath = "//div[@class='swiper-pagination swiper-pagination-fraction']/span[@class='swiper-pagination-total']")
+    public WebElement swiperPaginationTotal;
+    //Изображение слайдера
+    @FindBy(xpath = "//div[@class = 'swiper-slide swiper-slide-active']//img")
+            //"//div[@class='wrapper wrapper--slider-main']//div[contains(@class, 'swiper-slide') and not(contains(@class, 'duplicate'))]//img")
+    public WebElement sliderImg;
+    //Кнопка пролистывания слайдера
+    @FindBy(xpath = "//div[@class='swiper-button-next']")
+    public WebElement swiperButtonNext;
     //Блок новостей на главной странице
     @FindBy(className = "news")
     WebElement newsBlock;
