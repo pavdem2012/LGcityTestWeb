@@ -26,6 +26,6 @@ public class TestSearch extends Settings {
         clickElement(pages.searchIcon, "иконка поиска");
         waitVisibilityElement(pages.searchPopup, "Попап поиска");
         String inputProduct = pages.searchPopup.getAttribute("value").toLowerCase();
-        Assert.assertTrue(title.contains(inputProduct), "Имя в карточке: " + title + " Строка поиска: " + inputProduct);
+        assertString(title,inputProduct);
     }
 }
