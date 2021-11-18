@@ -4,7 +4,9 @@ import common.Settings;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.interactions.Actions;
+
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,6 +23,8 @@ public class MainPage extends Settings {
     }
 
     //Блок новостей на главной странице
+    /*@FindBy(className = "news")
+    WebElement newsBlock;*/
     public String newsBlock = "news";
     //Элемент блока новостей на Главной странице
     public String newsItemBlock = "//div[@class = 'news__item']";
@@ -37,7 +41,7 @@ public class MainPage extends Settings {
     @Step("Подводим указатель к блоку 'Новости'")
     public void scrollToNews() {
         Actions scroll = new Actions(driver);
-        scroll.moveToElement(getElementByClassName(newsBlock)).perform();
+        scroll.moveToElement(getElementByClassName(newsBlock,"Блок новостей")).perform();
     }
 
     /*

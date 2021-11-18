@@ -32,7 +32,7 @@ public class Settings {
     public BasketPage basketPage;
     public CatalogListPage catalogListPage;
     public CheckoutPage checkoutPage;
-
+    public SearchResultPage searchResultPage;
 
     @BeforeMethod
     public void before() {
@@ -57,6 +57,7 @@ public class Settings {
         catalogListPage = new CatalogListPage(driver, wait);
         checkoutPage = new CheckoutPage(driver, wait);
         mainPage = new MainPage(driver, wait);
+        searchResultPage=new SearchResultPage(driver,wait);
     }
     @Step("Получить скриншот страницы")
     public void getScreen() throws IOException {
@@ -79,8 +80,8 @@ public class Settings {
     public List<WebElement> getElementsByXpath(By string) {
         return driver.findElements(string);
     }
-    @Step("Получить элемент по имени класса")
-    public WebElement getElementByClassName(String string) {
+    @Step("Получить элемент по имени класса '{commentString}'")
+    public WebElement getElementByClassName(String string, String commentString) {
         return driver.findElement(By.className(string));
     }
     @Step("Получить элемент по ID")
@@ -110,7 +111,7 @@ public class Settings {
         wait.until(ExpectedConditions.textToBePresentInElementValue(element, string));
     }
 
-    @Step("Передать текст в поле")
+    @Step("Передать текст в поле '{keys}'")
     public void sendKeysToBody(Keys keys) {
         driver.findElement(By.xpath("//body")).sendKeys(keys);
     }
@@ -119,7 +120,7 @@ public class Settings {
         Random random = new Random();
         return random.nextInt(number);
     }
-    @Step("Передать строку в поле ввода")
+    @Step("Передаем строку в поле ввода")
     public void sendString(WebElement element, String string){
         element.sendKeys(string);
     }

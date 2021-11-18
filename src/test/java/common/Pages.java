@@ -46,6 +46,15 @@ public class Pages extends Settings {
     //кнопка избранного в шапке
     @FindBy(xpath = "//a[@class='header__r-icons-link header__r-icons-link--favorite js-header-favorite']")
     public WebElement favoriteInHeader;
+    //Иконка поиска
+    @FindBy(xpath = "//div[@class='header__right-side-icons']/a[@data-popup='popup--search']")
+    public WebElement searchIcon;
+    //Попап поиска
+    @FindBy(xpath = "//div[@class='input input--default header__search-input autocomplete is-focused']/input")
+    public WebElement searchPopup;
+    //Строка поиска
+    @FindBy(xpath = "//input[@name='q']")
+    public WebElement searchString;
 
     /*
     Название заголовка страницы

@@ -2,7 +2,7 @@ package pages;
 
 import common.Settings;
 import io.qameta.allure.*;
-import io.qameta.allure.testng.TestInstanceParameter;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -108,7 +108,6 @@ public class FavoritePage extends Settings {
     @Step("Выбор рандомной карточки товара")
     public void selectRandomCard() {
         int randomCatalogItem = getRandom(catalogItems.size());
-//        catalogItems.get(randomCatalogItem).click();
         clickElement(catalogItems.get(randomCatalogItem), "рандомной карточке товара");
     }
     @Step("Заголовок карточки товара")
