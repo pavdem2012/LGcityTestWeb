@@ -89,7 +89,7 @@ public class FavoritePage extends Settings {
     public void selectRandomMenu() {
         int menuItems = menuItemsList.size() - 4;
         randomItem = getRandom(menuItems);
-        moveTo(menuItemsList.get(randomItem));
+        moveTo(menuItemsList.get(randomItem),"рандомный элемента меню");
     }
 
     @Step("Выбор рандомного пункта меню")

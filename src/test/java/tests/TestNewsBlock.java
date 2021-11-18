@@ -7,7 +7,7 @@ import io.qameta.allure.Feature;
 import org.testng.annotations.Test;
 
 
-public class NewsMainLgCity extends Settings {
+public class TestNewsBlock extends Settings {
     /*
     Проверка "Новостные баннеры"
      */

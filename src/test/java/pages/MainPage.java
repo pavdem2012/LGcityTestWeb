@@ -5,8 +5,10 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,25 +25,22 @@ public class MainPage extends Settings {
     }
 
     //Блок новостей на главной странице
-    /*@FindBy(className = "news")
-    WebElement newsBlock;*/
-    public String newsBlock = "news";
+    @FindBy(className = "news")
+    WebElement newsBlock;
+    public String newsBlockS = "news";
     //Элемент блока новостей на Главной странице
     public String newsItemBlock = "//div[@class = 'news__item']";
     //Элемент блока новостей на главной странице с исключением
-    public String newsItemWithException = "//div[@class = 'news__item']//a[not(contains(text(), 'Бестселлеры " +
-            "коллекций'))]";
+    public String newsItemWithException = "//div[@class = 'news__item']//a[not(contains(text(), 'Бестселлеры коллекций'))]";
     //Заголовок страницы новостей
     public String newsPageBlockTitle = "//div[@class='news-page__back-title']";
-
 
     /*
     Переход к блоку новостей
      */
     @Step("Подводим указатель к блоку 'Новости'")
     public void scrollToNews() {
-        Actions scroll = new Actions(driver);
-        scroll.moveToElement(getElementByClassName(newsBlock,"Блок новостей")).perform();
+        moveTo(newsBlock,"Блок новостей");
     }
 
     /*

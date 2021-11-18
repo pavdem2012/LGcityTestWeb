@@ -22,7 +22,7 @@ public class TestSearch extends Settings {
         sendString(pages.searchString, "Футболка");
         pages.searchString.sendKeys(Keys.ENTER);
         waitVisibilityElement(searchResultPage.searchResultPageHeader, "Страница результатов поиска");
-        String title = searchResultPage.selectRandomName();
+        String title = searchResultPage. selectRandomName();
         clickElement(pages.searchIcon, "иконка поиска");
         waitVisibilityElement(pages.searchPopup, "Попап поиска");
         String inputProduct = pages.searchPopup.getAttribute("value").toLowerCase();

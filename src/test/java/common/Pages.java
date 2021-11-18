@@ -55,6 +55,21 @@ public class Pages extends Settings {
     //Строка поиска
     @FindBy(xpath = "//input[@name='q']")
     public WebElement searchString;
+    //Футер
+    @FindBy(xpath = "//footer[@class='footer']")
+    public WebElement footer;
+    //Элемент меню 'О КОМПАНИИ' в Футере
+    @FindBy (xpath = "//span[contains(text(), 'О компании')]/../self::div/following-sibling::ul/li")
+    public WebElement aboutCompanyFooterMenu;
+    //Элемент меню 'УСЛУГИ' в Футере
+    @FindBy (xpath = "//span[contains(text(), 'Услуги')]/../self::div/following-sibling::ul/li")
+    public WebElement servicesFooterMenu;
+    //Элемент меню 'ОНЛАЙН-ПОКУПКИ' в Футере
+    @FindBy (xpath = "//span[contains(text(), 'Онлайн-покупки')]/../self::div/following-sibling::ul/li")
+    public WebElement onlineShoppingFooterMenu;
+    //Блок подписки в Футере
+    @FindBy(xpath = "//input[@placeholder='Ваш e-mail']")
+    public WebElement subscriptionBlockFooterMenu;
 
     /*
     Название заголовка страницы

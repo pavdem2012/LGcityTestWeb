@@ -32,11 +32,11 @@ public class SearchResultPage extends Settings {
 
 
 
-    @Step("Выбор названия рандомного товара в листинге результатов поиска")
+    @Step("Получаем название рандомного товара в листинге результатов поиска")
     public String selectRandomName() {
         int menuItems = getRandom(catalogItemName.size());
         WebElement randomCard = catalogItemName.get(menuItems);
-        moveTo(randomCard);
+        moveTo(randomCard, "рандомная карточка товара");
         return catalogItemName.get(menuItems).getText().toLowerCase().replaceAll(" ","");
     }
 }

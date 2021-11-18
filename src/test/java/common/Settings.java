@@ -124,8 +124,8 @@ public class Settings {
     public void sendString(WebElement element, String string){
         element.sendKeys(string);
     }
-    @Step("Переместиться к элементу")
-    public void moveTo(WebElement element) {
+    @Step("Переместиться к элементу '{string}'")
+    public void moveTo(WebElement element,String string) {
         Actions actions = new Actions(driver);
         actions.moveToElement(element).perform();
     }
