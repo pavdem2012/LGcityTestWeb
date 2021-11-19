@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -36,9 +37,18 @@ public class Pages extends Settings {
     //Элемент главного меню "Верхняя одежда"
     @FindBy(xpath = "//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")
     public WebElement menuItem;
-    //Элемент главного меню "Верхняя одежда"
+    //Элементы главного меню "Верхняя одежда" Мужчинам
+    @FindBy(xpath = "//div[@id = 'gmenu-tab-326']/nav[@class='header__nav-list']/div/a")
+    public List<WebElement> menuItemsListMen;
+    //Элементы главного меню "Верхняя одежда" Женщинам
     @FindBy(xpath = "//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")
-    public List<WebElement> menuItemsList;
+    public List<WebElement> menuItemsListWomen;
+    //Не активный элемент главного меню Мужчинам/Женщинам
+    @FindBy(xpath = "//div[@class='header__nav-buttons js-tabs-nav']/div/div[not(contains(@class,'header__nav-button js-tabs-button active'))]")
+    public WebElement genderItem;
+    //Меню выбора пола Мужчинам/Женщинам
+    @FindBy(xpath = "//div[@class='wrapper']/div[contains(@class,'header__nav-button')]")
+    public List<WebElement> menuGenderList;
 
     //Заголовок страницы
     @FindBy(tagName = "h1")
@@ -59,13 +69,13 @@ public class Pages extends Settings {
     @FindBy(xpath = "//footer[@class='footer']")
     public WebElement footer;
     //Элемент меню 'О КОМПАНИИ' в Футере
-    @FindBy (xpath = "//span[contains(text(), 'О компании')]/../self::div/following-sibling::ul/li")
+    @FindBy(xpath = "//span[contains(text(), 'О компании')]/../self::div/following-sibling::ul/li")
     public WebElement aboutCompanyFooterMenu;
     //Элемент меню 'УСЛУГИ' в Футере
-    @FindBy (xpath = "//span[contains(text(), 'Услуги')]/../self::div/following-sibling::ul/li")
+    @FindBy(xpath = "//span[contains(text(), 'Услуги')]/../self::div/following-sibling::ul/li")
     public WebElement servicesFooterMenu;
     //Элемент меню 'ОНЛАЙН-ПОКУПКИ' в Футере
-    @FindBy (xpath = "//span[contains(text(), 'Онлайн-покупки')]/../self::div/following-sibling::ul/li")
+    @FindBy(xpath = "//span[contains(text(), 'Онлайн-покупки')]/../self::div/following-sibling::ul/li")
     public WebElement onlineShoppingFooterMenu;
     //Блок подписки в Футере
     @FindBy(xpath = "//input[@placeholder='Ваш e-mail']")
@@ -127,21 +137,54 @@ public class Pages extends Settings {
     }
 
     /*
-    Выбор рандомного элемента меню
+    Выбор рандомного элемента меню Мужчинам
      */
-    @Step("Выбираем рандомный элемент меню")
-    public void randomMenuItem() {
-        int menuItems = driver.findElements(By.xpath("//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div" + "/a")).size() - 1;
+    @Step("Выбираем рандомный элемент меню Мужчинам" )
+    public void randomMenuItemMen() throws InterruptedException {
+
+        int menuItems = menuItemsListMen.size() - 1;
+        //int menuItems = driver.findElements(By.xpath("//div[@id =
+        // 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")).size() - 1;
+        //System.out.println("количество элементов меню " + menuItems);
         Random random = new Random();
         int randomItem = random.nextInt(menuItems) + 1;
-        String randomMenuItem =  getTextElement(menuItemsList.get(randomItem),"меню");
-        clickElement(menuItemsList.get(randomItem),randomMenuItem);
+        String randomMenuItem = getTextElement(menuItemsListMen.get(randomItem), "меню");
+        //System.out.println(randomMenuItem);
+        clickElement(menuItemsListMen.get(randomItem), randomMenuItem);
         String headerName = getHeaderName();
-        assertString(headerName,randomMenuItem);
+        assertString(headerName, randomMenuItem);
+        wait(1);
 
     }
+    /*
+Выбор рандомного элемента меню Женщинам
+
+ */
+    @Step("Выбираем рандомный элемент меню Женщинам" )
+    public void randomMenuItemWomen() throws InterruptedException {
+
+        int menuItems = menuItemsListWomen.size() - 1;
+        //int menuItems = driver.findElements(By.xpath("//div[@id =
+        // 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")).size() - 1;
+        //System.out.println("количество элементов меню " + menuItems);
+        Random random = new Random();
+        int randomItem = random.nextInt(menuItems) + 1;
+        String randomMenuItem = getTextElement(menuItemsListWomen.get(randomItem), "меню");
+        //System.out.println(randomMenuItem);
+        clickElement(menuItemsListWomen.get(randomItem), randomMenuItem);
+        String headerName = getHeaderName();
+        assertString(headerName, randomMenuItem);
+        wait(1);
+    }
+
+    @Step("Количество элементов меню")
+    public int randomMenuGender(){
+        return menuGenderList.size();
+
+    }
+
     @Step("Нажимаем иконку Избранное в шапке")
-    public void clickIconFavorites(){
+    public void clickIconFavorites() {
         favoriteInHeader.click();
     }
 }

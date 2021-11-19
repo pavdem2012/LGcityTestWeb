@@ -21,8 +21,18 @@ public class testMainPage extends Settings {
     @Test(description = "Проверка перехода из главного меню в каталог")
     public void testMenu() throws InterruptedException {
         openWithCloseCookie("https://lgcity.ru");
+        int itemsGender= pages.menuGenderList.size();
+        Assert.assertEquals(itemsGender,2,"Не соответствует количество элементов меню выбора пола");
+        String gender = pages.genderItem.getText();
+        //System.out.println(gender);
+        clickElement(pages.genderItem, gender);
         pages.menuItem.isEnabled();
-        pages.randomMenuItem();
+        pages.randomMenuItemMen();
+        gender = pages.genderItem.getText();
+        //System.out.println(gender);
+        clickElement(pages.genderItem, gender);
+        pages.menuItem.isEnabled();
+        pages.randomMenuItemWomen();
 
     }
 
@@ -66,10 +76,10 @@ public class testMainPage extends Settings {
             wait(2);
             int checkNumber = numberSlide + 1;
             if (numberSlide < countSlide) {
-                Assert.assertEquals(numberSlideNext,checkNumber, "Номер слайда: " + numberSlideNext + " Проверочное " +
-                        "число: " + checkNumber);
+                Assert.assertEquals(numberSlideNext, checkNumber, "Номер слайда: " + numberSlideNext + " Проверочное "
+                        + "число: " + checkNumber);
             } else if (numberSlide == countSlide) {
-                Assert.assertEquals(numberSlideNext,1, " Пагинатор слайдера не вернулся на первую страницу");
+                Assert.assertEquals(numberSlideNext, 1, " Пагинатор слайдера не вернулся на первую страницу");
                 //System.out.println(" проверочное число: " + (numberSlide + 1));
             }
         }
