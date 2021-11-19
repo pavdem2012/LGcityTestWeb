@@ -5,7 +5,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.openqa.selenium.Keys;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TestFavorites extends Settings {
@@ -18,22 +17,23 @@ public class TestFavorites extends Settings {
     @Description("Добавление в избранное из карточки товара")
     @Test(description="Добавление в избранное из карточки товара")
     public void addFavoritesFromCartOfProduct() throws InterruptedException {
-        open("https://lgcity.ru");
+        openWithCloseCookie("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
         favoritePage.selectRandomMenu();
         String randomMenuItem = favoritePage.selectRandomMenuItem();
-        Assert.assertTrue(favoritePage.getTitle().contains(randomMenuItem));
+        String title = favoritePage.getTitle();
+        assertString(title,randomMenuItem);
         sendKeysToBody(Keys.PAGE_DOWN);
         waitVisibilityElement(favoritePage.catalogListBlock,"Блок с карточками товаров");
         favoritePage.selectRandomCard();
         waitVisibilityElement(favoritePage.cardPage,"Карточка товара");
         String cardTitle = favoritePage.getCardTitle();
         favoritePage.clickAddToFavorites();
-//        favoritePage.addToFavoriteIcon.isEnabled();
         waitVisibilityElement(favoritePage.favoriteCounter1,"иконка Избранное со счетчиком");
         pages.clickIconFavorites();
         waitVisibilityElement(favoritePage.favoriteBlock,"блок товаров в Избранное");
-        Assert.assertTrue(cardTitle.contains(favoritePage.getFavoriteCardTitle()));
+        String favoriteCardTitle=favoritePage.getFavoriteCardTitle();
+        assertString(cardTitle,favoriteCardTitle);
         favoritePage.clickDeleteFavoriteBtn();
         waitVisibilityElement(favoritePage.favoriteEmptyPage,"пустая страница Избранное");
         favoritePage.clickGoToMainPage();
@@ -48,20 +48,21 @@ public class TestFavorites extends Settings {
     @Description("Добавление в избранное из листинга товаров")
     @Test(description="Добавление в избранное из листинга товаров")
     public void addFavoritesFromCatalogue() throws InterruptedException {
-        open("https://lgcity.ru");
+        openWithCloseCookie("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
         favoritePage.selectRandomMenu();
         String randomMenuItem = favoritePage.selectRandomMenuItem();
-        Assert.assertTrue(favoritePage.getTitle().contains(randomMenuItem));
+        String title = favoritePage.getTitle();
+        assertString(title,randomMenuItem);
         sendKeysToBody(Keys.PAGE_DOWN);
         waitVisibilityElement(favoritePage.catalogListBlock,"Блок с карточками товаров");
         String itemTitleInCatalog = favoritePage.selectFavoritesIcons();
-//        favoritePage.addToFavoriteIcon.isEnabled();
-        moveTo(favoritePage.headerElement);
+        moveTo(favoritePage.headerElement,"Шапка сайта");
         waitVisibilityElement(favoritePage.favoriteCounter1,"иконка Избранное со счетчиком");
         pages.clickIconFavorites();
         waitVisibilityElement(favoritePage.favoriteBlock,"блок товаров в Избранное");
-        Assert.assertTrue(itemTitleInCatalog.contains(favoritePage.getFavoriteCardTitle()));
+        String favoriteCardTitle=favoritePage.getFavoriteCardTitle();
+        assertString(itemTitleInCatalog,favoriteCardTitle);
         favoritePage.clickDeleteFavoriteBtn();
         waitVisibilityElement(favoritePage.favoriteEmptyPage,"пустая страница Избранное");
         favoritePage.clickGoToMainPage();
