@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.Random;
 
 public class MainPage extends Settings {
@@ -24,16 +25,21 @@ public class MainPage extends Settings {
         this.wait = wait;
     }
     //Слайдер
+    @FindBy(css = "#bx_3218110189_764204 > a.slider__link > img")
+    public List<WebElement> wrapper;
     //Текущая страница слайдера
     @FindBy(xpath = "//div[@class='swiper-pagination swiper-pagination-fraction']/span[@class='swiper-pagination-current']")
     public WebElement swiperPaginationCurrent;
     //Количество страниц слайдера
     @FindBy(xpath = "//div[@class='swiper-pagination swiper-pagination-fraction']/span[@class='swiper-pagination-total']")
     public WebElement swiperPaginationTotal;
-    //Изображение слайдера
+    //Изображение слайдера до прокрутки
     @FindBy(xpath = "//div[@class = 'swiper-slide swiper-slide-active']//img")
             //"//div[@class='wrapper wrapper--slider-main']//div[contains(@class, 'swiper-slide') and not(contains(@class, 'duplicate'))]//img")
     public WebElement sliderImg;
+    //Изображение слайдера после прокрутки
+    @FindBy(xpath = "//div[@class = 'swiper-slide swiper-slide-duplicate swiper-slide-active']//img")
+    public WebElement slideDuplicate;
     //Кнопка пролистывания слайдера
     @FindBy(xpath = "//div[@class='swiper-button-next']")
     public WebElement swiperButtonNext;
