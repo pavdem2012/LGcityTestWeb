@@ -7,8 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
+import java.util.List;
 import java.util.Random;
 
 public class Pages extends Settings {
@@ -36,6 +36,9 @@ public class Pages extends Settings {
     //Элемент главного меню "Верхняя одежда"
     @FindBy(xpath = "//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")
     public WebElement menuItem;
+    //Элемент главного меню "Верхняя одежда"
+    @FindBy(xpath = "//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")
+    public List<WebElement> menuItemsList;
 
     //Заголовок страницы
     @FindBy(tagName = "h1")
@@ -43,12 +46,42 @@ public class Pages extends Settings {
     //кнопка избранного в шапке
     @FindBy(xpath = "//a[@class='header__r-icons-link header__r-icons-link--favorite js-header-favorite']")
     public WebElement favoriteInHeader;
+    //Иконка поиска
+    @FindBy(xpath = "//div[@class='header__right-side-icons']/a[@data-popup='popup--search']")
+    public WebElement searchIcon;
+    //Попап поиска
+    @FindBy(xpath = "//div[@class='input input--default header__search-input autocomplete is-focused']/input")
+    public WebElement searchPopup;
+    //Строка поиска
+    @FindBy(xpath = "//input[@name='q']")
+    public WebElement searchString;
+    //Футер
+    @FindBy(xpath = "//footer[@class='footer']")
+    public WebElement footer;
+    //Элемент меню 'О КОМПАНИИ' в Футере
+    @FindBy (xpath = "//span[contains(text(), 'О компании')]/../self::div/following-sibling::ul/li")
+    public WebElement aboutCompanyFooterMenu;
+    //Элемент меню 'УСЛУГИ' в Футере
+    @FindBy (xpath = "//span[contains(text(), 'Услуги')]/../self::div/following-sibling::ul/li")
+    public WebElement servicesFooterMenu;
+    //Элемент меню 'ОНЛАЙН-ПОКУПКИ' в Футере
+    @FindBy (xpath = "//span[contains(text(), 'Онлайн-покупки')]/../self::div/following-sibling::ul/li")
+    public WebElement onlineShoppingFooterMenu;
+    //Блок подписки в Футере
+    @FindBy(xpath = "//input[@placeholder='Ваш e-mail']")
+    public WebElement subscriptionBlockFooterMenu;
+    //Фавикон
+    @FindBy(xpath = "//link[@rel='icon']")
+    public WebElement favicon;
+    //К сожалению, данная страница не найдена или возникла непредвиденная ошибка
+    public @FindBy(xpath = "//div[contains(text(), 'Что-то пошло не так...')]")
+    WebElement somethingWentWrong;
 
     /*
     Название заголовка страницы
      */
-    @Step("Название заголовка страницы")
-    public String headerName() {
+    @Step("Получаем заголовок страницы")
+    public String getHeaderName() {
         return pageHeader.getText().toLowerCase();
     }
 
@@ -56,17 +89,17 @@ public class Pages extends Settings {
     /*
     Закрыть куки
     */
-    @Step("Закрыть куки")
+    @Step("Закрываем куки")
     public void setCloseCookieBtn() {
         closeCookieBtn.click();
-        waitInvisibilityElement(closeCookieBtn);
+        waitInvisibilityElement(closeCookieBtn, "куки");
     }
 
 
     /*
     Войти в Корзину
     */
-    @Step("Переход в корзину по иконке")
+    @Step("Переходим в корзину по иконке")
     public void goToBasket() throws InterruptedException {
         basketIcon.click();
         wait(2);
@@ -75,7 +108,7 @@ public class Pages extends Settings {
     /*
     Перейти на главную страницу по логотипу
      */
-    @Step("Переход на главную страницу по логотипу")
+    @Step("Переходим на главную страницу по логотипу")
     public void goToMainPage() {
         logo.click();
     }
@@ -85,7 +118,7 @@ public class Pages extends Settings {
      */
     public void loaderWait() {
         try {
-            waitInvisibilityElement(pages.loader);
+            waitInvisibilityElement(pages.loader, "лоадер");
             System.out.println("Лоадер виден");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -96,21 +129,18 @@ public class Pages extends Settings {
     /*
     Выбор рандомного элемента меню
      */
-    @Step("Выбор рандомного элемента меню")
+    @Step("Выбираем рандомный элемент меню")
     public void randomMenuItem() {
         int menuItems = driver.findElements(By.xpath("//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div" + "/a")).size() - 1;
         Random random = new Random();
         int randomItem = random.nextInt(menuItems) + 1;
-        String randomMenuItem =
-                driver.findElement(By.xpath("(//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a)" + "[" + randomItem + "]")).getText().toLowerCase();
-
-        driver.findElement(By.xpath("(//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a)[" + randomItem + "]")).click();
-        String headerName = headerName();
+        String randomMenuItem =  getTextElement(menuItemsList.get(randomItem),"меню");
+        clickElement(menuItemsList.get(randomItem),randomMenuItem);
+        String headerName = getHeaderName();
         assertString(headerName,randomMenuItem);
-        //Assert.assertTrue(headerName.contains(randomMenuItem),"Заголовок страницы: "+headerName + "; Заголовок элемента меню: " +randomMenuItem);
 
     }
-    @Step("Нажать иконку Избранное в шапке")
+    @Step("Нажимаем иконку Избранное в шапке")
     public void clickIconFavorites(){
         favoriteInHeader.click();
     }

@@ -2,6 +2,9 @@ package tests;
 
 import common.Settings;
 import common.TestData;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,10 +18,13 @@ public class TestCityLgCity extends Settings {
     /*
     Проверка ввода названия города.
      */
-    @Test
+    @Epic(value = "Главная страница")
+    @Feature(value = "Попап 'Укажите свой город'")
+    @Description("Проверка выбора населенного пункта по названию")
+    @Test(description="Проверка выбора населенного пункта по названию")
         public void setCity() throws InterruptedException {
         String city = "Омск";
-        open(TestData.getProperty("baseUrl"));
+        openWithCloseCookie(TestData.getProperty("baseUrl"));
         cityPage.selectCity(city);
         String getHeaderCity= cityPage.getHeaderCity();
         Assert.assertEquals(city, getHeaderCity, "Введеный текст: "+city+"; Текст иконки открытия попапа 'Укажите свой город': "+getHeaderCity);
@@ -27,9 +33,12 @@ public class TestCityLgCity extends Settings {
     /*
     Проверка выбора города из выпадающего списка
      */
-    @Test
+    @Epic(value = "Главная страница")
+    @Feature(value = "Попап 'Укажите свой город'")
+    @Description("Проверка выбора города из выпадающего списка")
+    @Test(description="Проверка выбора города из выпадающего списка")
     public void setPopularCity() throws InterruptedException {
-        open(TestData.getProperty("baseUrl"));
+        openWithCloseCookie(TestData.getProperty("baseUrl"));
         cityPage.clickIconSetCity();
         int popularCityAmount = getElementsByXpath(cityPage.popularCityList).size();
         ArrayList<String> list = cityPage.getRandomCity(popularCityAmount);
@@ -42,10 +51,13 @@ public class TestCityLgCity extends Settings {
     /*
     Проверка работоспособности крестика
      */
-    @Test
+    @Epic(value = "Главная страница")
+    @Feature(value = "Попап 'Укажите свой город'")
+    @Description("Проверка работоспособности крестика")
+    @Test(description="Проверка работоспособности крестика")
     public void closePopup() throws InterruptedException {
         String city = "Омск";
-        open(TestData.getProperty("baseUrl"));
+        openWithCloseCookie(TestData.getProperty("baseUrl"));
         String cityInHeader = cityPage.getHeaderCity();
         cityPage.clickIconSetCity();
         cityPage.inputUserLocate.clear();
@@ -57,9 +69,12 @@ public class TestCityLgCity extends Settings {
     /*
     Проверка автоматического определения города
      */
-    @Test
+    @Epic(value = "Главная страница")
+    @Feature(value = "Попап 'Укажите свой город'")
+    @Description("Проверка автоматического определения города")
+    @Test(description="Проверка автоматического определения города")
     public void automaticSetCity() throws InterruptedException {
-        open(TestData.getProperty("baseUrl"));
+        openWithCloseCookie(TestData.getProperty("baseUrl"));
         String city = "Воронеж";
         String autoCity = "Москва";
         cityPage.selectCity(city);
@@ -73,9 +88,12 @@ public class TestCityLgCity extends Settings {
     /*
     Проверка заполнения выпадающего списка популярных городов
      */
-    @Test
+    @Epic(value = "Главная страница")
+    @Feature(value = "Попап 'Укажите свой город'")
+    @Description("Проверка заполнения выпадающего списка популярных городов")
+    @Test(description="Проверка заполнения выпадающего списка популярных городов")
     public void popularCityList() throws InterruptedException {
-        open(TestData.getProperty("baseUrl"));
+        openWithCloseCookie(TestData.getProperty("baseUrl"));
         cityPage.clickIconSetCity();
          int popularCityAmount = getElementsByXpath(cityPage.popularCityList).size();
         Assert.assertTrue(popularCityAmount > 0,"Список популярных городов пуст");

@@ -130,7 +130,7 @@ public class CheckoutPage extends Settings {
     //Нажать ссылку "Войти с помощью пароля"
     @Step("Нажать ссылку \"Войти с помощью пароля\"")
     public void loginLinkTogglePassLogin() {
-        waitVisibilityElement(loginTitle);
+        waitVisibilityElement(loginTitle,"Личный кабинет");
         loginLinkTogglePassLogin.click();
     }
 
@@ -144,7 +144,7 @@ public class CheckoutPage extends Settings {
     //Ввести в поле 'E-mail или номер телефона' аунтификационные данные
     @Step("Заполнить поля Авторизации и нажать кнопку Войти в Личный кабинет")
     public void Authorization() throws InterruptedException {
-        waitVisibilityElement(eMailInput);
+        waitVisibilityElement(eMailInput,"Поле ввода \"E-mail или номер телефона\"");
         eMailInput.isEnabled();
         eMailInput.sendKeys(eMail);
         passInput.sendKeys(pass);
@@ -156,7 +156,7 @@ public class CheckoutPage extends Settings {
     //Нажать кнопку самовывоз
     @Step("Нажать кнопку самовывоз")
     public void clickPickUpBtn() {
-        moveTo(textareaPlaceholder);
+        moveTo(textareaPlaceholder,"Кнопка самовывоза");
         pickUpBtn.click();
     }
 
@@ -175,7 +175,7 @@ public class CheckoutPage extends Settings {
         firstPickupPoint.click();
         selectThisItemButton.click();
         wait(2);
-        moveTo(onlineCardRadioBtn);
+        moveTo(onlineCardRadioBtn,"Радио баттон 'Оплата картой'");
         clickTextareaPlaceholder.click();
         textareaPlaceholder.sendKeys(commentToOrder);
         onlineCardRadioBtn.click();
@@ -197,7 +197,7 @@ public class CheckoutPage extends Settings {
         Assert.assertEquals(phoneA,telephone,"Неверный телефон пользователя:" + phoneA +", должен быть: "+telephone);
         Assert.assertTrue(getOnlineCardRadioBtn.getAttribute("style").contains("translate"),"Кнопка \"Картой онлайн\" не нажата");
         Assert.assertTrue(getOperatorCallRadioBtn.getAttribute("style").contains("translate"),"Кнопка \"Звонок оператора\" не нажата");
-        moveTo(checkbox);
+        moveTo(checkbox,"Чекбокс");
         int cartScope = Integer.parseInt(cartScopeValue.getText().toLowerCase().replaceAll(" ","").replaceAll("₽",""));
         int discountValue = Integer.parseInt(onlineCardRadioBtn.getText().toLowerCase().replaceAll("[^0-9]", ""));
         cartScopeTotal = Integer.parseInt(orderScopeValue.getText().toLowerCase().replaceAll(" ","").replaceAll("₽",""));
@@ -216,10 +216,9 @@ public class CheckoutPage extends Settings {
     public void chekPaymentPage() throws  InterruptedException {
         wait(2);
         //getScreen();
-        waitVisibilityElement(merchantName);
+        waitVisibilityElement(merchantName,"Заголовок страницы оплаты");
         String merchantNameCheck=merchantName.getText();
         System.out.println(merchantNameCheck);
-
         Assert.assertEquals( merchantNameExam.contains(merchantNameCheck),"Неверная страница оплаты");
         int merchantPrice1 = Integer.parseInt(merchantPrice.getText().replaceAll(" ","").replaceAll("₽",""));
         System.out.println(merchantPrice1);

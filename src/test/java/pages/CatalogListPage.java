@@ -51,8 +51,7 @@ public class CatalogListPage extends Settings {
     //список названий товаров в листинге товара
     @FindBy(xpath = "//div[@class='catalog__item-title']")
     List<WebElement> catalogItemTitleList;
-    //int randomQuickBuyList;
-    //int randomQuickBuSize;
+
     //Функции
 
 
@@ -65,18 +64,18 @@ public class CatalogListPage extends Settings {
     public void selectQuickBuyList() throws InterruptedException {
         int num = getRandom(cardsList.size());
         WebElement randomCard = cardsList.get(num);
-        moveTo(randomCard);
+        moveTo(randomCard,"рандомная карточка товара");
         String title = catalogItemTitleList.get(num).getText().toLowerCase().replaceAll(" ","");
         cartItemName.add(title);
         wait(1);
-        moveTo(catalogQuickBuyList.get(num));
+        moveTo(catalogQuickBuyList.get(num),"рандомный размер для быстрой покупки");
         wait(2);
         int randomQuickBuSize =
                 getRandom(driver.findElements(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button")).size()) + 1;
         String randomSize =
                 driver.findElement(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button[" + randomQuickBuSize + "]")).getText().toLowerCase().replaceAll(" ", "");
         cartItemSize.add(randomSize);
-        waitVisibilityElement(priceInList);
+        waitVisibilityElement(priceInList,"Цена в листинге товара");
         String price = priceItemTitleList.get(num).getText().replaceAll(" ","").replaceAll("₽","");
         cartItemPrice.add(price);
         driver.findElement(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button[" + randomQuickBuSize + "]")).click();
