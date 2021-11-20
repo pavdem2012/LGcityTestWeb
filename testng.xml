@@ -4,12 +4,8 @@
 
 
     <test name="Test 1">
-        <classes>
-            <class name="tests.TestCityLgCity"/>
-        </classes>
-<!--        <packages>-->
-<!--            <package name="tests"/>-->
-<!--        </packages>-->
-
+        <packages>
+            <package name="tests"/>
+        </packages>
     </test>
 </suite>
