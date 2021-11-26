@@ -63,7 +63,6 @@ public class BasketPage extends Settings {
     @FindBy(xpath = "//button[text()='Продолжить без регистрации']")
     WebElement btnWithoutRegistration;
 
-
     //Количество товаров для теста
     public static int countProductsForTest = 2;
 

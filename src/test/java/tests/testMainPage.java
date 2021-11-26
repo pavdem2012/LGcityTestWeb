@@ -12,12 +12,11 @@ import java.util.ArrayList;
 
 public class testMainPage extends Settings {
 
+
     /*
     Проверка элементов главного меню.
      */
-    @Epic(value = "Главная страница")
-    @Feature(value = "Главное меню")
-    @Description("Проверка перехода из главного меню в каталог")
+
     @Test(description = "Проверка перехода из главного меню в каталог")
     public void testMenu() throws InterruptedException {
         openWithCloseCookie("https://lgcity.ru");

@@ -116,7 +116,7 @@ public class FavoritePage extends Settings {
     }
     @Step("Получить название товара в карточке товара")
     public String getCardTitle() {
-        return cardTitle.getText().toLowerCase().replaceAll(" ", "").split("\n")[0];
+        return cardTitle.getText().toLowerCase().split("\n")[0].replaceAll("[^\\da-zA-Z]", "");
     }
     @Step("Нажать кнопку 'Добавить в избранное'")
     public void clickAddToFavorites(){

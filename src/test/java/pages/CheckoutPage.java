@@ -205,6 +205,7 @@ public class CheckoutPage extends Settings {
         getScreen();
         Assert.assertTrue(cartScopeTotalCheck==cartScopeTotal,"Расчет скидки онлайн-заказа неверен!"+"; Сумма заказа: "+cartScope+"; Размер скидки: "+discountValue+"; Сумма заказа со скидкой: "+cartScopeTotalCheck);
     }
+
     //Нажать кнопку Оформить заказ
     @Step("Нажать кнопку Оформить заказ")
     public void clickCheckoutButton(){

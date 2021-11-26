@@ -1,16 +1,19 @@
 package common;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
+
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+
+import static io.restassured.RestAssured.given;
 
 public class Pages extends Settings {
     WebDriver driver;
@@ -44,7 +47,8 @@ public class Pages extends Settings {
     @FindBy(xpath = "//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")
     public List<WebElement> menuItemsListWomen;
     //Не активный элемент главного меню Мужчинам/Женщинам
-    @FindBy(xpath = "//div[@class='header__nav-buttons js-tabs-nav']/div/div[not(contains(@class,'header__nav-button js-tabs-button active'))]")
+    @FindBy(xpath = "//div[@class='header__nav-buttons js-tabs-nav']/div/div[not(contains(@class,'header__nav-button " +
+            "js-tabs-button active'))]")
     public WebElement genderItem;
     //Меню выбора пола Мужчинам/Женщинам
     @FindBy(xpath = "//div[@class='wrapper']/div[contains(@class,'header__nav-button')]")
@@ -139,7 +143,7 @@ public class Pages extends Settings {
     /*
     Выбор рандомного элемента меню Мужчинам
      */
-    @Step("Выбираем рандомный элемент меню Мужчинам" )
+    @Step("Выбираем рандомный элемент меню Мужчинам")
     public void randomMenuItemMen() throws InterruptedException {
 
         int menuItems = menuItemsListMen.size() - 1;
@@ -156,11 +160,12 @@ public class Pages extends Settings {
         wait(1);
 
     }
+
     /*
 Выбор рандомного элемента меню Женщинам
 
  */
-    @Step("Выбираем рандомный элемент меню Женщинам" )
+    @Step("Выбираем рандомный элемент меню Женщинам")
     public void randomMenuItemWomen() throws InterruptedException {
 
         int menuItems = menuItemsListWomen.size() - 1;
@@ -178,7 +183,7 @@ public class Pages extends Settings {
     }
 
     @Step("Количество элементов меню")
-    public int randomMenuGender(){
+    public int randomMenuGender() {
         return menuGenderList.size();
 
     }
@@ -187,5 +192,75 @@ public class Pages extends Settings {
     public void clickIconFavorites() {
         favoriteInHeader.click();
     }
+
+    @Step("Сканируем страницу {baseUrl} на наличие ссылок")
+    public ArrayList<String> scanForLinks(String baseUrl) {
+        ArrayList<String> urlList = new ArrayList<>();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        int num = Integer.parseInt(js.executeScript("return document.getElementsByTagName('a').length").toString());
+        for (int i = 0; i < num; i++) {
+            try {
+                String string =
+                        js.executeScript("return document.getElementsByTagName('a')[" + i + "].getAttribute('href')").toString();
+                char str = js.executeScript("return document.getElementsByTagName('a')[" + i + "].getAttribute('href')").toString().charAt(0);
+                if (str == '/') {
+                    String url =
+                            "https://lgcity.ru" + js.executeScript("return document.getElementsByTagName('a')[" + i + "].getAttribute('href')").toString();
+                    urlList.add(url);
+                } else if (!string.contains("javascript") && !string.equals("#")) {
+                    urlList.add(js.executeScript("return document.getElementsByTagName('a')[" + i + "].getAttribute" + "('href')").toString());
+                }
+            } catch (Exception e) {
+
+            }
+        }
+        return urlList;
+    }
+
+    @Step("Собираем  массив ссылок")
+    public void getLinks(ArrayList<String> urlList, String baseUrl) {
+        ArrayList<String> urlsList = new ArrayList<>();
+        int sizeUrlList = urlList.size();
+        for (int i = 0; i < urlList.size(); i++) {
+            int count = i + 1;
+            urlsList.add("\nПолучена ссылка №" + count + " URL: " + urlList.get(i));
+        }
+        System.out.println(urlsList);
+        System.out.println("Всего ссылок на странице: " + baseUrl + " - " + sizeUrlList);
+    }
+
+    @Step("Отбираем уникальные ссылки")
+    public ArrayList<String> getUniqueLinks(ArrayList<String> urlList) {
+        Set<String> set = new HashSet<>(urlList);
+        urlList.clear();
+        urlList.addAll(set);
+        for (int i = 0; i < urlList.size(); i++) {
+            int count = i + 1;
+            System.out.println("Отобрана уникальная ссылка № " + count + " - URL: " + urlList.get(i));
+        }
+        int resultArrayLinks = urlList.size();
+        System.out.println("Количество уникальных ссылок:" + resultArrayLinks);
+        return urlList;
+    }
+
+    @Step("Отбираем из массива уникальных ссылок битые")
+    public void getBadUrlList(ArrayList<String> urlList) {
+        ArrayList<String> badUrlList = new ArrayList<>();
+        int resultArrayLinks = urlList.size();
+        for (int i = 0; i < resultArrayLinks; i++) {
+            int statusCode = given().when().get(urlList.get(i)).getStatusCode();
+
+            int count = i + 1;
+            System.out.println("Проверена уникальная ссылка № " + count + " - URL: " + urlList.get(i) + " - вернула " +
+                    "статус код: " + statusCode + ";");
+            if (statusCode != 200) {
+                badUrlList.add(urlList.get(i) + " - вернулся статус код: " + statusCode + " № ссылки: " + count + ";");
+            }
+        }
+        System.out.println(badUrlList);
+        Assert.assertEquals(badUrlList.size(), 0, "Битые ссылки: " + badUrlList);
+    }
+
+
 }
 
