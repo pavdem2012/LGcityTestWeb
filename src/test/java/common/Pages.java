@@ -90,7 +90,7 @@ public class Pages extends Settings {
     //К сожалению, данная страница не найдена или возникла непредвиденная ошибка
     public @FindBy(xpath = "//div[contains(text(), 'Что-то пошло не так...')]")
     WebElement somethingWentWrong;
-
+    public String jsTagName = "return document.getElementsByTagName('a').length";
     /*
     Название заголовка страницы
      */
@@ -194,10 +194,10 @@ public class Pages extends Settings {
     }
 
     @Step("Сканируем страницу {baseUrl} на наличие ссылок")
-    public ArrayList<String> scanForLinks(String baseUrl) {
+    public ArrayList<String> scanForLinks(String jsTagName,String baseUrl) {
         ArrayList<String> urlList = new ArrayList<>();
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        int num = Integer.parseInt(js.executeScript("return document.getElementsByTagName('a').length").toString());
+        int num = Integer.parseInt(js.executeScript(jsTagName).toString());
         for (int i = 0; i < num; i++) {
             try {
                 String string =

@@ -85,14 +85,20 @@ public class FavoritePage extends Settings {
     List<WebElement> favoritesIconsInCatalog;
     int randomItem;
 
-    @Step("Выбор рандомного элемента меню")
-    public void selectRandomMenu() {
+    @Step("Подводим курсор к рандомному элементу меню")
+    public void movieToRandomMenu() {
         int menuItems = menuItemsList.size() - 4;
         randomItem = getRandom(menuItems);
         moveTo(menuItemsList.get(randomItem),"рандомный элемента меню");
     }
+    @Step("Выбираем рандомный элемент меню")
+    public void selectRandomMenu() {
+        int menuItems = menuItemsList.size() - 4;
+        randomItem = getRandom(menuItems);
 
-    @Step("Выбор рандомного пункта меню")
+        clickElement(menuItemsList.get(randomItem),"рандомный элемента меню");
+    }
+    @Step("Выбираем рандомный пункт категории меню")
     public String selectRandomMenuItem() {
         int menuItemsInner = driver.findElements(By.xpath("//div[@id='gmenu-tab-327']//div[@class='header__nav-list" +
                 "-item'][" + (randomItem + 1) + "]//div[@class='header__drop-inner']/div[@class='header__drop" +

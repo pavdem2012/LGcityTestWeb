@@ -4,6 +4,8 @@ import common.Settings;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+
+import io.restassured.RestAssured;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,20 +16,21 @@ import java.util.Set;
 
 import static io.restassured.RestAssured.given;
 
+
 public class TestUrlCodes extends Settings {
     @Epic(value = "Главная страница")
     @Feature(value = "Ссылки")
     @Description("Проверка на наличие битых ссылок")
-/*    @Test(description = "Проверка на наличие битых ссылок")
+    @Test(description = "Проверка на наличие битых ссылок")
 
-    public void getAllUrl() throws InterruptedException {
-        openPage("https://lgcity.ru");
+/*    public void getAllUrl() throws InterruptedException {
+        openPage("https://lgcity.ru/outerwear/women/");
         ArrayList<String> urlList = new ArrayList<>();
         //pages.scanForLinks(urlList);
         //ArrayList<String> urlList = new ArrayList<>();
         //ArrayList<String> urlsList =new ArrayList<>();
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        int num = Integer.parseInt(js.executeScript("return document.getElementsByTagName('a').length").toString());
+        int num = Integer.parseInt(js.executeScript("return document.querySelectorAll('div.content a').length").toString());
         for (int i = 0; i < num; i++) {
 
             try {
@@ -59,7 +62,7 @@ public class TestUrlCodes extends Settings {
             urlsList.add("\nПолучена ссылка №"+count+" URL: " + urlList.get(i));
         }
         System.out.println(urlsList);
-        System.out.println("Количество ссылок на странице (https://lgcity.ru): " + sizeUrlList);
+        System.out.println("Количество ссылок на странице (https://lgcity.ru/outerwear/women/): " + sizeUrlList);
         Set<String> set = new HashSet<>(urlList);
         urlList.clear();
         urlList.addAll(set);
@@ -82,11 +85,14 @@ public class TestUrlCodes extends Settings {
         }
         System.out.println(badUrlList);
         Assert.assertEquals(badUrlList.size(), 0, "Битые ссылки: " + badUrlList);
-    }*/
-    @Test
+    }
+
+
+
+    @Test*/
     public void getAllUrlsCodes() throws InterruptedException {
         openPage("https://lgcity.ru");
-        pages.getLinks(pages.scanForLinks("https://lgcity.ru"),"https://lgcity.ru");
-        pages.getBadUrlList(pages.getUniqueLinks(pages.scanForLinks("https://lgcity.ru")));
+        pages.getLinks(pages.scanForLinks(pages.jsTagName,"https://lgcity.ru"),"https://lgcity.ru");
+        pages.getBadUrlList(pages.getUniqueLinks(pages.scanForLinks(pages.jsTagName,"https://lgcity.ru")));
     }
 }

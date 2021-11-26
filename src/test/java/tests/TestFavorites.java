@@ -19,7 +19,7 @@ public class TestFavorites extends Settings {
     public void addFavoritesFromCartOfProduct() throws InterruptedException {
         openWithCloseCookie("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
-        favoritePage.selectRandomMenu();
+        favoritePage.movieToRandomMenu();
         String randomMenuItem = favoritePage.selectRandomMenuItem();
         String title = favoritePage.getTitle();
         assertString(title,randomMenuItem);
@@ -50,7 +50,7 @@ public class TestFavorites extends Settings {
     public void addFavoritesFromCatalogue() throws InterruptedException {
         openWithCloseCookie("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
-        favoritePage.selectRandomMenu();
+        favoritePage.movieToRandomMenu();
         String randomMenuItem = favoritePage.selectRandomMenuItem();
         String title = favoritePage.getTitle();
         assertString(title,randomMenuItem);

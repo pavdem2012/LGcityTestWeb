@@ -51,6 +51,26 @@ public class CatalogListPage extends Settings {
     //список названий товаров в листинге товара
     @FindBy(xpath = "//div[@class='catalog__item-title']")
     List<WebElement> catalogItemTitleList;
+    public String jsTagName ="return document.querySelectorAll('div.content a').length";
+    //Последний элемент пагинации
+    @FindBy(xpath = "//a[@class='catalog__pagination-last js-pagination']")
+    public WebElement paginationLast;
+    //Категория левого меню
+    @FindBy(xpath = "//div[@class='catalog__nav-item-title'] ")
+    public WebElement leftMenuItem;
+    //Счетчик элементов категории левого меню
+    @FindBy(xpath = "//div[@class='catalog__nav-item-title'] /span")
+    public WebElement countItemLeftMenu;
+    //Подкатегория левого меню
+    @FindBy(xpath = "//a[@class='catalog__nav-item-drop-link']")
+    public WebElement leftMenuSubItem;
+    //Счетчик элементов подкатегории левого меню
+    @FindBy(xpath = "//a[@class='catalog__nav-item-drop-link']/span")
+    public WebElement countSubItemLeftMenu;
+    //Счетчик элементов подкатегории листинга в заголоаке
+    @FindBy(xpath = "//div[@class='catalog__subtitle']")
+    public WebElement countListingSubCategory;
+
 
     //Функции
 

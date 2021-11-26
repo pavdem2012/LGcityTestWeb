@@ -11,7 +11,7 @@ public class testMainMenu extends Settings {
     public void testMenu() throws InterruptedException {
         openWithCloseCookie("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
-        favoritePage.selectRandomMenu();
+        favoritePage.movieToRandomMenu();
         String randomMenuItem = favoritePage.selectRandomMenuItem();
         String getTitle =favoritePage.getTitle();
         Assert.assertTrue(getTitle.contains(randomMenuItem));

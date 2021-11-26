@@ -21,13 +21,13 @@ public class TestCheckout extends Settings {
     public void testCheckout() throws InterruptedException, IOException {
         openWithCloseCookie("https://lgcity.ru");
         waitVisibilityElement(favoritePage.menuItem,"элемент подкатегории товаров");
-        favoritePage.selectRandomMenu();
+        favoritePage.movieToRandomMenu();
         favoritePage.selectRandomMenuItem();
         sendKeysToBody(Keys.PAGE_DOWN);
         waitVisibilityElement(favoritePage.catalogListBlock,"Блок с карточками товаров");
         catalogListPage.selectQuickBuyList();
         pages.goToMainPage();
-        favoritePage.selectRandomMenu();
+        favoritePage.movieToRandomMenu();
         favoritePage.selectRandomMenuItem();
         waitVisibilityElement(favoritePage.catalogListBlock,"Блок с карточками товаров");
         favoritePage.selectRandomCard();
@@ -45,5 +45,11 @@ public class TestCheckout extends Settings {
         //checkoutPage.clickCheckoutButton();
         //checkoutPage.chekPaymentPage();
 
+    }
+    @Test
+    public void getAllUrlsCodes() throws InterruptedException {
+        openPage("https://lgcity.ru/personal/");
+        pages.getLinks(pages.scanForLinks(catalogListPage.jsTagName,"https://lgcity.ru/personal/"),"https://lgcity.ru/personal/");
+        pages.getBadUrlList(pages.getUniqueLinks(pages.scanForLinks(catalogListPage.jsTagName,"https://lgcity.ru/personal/")));
     }
 }

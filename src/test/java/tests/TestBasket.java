@@ -28,7 +28,7 @@ public class TestBasket extends Settings {
         ArrayList<String> cartItemColor = new ArrayList<>();
         for (int i = 0; i < BasketPage.countProductsForTest; i++) {
             waitVisibilityElement(favoritePage.menuItem, "элемент подкатегории товаров");
-            favoritePage.selectRandomMenu();
+            favoritePage.movieToRandomMenu();
             String randomMenuItem = favoritePage.selectRandomMenuItem();
 
             Assert.assertTrue(favoritePage.getTitle().contains(randomMenuItem), "Итерация " + (i + 1) + ": Заголовок " +
@@ -85,7 +85,7 @@ public class TestBasket extends Settings {
 
         for (int i = 0; i < BasketPage.countProductsForTest; i++) {
             waitVisibilityElement(favoritePage.menuItem, "элемент подкатегории товаров");
-            favoritePage.selectRandomMenu();
+            favoritePage.movieToRandomMenu();
             String randomMenuItem = favoritePage.selectRandomMenuItem();
 
             String getTitle = favoritePage.getTitle();
