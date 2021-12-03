@@ -32,7 +32,7 @@ public class CatalogListPage extends Settings {
     public List<WebElement> quickBuyCatalog;
     //карточки товаров на странице
     @FindBy(xpath = "//div[@class='catalog__item-top']")
-    List<WebElement> cardsList;
+    public List<WebElement> cardsList;
     //Доступные размеры в всплывающее меню быстрой покупки
     @FindBy(xpath = "//div[@class='catalog__quick-buy-list']")
     public List<WebElement> catalogQuickBuyList;
@@ -57,19 +57,23 @@ public class CatalogListPage extends Settings {
     public WebElement paginationLast;
     //Категория левого меню
     @FindBy(xpath = "//div[@class='catalog__nav-item-title'] ")
-    public WebElement leftMenuItem;
+    public List<WebElement> leftMenuItemList;
     //Счетчик элементов категории левого меню
     @FindBy(xpath = "//div[@class='catalog__nav-item-title'] /span")
     public WebElement countItemLeftMenu;
     //Подкатегория левого меню
-    @FindBy(xpath = "//a[@class='catalog__nav-item-drop-link']")
-    public WebElement leftMenuSubItem;
+    @FindBy(xpath = "//div[@class='catalog__nav-item catalog__nav-item--active']/div[@class='catalog__nav-item-drop']//a")
+    public List<WebElement> leftMenuSubItemList;
     //Счетчик элементов подкатегории левого меню
-    @FindBy(xpath = "//a[@class='catalog__nav-item-drop-link']/span")
-    public WebElement countSubItemLeftMenu;
+    //@FindBy(xpath = "//a[@class='catalog__nav-item-drop-link']/span")
+    @FindBy(xpath = "//div[@class='catalog__nav-item catalog__nav-item--active']/div[@class='catalog__nav-item-drop']//span")
+     public List<WebElement> countSubItemLeftMenuList;
     //Счетчик элементов подкатегории листинга в заголоаке
     @FindBy(xpath = "//div[@class='catalog__subtitle']")
     public WebElement countListingSubCategory;
+    //Счетчик в кнопке фильтров "Показать"
+    @FindBy(xpath = "//div[@class='button button--fill btn-full filter-submit-btn filter__button--apply']/div")
+    public WebElement countFilterSubmitBtn;
 
 
     //Функции
