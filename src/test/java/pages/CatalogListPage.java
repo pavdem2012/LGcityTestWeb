@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,7 @@ public class CatalogListPage extends Settings {
     public WebElement countListingSubCategory;
     //Счетчик в кнопке фильтров "Показать"
     @FindBy(xpath = "//div[@class='button button--fill btn-full filter-submit-btn filter__button--apply']/div")
-    public WebElement countFilterSubmitBtn;
+    public WebElement countsFilterSubmitBtn;
 
 
     //Функции
@@ -105,7 +106,61 @@ public class CatalogListPage extends Settings {
         driver.findElement(By.xpath("(//div[@class='catalog__quick-buy-list'])[" + (num + 1) + "]/button[" + randomQuickBuSize + "]")).click();
 
     }
-
+    @Step("Проверяем соответствие счетчиков в заголовке каталога, категории левого меню, кнопке показать все и количество страниц в пагинации")
+    public void checkCountsCategory() throws InterruptedException {
+        int countCartOnPage = cardsList.size();
+        //System.out.println("Количество карточек на странице: "+countCartOnPage);
+        double countHeader =Integer.parseInt(countListingSubCategory.getText().replaceAll("[^\\d+]",""));
+        //System.out.println("Счетчик товаров в заголовке: "+countHeader);
+        double countPage = Integer.parseInt(paginationLast.getText());
+        //System.out.println("Количество страниц в пагинации: "+countPage);
+        double checkPages = Math.ceil(countHeader/countCartOnPage);
+        //System.out.println("Проверочное число количества страниц в пагинацмии: "+checkPages);
+        wait(1);
+        double countFilterSubmitBtn = Integer.parseInt(countsFilterSubmitBtn.getText().replaceAll("[^\\d+]",""));
+        //System.out.println("Счетчик товаров в кнопке 'Показать' в блоке фильтров: " + countFilterSubmitBtn);
+        Assert.assertEquals(countPage,checkPages,"Количество товаров не соответствует количеству страниц");
+        Assert.assertEquals(countHeader,countFilterSubmitBtn,"Счетчик товаров в заголовке не совпадает со счетчиком товаров в кнопке 'Показать'");
+    }
+    @Step("Выбираем рандомную категорию левого меню и сравниваем ее счетчик с суммой счетчиков входящих в нее элементов")
+    public void checkCountsSumSubcategory(){
+        int leftMenuItems = leftMenuItemList.size();
+        int randomItem;
+        randomItem = getRandom(leftMenuItems);
+        clickElement(leftMenuItemList.get(randomItem),"рандомный элемента меню");
+        //System.out.println("Наименование товара в рандомном элементе левого меню: "+(leftMenuItemList.get(randomItem).getText().replaceAll("[0-9]","")));
+        int countRandomLeftMenuItem= Integer.parseInt(leftMenuItemList.get(randomItem).getText().replaceAll("[^\\d+]",""));
+        //System.out.println("Счетчик товаров в рандомном элементе левого меню: "+countRandomLeftMenuItem);
+        int subcategoryLeftMenuItems =countSubItemLeftMenuList.size();
+        //System.out.println("Количество подкатегорий рандомного элемента меню: "+subcategoryLeftMenuItems);
+        int check=0;
+        for (int i = 0; i<subcategoryLeftMenuItems;i++){
+            int countSubcategoryItem = Integer.parseInt(countSubItemLeftMenuList.get(i).getText());
+            check+=countSubcategoryItem;
+        }
+        //System.out.println("Сумма счетчиков подкатегорий рандомного элемента меню: "+check);
+        Assert.assertEquals(countRandomLeftMenuItem,check, "Не совпадает счетчик рандомного элемента левого меню и сумма счетчиков входящих в него подкатегорий ");
+    }
+    @Step("Переходим в рандомную подкатегорию левого меню и проверяем соответствие: заголовка подкатегории заголовку страницы, счетчика субкатегории счетчику заголовка страницы и счетчика в заголовке страницы счетчику в кнопке показать все")
+public void checkSubCategoryList() throws InterruptedException {
+        int randomSubItem = getRandom(countSubItemLeftMenuList.size());
+        //System.out.println(randomSubItem);
+        String subcategoryLeftMenuName =  leftMenuSubItemList.get(randomSubItem).getText().toLowerCase().replaceAll("[0-9]","");
+        //System.out.println("Наименование товара рандомной подкатегории рандомного элементе левого меню: " + subcategoryLeftMenuName);
+        int countSubcategoryLeftMenu = Integer.parseInt(countSubItemLeftMenuList.get(randomSubItem).getText());
+        //System.out.println("Счетчик товара рандомной подкатегории рандомного элементе левого меню: " + countSubcategoryLeftMenu);
+        clickElement(leftMenuSubItemList.get(randomSubItem),"");
+        wait(1);
+        String randomPageHeader =getTitle();
+        //System.out.println(randomPageHeader);
+        assertString(randomPageHeader,subcategoryLeftMenuName);
+        int countRandomPageHeader =Integer.parseInt(countListingSubCategory.getText().replaceAll("[^\\d+]",""));
+        //System.out.println("Счетчик товаров заголовка страницы при переходе из субкатегории: "+countRandomPageHeader);
+        Assert.assertEquals(countSubcategoryLeftMenu,countRandomPageHeader,"Не совпадает счетчик субкатегории левого меню и счетчик заголовка страницы на которую она ведет");
+        int countRandomPageFilterSubmitBtn = Integer.parseInt(countsFilterSubmitBtn.getText().replaceAll("[^\\d+]",""));
+        //System.out.println("Счетчик товаров в кнопке 'Показать' в блоке фильтров: "+countRandomPageFilterSubmitBtn);
+        Assert.assertEquals(countRandomPageHeader,countRandomPageFilterSubmitBtn,"Счетчик товаров в заголовке не совпадает со счетчиком товаров в кнопке 'Показать'");
+    }
 
 
     //Размер товара из листинга каталога
