@@ -7,11 +7,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import javax.lang.model.element.Element;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 public class CatalogListPage extends Settings {
@@ -75,7 +78,15 @@ public class CatalogListPage extends Settings {
     //Счетчик в кнопке фильтров "Показать"
     @FindBy(xpath = "//div[@class='button button--fill btn-full filter-submit-btn filter__button--apply']/div")
     public WebElement countsFilterSubmitBtn;
-
+    //Кнопка загрузить еще
+    @FindBy(xpath = "//a[@id='load-more']")
+    public WebElement loadMoreBtn;
+    @FindBy(xpath = "//a[@class='catalog__pagination-next js-pagination']")
+    public WebElement arrowIcon;
+    //список категорий товаров
+    @FindBy(xpath = "//div[@id = 'gmenu-tab-327']/nav[@class='header__nav-list']/div/a")
+    public List<WebElement> menuItemsList;
+    int randomItem;
 
     //Функции
 
@@ -160,6 +171,78 @@ public void checkSubCategoryList() throws InterruptedException {
         int countRandomPageFilterSubmitBtn = Integer.parseInt(countsFilterSubmitBtn.getText().replaceAll("[^\\d+]",""));
         //System.out.println("Счетчик товаров в кнопке 'Показать' в блоке фильтров: "+countRandomPageFilterSubmitBtn);
         Assert.assertEquals(countRandomPageHeader,countRandomPageFilterSubmitBtn,"Счетчик товаров в заголовке не совпадает со счетчиком товаров в кнопке 'Показать'");
+    }
+    @Step("Плучаем число страниц в пагинации и проверяем их соответствие количеству товаров")
+    public double countPaginationPages(int countPage){
+        int countCartOnPage = cardsList.size();
+        System.out.println("Количество карточек на странице: "+countCartOnPage);
+        double countHeader =Integer.parseInt(countListingSubCategory.getText().replaceAll("[^\\d+]",""));
+        System.out.println("Счетчик товаров в заголовке: "+countHeader);
+        double countPages = Integer.parseInt(paginationLast.getText());
+        System.out.println("Количество страниц в пагинации: "+countPages);
+        double checkPages = Math.ceil(countHeader/countCartOnPage);
+        System.out.println("Проверочное число количества страниц в пагинацмии: "+checkPages);
+        Assert.assertEquals(countPages,checkPages,"Количество товаров не соответствует количеству страниц");
+        return countPages;
+    }
+    //Поиск раздела каталога с пагинацией
+    @Step("Ищем раздел каталога с пагтнацией")
+    public void searchLoadMoreBtn(){
+        for (int i = 0; i < 10; i++) {
+            movieToRandomMenu();
+            selectRandomMenuItem();
+            System.out.println(getUrl());
+            double countPage = 1;
+            try {
+                countPage = countPaginationPages(0);
+                if (countPage > 1) {
+                    break;
+                }
+            } catch (Exception pages) {
+                System.out.println("На странице не более 24 товаров, пробуем заново");
+            }
+        }
+    }
+    @Step("Выбираем рандомный пункт категории меню")
+    public String selectRandomMenuItem() {
+        int menuItemsInner = driver.findElements(By.xpath("//div[@id='gmenu-tab-327']//div[@class='header__nav-list" +
+                "-item'][" + (randomItem + 1) + "]//div[@class='header__drop-inner']/div[@class='header__drop" +
+                "-category-col']//a")).size();
+        int randomInner = getRandom(menuItemsInner) + 1;
+        String randomItemInner = driver.findElement(By.xpath("(//div[@id='gmenu-tab-327']//div[@class='header__nav" +
+                "-list-item'][" + (randomItem + 1) + "]//div[@class='header__drop-inner']/div[@class='header__drop" +
+                "-category-col']//a)[" + randomInner + "]")).getText().toLowerCase();
+        driver.findElement(By.xpath("(//div[@id='gmenu-tab-327']//div[@class='header__nav-list-item'][" + (randomItem + 1) + "]//div[@class='header__drop-inner']/div[@class='header__drop-category-col']//a)[" + randomInner + "]")).click();
+        return randomItemInner;
+    }
+    //Проверка наличия элемента
+    @Step("Проверяем отсутствие элемента на странице")
+    public boolean isElementPresent(WebElement element) {
+
+        try {
+            new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOf(element));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    @Step("Подводим курсор к рандомному элементу меню")
+    public void movieToRandomMenu() {
+        int menuItems = menuItemsList.size() - 4;
+        randomItem = getRandom(menuItems);
+        moveTo(menuItemsList.get(randomItem),"рандомный элемента меню");
+    }
+    //Прокликиваем кнопку "Загрузить еще"
+    @Step("Прокликиваем кнопку \"Загрузить еще\"")
+    public void clickLoadMoreBtn(){
+        while (true) try {
+            moveTo(paginationLast, "кнопка 'Загрузить еще'");
+            wait(1);
+            clickElement(loadMoreBtn, "Нажимаем кнопку 'Загрузить еще'");
+            wait(1);
+        } catch (Exception e) {
+            break;
+        }
     }
 
 
