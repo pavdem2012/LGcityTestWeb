@@ -109,6 +109,11 @@ public class Settings {
         Thread.sleep(time);
     }
 
+    public void wait1(int second) throws InterruptedException {
+        int time = second * 1000;
+        Thread.sleep(time);
+    }
+
     @After
     public void quit() {
         driver.quit();
